@@ -7,7 +7,7 @@ import AnimatedText from "../AnimatedText";
 import Button from "../Button";
 import { images } from "@/data/images";
 import { site } from "@/data/site";
-import { contactName } from "@/lib/contact";
+import { contactName, telLink } from "@/lib/contact";
 
 export default function HomeHero() {
   const ref = useRef<HTMLElement>(null);
@@ -44,7 +44,7 @@ export default function HomeHero() {
             <span className="h-px w-8 bg-current" aria-hidden />
             {site.location.display.toUpperCase()}
           </p>
-          <p className="label hidden text-bone/60 md:block">Architectural Design · Residential Construction</p>
+          <p className="label hidden text-bone/60 md:block">Architecture · Construction · Execution</p>
         </motion.div>
 
         <AnimatedText
@@ -52,7 +52,7 @@ export default function HomeHero() {
           trigger="load"
           delay={0.6}
           stagger={0.07}
-          text={"Designed first.\nBuilt properly."}
+          text={"We build homes\ndesigned to\nstand out."}
           className="display display-xl uppercase"
         />
 
@@ -63,21 +63,21 @@ export default function HomeHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.3, ease }}
           >
-            Architecturally designed, professionally built. We design and construct thoughtfully planned residential homes, villas and apartments with optimized layouts, refined architectural aesthetics and professional construction standards.
+            From architectural planning and CAD design to grey structure, finishing and final handover, we manage your home construction from concept to completion.
           </motion.p>
 
           <motion.div
-            className="flex flex-wrap items-start gap-3 md:col-span-4 md:col-start-6"
+            className="flex flex-wrap items-start gap-3 md:col-span-4 md:col-start-6 xl:col-span-5"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.45, ease }}
           >
             <Button href="/contact" variant="light">Start Your Project</Button>
-            <Button href="/projects" variant="ghost-light">View Residential Projects</Button>
+            <Button href={telLink(0)} variant="ghost-light">Call Now</Button>
           </motion.div>
 
           <motion.ul
-            className="space-y-3 md:col-span-3 md:text-right"
+            className="space-y-3 md:col-span-3 md:text-right xl:col-span-2"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.6, ease }}
