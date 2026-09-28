@@ -12,7 +12,7 @@ export default function MobileContactBar() {
       className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-ink/10 bg-bone/95 text-ink backdrop-blur-xl md:hidden"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
-      <a href={telLink(0)} className={`${item} h-16`} aria-label={`Call ${site.phones[0].display}`}>
+      <a href={telLink(0)} className={`${item} h-16`} aria-label={`Call ${site.phones[0].name} on ${site.phones[0].display}`}>
         <Phone className="size-4" strokeWidth={1.5} aria-hidden />
         Call
       </a>

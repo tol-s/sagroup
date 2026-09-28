@@ -27,6 +27,7 @@ export function localBusinessSchema() {
     ],
     contactPoint: site.phones.map((p) => ({
       "@type": "ContactPoint",
+      name: p.role ? `${p.name}, ${p.role}` : p.name,
       telephone: p.tel,
       contactType: "customer service",
       areaServed: "PK",
@@ -40,8 +41,7 @@ export function localBusinessSchema() {
         itemOffered: { "@type": "Service", name: s.title, description: s.shortDescription, areaServed: "Karachi" },
       })),
     },
-    sameAs: site.social.map((s) => s.href).filter(Boolean),
-  };
+    sameAs: site.social.map((s) => s.href).filter(Boolean),  };
 }
 
 export function breadcrumbSchema(items: { name: string; path: string }[]) {

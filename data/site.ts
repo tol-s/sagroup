@@ -11,9 +11,10 @@ export const site = {
     "Residential architecture and construction company in Karachi. Architectural design, CAD drawings, modern elevations, grey structure, finishing and turnkey home construction from concept to handover.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://sagroup.vercel.app",
 
+  // The first entry is the main number: every "Call Now" and WhatsApp button links to it.
   phones: [
-    { label: "Primary", display: "+92 316 2839917", tel: "+923162839917", whatsapp: "923162839917" },
-    { label: "Secondary", display: "+92 345 2008343", tel: "+923452008343", whatsapp: "923452008343" },
+    { label: "Primary", name: "Atiq Ur Rehman", role: "CEO", display: "+92 345 2008343", tel: "+923452008343", whatsapp: "923452008343" },
+    { label: "Secondary", name: "M Abubakar", role: "", display: "+92 321 2008343", tel: "+923212008343", whatsapp: "923212008343" },
   ],
 
   // Public contact email shown on the website (enquiry recipients are configured via env vars).

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { nav, site } from "@/data/site";
 import { services } from "@/data/services";
-import { whatsappLink } from "@/lib/contact";
+import { contactName, whatsappLink } from "@/lib/contact";
 import Logo from "./Logo";
 
 export default function Footer() {
@@ -56,6 +56,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {site.phones.map((p) => (
                 <li key={p.tel}>
+                  <span className="block text-sm text-bone/55">{contactName(p)}</span>
                   <a href={`tel:${p.tel}`} className="link-underline text-lg text-bone">
                     {p.display}
                   </a>

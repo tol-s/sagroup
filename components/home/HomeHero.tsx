@@ -7,7 +7,7 @@ import AnimatedText from "../AnimatedText";
 import Button from "../Button";
 import { images } from "@/data/images";
 import { site } from "@/data/site";
-import { telLink } from "@/lib/contact";
+import { contactName, telLink } from "@/lib/contact";
 
 export default function HomeHero() {
   const ref = useRef<HTMLElement>(null);
@@ -77,15 +77,16 @@ export default function HomeHero() {
           </motion.div>
 
           <motion.ul
-            className="space-y-1 md:col-span-3 md:text-right"
+            className="space-y-3 md:col-span-3 md:text-right"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.6, ease }}
           >
             {site.phones.map((p) => (
               <li key={p.tel}>
-                <a href={`tel:${p.tel}`} className="link-underline text-lg tracking-tight">
-                  {p.display}
+                <a href={`tel:${p.tel}`} className="group block" aria-label={`Call ${contactName(p)} on ${p.display}`}>
+                  <span className="label block text-bone/55">{contactName(p)}</span>
+                  <span className="link-underline text-lg tracking-tight">{p.display}</span>
                 </a>
               </li>
             ))}

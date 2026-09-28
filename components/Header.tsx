@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { Phone } from "lucide-react";
 import Logo from "./Logo";
 import { nav, site } from "@/data/site";
-import { telLink, whatsappLink } from "@/lib/contact";
+import { contactName, telLink, whatsappLink } from "@/lib/contact";
 import clsx from "@/lib/clsx";
 
 export default function Header() {
@@ -83,7 +83,7 @@ export default function Header() {
                 "label hidden h-11 items-center gap-2 px-4 transition-colors md:inline-flex",
                 light ? "hover:bg-bone/10" : "hover:bg-ink/5",
               )}
-              aria-label={`Call now ${site.phones[0].display}`}
+              aria-label={`Call now: ${contactName(site.phones[0])}, ${site.phones[0].display}`}
             >
               <Phone className="size-3.5" strokeWidth={1.5} aria-hidden />
               Call Now
@@ -157,8 +157,9 @@ export default function Header() {
                 <div>
                   <p className="label mb-3 text-bone/50">Call</p>
                   {site.phones.map((p) => (
-                    <a key={p.tel} href={`tel:${p.tel}`} className="block text-lg">
-                      {p.display}
+                    <a key={p.tel} href={`tel:${p.tel}`} className="mb-3 block">
+                      <span className="block text-sm text-bone/60">{contactName(p)}</span>
+                      <span className="block text-lg">{p.display}</span>
                     </a>
                   ))}
                 </div>

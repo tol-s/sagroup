@@ -12,7 +12,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Contact | Free Construction Consultation in Karachi",
-  description: `Request a free consultation for house construction, architectural design, CAD drawings or renovation in Karachi. Call ${site.phones[0].display} or ${site.phones[1].display}.`,
+  description: `Request a free consultation for house construction, architectural design, CAD drawings or renovation in Karachi. Call ${site.phones[0].name} on ${site.phones[0].display} or ${site.phones[1].name} on ${site.phones[1].display}.`,
   alternates: { canonical: "/contact" },
   openGraph: { url: "/contact", title: `Contact ${site.companyName}` },
 };
@@ -46,7 +46,11 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
               <ul className="border-t border-ink/10">
                 {site.phones.map((p, i) => (
                   <li key={p.tel} className="border-b border-ink/10 py-6">
-                    <p className="label text-concrete">{p.label} line</p>
+                    <p className="label text-concrete">{p.label} contact</p>
+                    <p className="mt-2 text-lg font-medium tracking-tight">
+                      {p.name}
+                      {p.role ? <span className="font-normal text-graphite">, {p.role}</span> : null}
+                    </p>
                     <a href={`tel:${p.tel}`} className="mt-2 block font-display text-[clamp(1.6rem,2.6vw,2.4rem)] font-medium tracking-tight hover:text-bronze">
                       {p.display}
                     </a>

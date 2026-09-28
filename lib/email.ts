@@ -28,7 +28,7 @@ function shell(title: string, inner: string) {
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#ffffff;border:1px solid #e3ddd3">
 <tr><td style="background:#141412;color:#f4f1ec;padding:24px 28px;font-size:12px;letter-spacing:3px;text-transform:uppercase">${esc(site.companyName)}</td></tr>
 <tr><td style="padding:28px"><h1 style="margin:0 0 20px;font-size:22px;font-weight:600;letter-spacing:-0.3px">${esc(title)}</h1>${inner}</td></tr>
-<tr><td style="padding:18px 28px;border-top:1px solid #e3ddd3;font-size:12px;color:#77736b">${esc(site.tagline)}<br>${esc(site.location.display)} · ${site.phones.map((p) => esc(p.display)).join(" · ")}</td></tr>
+<tr><td style="padding:18px 28px;border-top:1px solid #e3ddd3;font-size:12px;color:#77736b">${esc(site.tagline)}<br>${esc(site.location.display)} · ${site.phones.map((p) => `${esc(p.name)} ${esc(p.display)}`).join(" · ")}</td></tr>
 </table></td></tr></table></body></html>`;
 }
 
@@ -45,7 +45,7 @@ export function enquiryEmail(d: EnquiryInput, timestamp: string) {
 }
 
 export function confirmationEmail(d: EnquiryInput) {
-  const phones = site.phones.map((p) => p.display).join(" or ");
+  const phones = site.phones.map((p) => `${p.name} on ${p.display}`).join(" or ");
   const inner = `<p style="font-size:15px;line-height:1.6;margin:0 0 14px">Dear ${esc(d.name)},</p>
 <p style="font-size:15px;line-height:1.6;margin:0 0 14px">Thank you for contacting ${esc(site.companyName)}. We have received your enquiry about <strong>${esc(d.service)}</strong> for your project in <strong>${esc(d.location)}</strong>.</p>
 <p style="font-size:15px;line-height:1.6;margin:0 0 14px">A member of our team will review your requirements and get back to you shortly. If you would like to speak with us sooner, please call ${esc(phones)}.</p>

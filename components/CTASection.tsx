@@ -4,7 +4,7 @@ import Button from "./Button";
 import Reveal from "./Reveal";
 import { site } from "@/data/site";
 import { images } from "@/data/images";
-import { telLink } from "@/lib/contact";
+import { contactName, telLink } from "@/lib/contact";
 
 type Props = {
   title?: string;
@@ -39,7 +39,7 @@ export default function CTASection({
               {site.phones.map((p) => (
                 <li key={p.tel}>
                   <a href={`tel:${p.tel}`} className="group flex items-center justify-between py-5">
-                    <span className="label text-bone/50">{p.label}</span>
+                    <span className="label text-bone/50">{contactName(p)}</span>
                     <span className="text-xl tracking-tight transition-transform duration-500 group-hover:-translate-x-2 md:text-2xl">{p.display}</span>
                   </a>
                 </li>

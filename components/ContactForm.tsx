@@ -111,7 +111,7 @@ export default function ContactForm({ initialService }: { initialService?: strin
         </span>
         <h3 className="display display-sm mt-8">Thank you. Your enquiry has been received.</h3>
         <p className="mt-4 max-w-lg text-graphite">
-          Our team will review your requirements and contact you shortly. If you provided an email address, a confirmation is on its way. For anything urgent, call us on {site.phones[0].display}.
+          Our team will review your requirements and contact you shortly. If you provided an email address, a confirmation is on its way. For anything urgent, call {site.phones[0].name} on {site.phones[0].display}.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <a href={telLink(0)} className="label inline-flex h-12 items-center bg-ink px-6 text-bone">Call Now</a>
@@ -201,7 +201,7 @@ export default function ContactForm({ initialService }: { initialService?: strin
             >
               <p>{serverError}</p>
               <p className="mt-2">
-                Call <a className="underline" href={telLink(0)}>{site.phones[0].display}</a> or{" "}
+                Call {site.phones[0].name} on <a className="underline" href={telLink(0)}>{site.phones[0].display}</a> or{" "}
                 <a className="underline" href={whatsappLink(0)} target="_blank" rel="noopener noreferrer">message us on WhatsApp</a>.
               </p>
             </motion.div>

@@ -137,7 +137,8 @@ public/                 Static files (put your own photos in public/images)
 ### Change company information, name, phone numbers
 Edit **`data/site.ts`**. `companyName` updates the logo wordmark, page titles, footer, emails and structured data everywhere.
 
-- Phone numbers: edit the `phones` array. Keep `display` (shown on site), `tel` (for `tel:` links, e.g. `+923162839917`) and `whatsapp` (digits only, country code first, e.g. `923162839917`) in sync.
+- Phone numbers: edit the `phones` array. Each entry has `name` and `role` (shown next to the number), `display` (shown on site), `tel` (for `tel:` links, e.g. `+923452008343`) and `whatsapp` (digits only, country code first, e.g. `923452008343`). Keep them in sync.
+- The **first** entry is the main contact (currently Atiq Ur Rehman, CEO, +92 345 2008343). Every "Call Now" button, WhatsApp button, floating WhatsApp icon and mobile contact bar links to it. The second entry (M Abubakar, +92 321 2008343) is shown as the secondary contact.
 - WhatsApp pre-filled message: `whatsappMessage`.
 - Social links: set `href` for each profile. Empty links render as greyed-out text, not as links.
 - Stats: add a `value` to show a statistic on the About page. Leave empty to hide. Only publish verified numbers.
