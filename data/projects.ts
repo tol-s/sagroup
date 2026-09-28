@@ -63,7 +63,7 @@ export const projects: Project[] = [
       { src: images.house, alt: "Exterior of a contemporary two-storey residence with horizontal volumes", caption: "Exterior" },
       { src: images.house8, alt: "Front elevation with large glazed openings", caption: "Front elevation" },
       { src: images.living, alt: "Open-plan living room with neutral finishes", caption: "Living room" },
-      { src: images.interior, alt: "Minimal interior with staircase and natural light", caption: "Staircase" },
+      { src: images.interior, alt: "Minimal interior with natural light", caption: "Interior" },
       { src: images.kitchen, alt: "Modern kitchen with island", caption: "Kitchen" },
       { src: images.bedroom2, alt: "Calm bedroom with soft daylight", caption: "Bedroom" },
       { src: images.facade, alt: "Detail of white architectural surfaces and shadows", caption: "Material details" },
@@ -115,6 +115,7 @@ export const projects: Project[] = [
     gallery: [
       { src: images.house5, alt: "Modern home arranged around an open courtyard", caption: "Courtyard" },
       { src: images.house10, alt: "Residence with landscaped surroundings", caption: "Exterior" },
+      { src: images.house13, alt: "Outdoor space around a modern family home", caption: "Outdoor living" },
       { src: images.living3, alt: "Living space opening to outdoor areas", caption: "Living" },
       { src: images.interior3, alt: "Bright interior with large openings", caption: "Open living" },
       { src: images.kitchen3, alt: "Family kitchen", caption: "Kitchen" },
@@ -142,6 +143,7 @@ export const projects: Project[] = [
     gallery: [
       { src: images.villa, alt: "Luxury modern villa with pool", caption: "Exterior" },
       { src: images.villa2, alt: "Villa elevation with layered volumes", caption: "Elevation" },
+      { src: images.house12, alt: "Villa exterior with glazing and landscaping", caption: "Garden facade" },
       { src: images.interiorLuxe, alt: "Luxury living room interior", caption: "Living" },
       { src: images.kitchen4, alt: "Premium kitchen", caption: "Kitchen" },
       { src: images.bedroom2, alt: "Master bedroom", caption: "Bedroom" },
@@ -168,8 +170,7 @@ export const projects: Project[] = [
     heroImage: images.house3,
     gallery: [
       { src: images.house3, alt: "Modern family home at dusk", caption: "Exterior" },
-      { src: images.house7, alt: "Modern home elevation", caption: "Elevation" },
-      { src: images.living4, alt: "Bright family living room", caption: "Living" },
+      { src: images.house7, alt: "Modern home elevation", caption: "Elevation" },      { src: images.living4, alt: "Bright family living room", caption: "Living" },
       { src: images.living6, alt: "Compact open-plan living and dining", caption: "Dining" },
       { src: images.kitchen2, alt: "Efficient modern kitchen", caption: "Kitchen" },
       { src: images.bedroom3, alt: "Family bedroom", caption: "Bedroom" },
@@ -196,7 +197,7 @@ export const projects: Project[] = [
       { src: images.house2, alt: "Contemporary residence with glass openings lit at dusk", caption: "Exterior" },
       { src: images.house11, alt: "House with landscape surroundings", caption: "Landscape" },
       { src: images.living5, alt: "Warm living room interior", caption: "Living" },
-      { src: images.interior2, alt: "Interior with stone and timber finishes", caption: "Materials" },
+      { src: images.interior2, alt: "Living space with warm, natural finishes", caption: "Lounge" },
       { src: images.kitchen, alt: "Kitchen with warm lighting", caption: "Kitchen" },
       { src: images.bathroom, alt: "Stone bathroom", caption: "Bathroom" },
       { src: images.lamp, alt: "Warm pendant lighting detail", caption: "Details" },

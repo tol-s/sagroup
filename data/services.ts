@@ -25,7 +25,7 @@ export const services: Service[] = [
     shortDescription: "Planning shaped by your plot, your lifestyle and the way you want to live.",
     description:
       "Architectural planning based on plot dimensions, lifestyle, functional requirements and desired aesthetic. We study orientation, light, privacy and circulation before a single line is fixed, so every room earns its place.",
-    image: images.plans,
+    image: images.facade,
     included: ["Requirement and lifestyle brief", "Space programming", "Zoning and circulation", "Concept floor plans", "Design development", "Client review sessions"],
     formLabel: "Architectural Design",
   },
