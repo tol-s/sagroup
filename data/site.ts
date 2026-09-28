@@ -8,7 +8,7 @@ export const site = {
   shortName: "SA Group",
   tagline: "Modern Design. Solid Construction. Complete Execution.",
   description:
-    "Residential architecture and construction company in Karachi. Architectural design, CAD drawings, modern elevations, grey structure, finishing and turnkey home construction from concept to handover.",
+    "Architectural design and residential construction company in Karachi. Professionally designed and constructed houses, villas and apartments, from 2D plans, CAD drawings and 3D elevations to grey structure, finishing and handover.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://sagroup.vercel.app",
 
   // The first entry is the main number: every "Call Now" and WhatsApp button links to it.

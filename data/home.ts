@@ -1,15 +1,18 @@
 import { images } from "./images";
 
-/** QUALITY stages shown on the home page. */
+/**
+ * Stages of the complete construction scope, shown on the home page ("Complete construction. One professional team.").
+ * These are components of one project, not standalone services.
+ */
 export const qualityStages = [
-  { title: "Foundation", text: "Correct excavation, PCC and footings as per structural drawings.", image: images.site },
-  { title: "Structure", text: "RCC columns, beams and slabs with proper shuttering and curing.", image: images.structure },
-  { title: "Masonry", text: "True lines, correct bonding and aligned openings.", image: images.masonry },
+  { title: "Foundation", text: "Excavation, PCC and footings as per the structural drawings.", image: images.site },
+  { title: "RCC Structure", text: "Columns, beams and slabs with proper shuttering and curing.", image: images.structure },
+  { title: "Masonry & Roofing", text: "True lines, correct bonding, aligned openings and a sound roof.", image: images.masonry },
   { title: "Waterproofing", text: "Roofs, terraces and wet areas protected at the right stage.", image: images.house9 },
-  { title: "Electrical", text: "Planned conduits, safe wiring and organised distribution.", image: images.electrical },
+  { title: "Electrical", text: "Conduits and points planned around the approved layout.", image: images.electrical },
   { title: "Plumbing", text: "Pressure-tested supply lines and properly sloped drainage.", image: images.bathroom2 },
-  { title: "Flooring", text: "Level substrates, planned layouts and clean joints.", image: images.interior2 },
-  { title: "Finishing", text: "Patient surface preparation before every final coat.", image: images.painting },
+  { title: "Flooring & Tiling", text: "Level substrates, planned layouts and clean joints.", image: images.interior2 },
+  { title: "Carpentry, Ceilings & Paint", text: "Joinery, false ceilings and careful preparation before every final coat.", image: images.painting },
 ];
 
 /** MATERIALS section. No brand claims: add brands only when confirmed. */
@@ -28,12 +31,12 @@ export const materials = [
 
 /** WHY CHOOSE US */
 export const reasons = [
-  { number: "01", title: "Modern Architectural Design", text: "Contemporary homes designed around your plot, your family and the Karachi climate." },
-  { number: "02", title: "Detailed Planning", text: "Complete CAD and structural drawings before work starts, so decisions are made on paper, not on site." },
+  { number: "01", title: "Design-Led Approach", text: "We design the building before we build it: optimized layouts, natural light, ventilation and modern elevations planned around your plot." },
+  { number: "02", title: "Proper Drawings & 3D", text: "2D plans, CAD drawings and 3D visualization before work starts, so decisions are made on paper, not on site." },
   { number: "03", title: "Quality Materials", text: "Materials selected for performance and longevity, with clear specifications you can review." },
-  { number: "04", title: "Skilled Execution", text: "Experienced trades for every stage, from RCC to fine finishing." },
+  { number: "04", title: "Built to the Approved Design", text: "Construction follows the approved architectural and structural drawings, from RCC to fine finishing." },
   { number: "05", title: "Professional Supervision", text: "Regular site supervision and quality checks at every critical stage." },
-  { number: "06", title: "Complete Project Management", text: "One accountable team coordinating design, materials, trades and schedule." },
+  { number: "06", title: "End-to-End Project Delivery", text: "One accountable team coordinating design, construction, building services, interiors and handover." },
 ];
 
 /** KARACHI service areas. These are areas served, not a list of completed projects. */

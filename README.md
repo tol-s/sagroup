@@ -28,15 +28,15 @@ This repository is standalone. It shares no code, database, environment variable
 | --- | --- |
 | `/` | Home: hero, intro, services, featured projects, quality, materials, why us, process, Karachi coverage, testimonials, CTA |
 | `/about` | Company, philosophy, disciplines, coverage, client experience |
-| `/services` | All 23 services, each with image, description, inclusions and CTA (anchors: `/services#slug`) |
-| `/projects` | Portfolio with instant filters (All, Modern Homes, Villas, Elevation, Turnkey, Renovation) |
+| `/services` | The 7 primary services grouped by priority, each with image, description, inclusions, complete construction scope and CTA (anchors: `/services#slug`) |
+| `/projects` | Portfolio with instant filters (Residential Houses by default, Villas, Apartments / Flats, Commercial, All) |
 | `/projects/[slug]` | Project detail: hero, overview, details, design approach, features, gallery with lightbox, previous/next |
-| `/process` | Interactive 10-step construction timeline |
+| `/process` | Interactive 8-step design and construction timeline |
 | `/contact` | Lead form, phone numbers, WhatsApp |
 | `/privacy` | Privacy policy |
 | 404 | Custom not-found page |
 
-`/sitemap.xml`, `/robots.txt`, Open Graph/Twitter metadata, canonical URLs and JSON-LD (GeneralContractor / LocalBusiness, BreadcrumbList, HowTo, ItemList) are generated automatically.
+`/sitemap.xml`, `/robots.txt`, Open Graph/Twitter metadata, canonical URLs and JSON-LD (HomeAndConstructionBusiness / ProfessionalService, BreadcrumbList, HowTo, ItemList) are generated automatically.
 
 ---
 
@@ -120,7 +120,7 @@ components/home/        Home-page sections
 data/                   ALL editable content
   site.ts               Company name, phones, emails, location, social, stats
   images.ts             Central image library
-  services.ts           23 services + contact dropdown options
+  services.ts           7 primary services, construction scope + contact dropdown options
   projects.ts           Sample projects, filters, galleries
   process.ts            Construction steps
   home.ts               Quality stages, materials, reasons, service areas
@@ -146,12 +146,29 @@ Edit **`data/site.ts`**. `companyName` updates the logo wordmark, page titles, f
 Enquiry **recipients** are not in code. Change `CONTACT_EMAIL_1` / `CONTACT_EMAIL_2` in Vercel.
 
 ### Update services
-Edit **`data/services.ts`**. Each service has `slug`, `number`, `title`, `shortDescription`, `description`, `image`, `included` and `formLabel`. The home page shows the slugs listed in `featuredServiceSlugs`. The contact dropdown uses `serviceOptions`.
+Edit **`data/services.ts`**. The company is positioned as **architectural design + residential construction**, with exactly seven primary services:
+
+| # | Service | Tier |
+| --- | --- | --- |
+| 01 | Residential House Construction (120, 240, 500 and 1,000 sq. yd.) | Primary focus |
+| 02 | Apartment & Flat Construction | Major |
+| 03 | Commercial Construction | Additional |
+| 04 | Grey Structure Construction | Supporting |
+| 05 | Architectural Design | Major |
+| 06 | Interior & Finishing | Supporting |
+| 07 | Renovation & Remodeling | Supporting |
+
+Each service has `slug`, `number`, `title`, `tier`, `shortDescription`, `description`, `image`, `included` (optional `includedLabel`), `scope` and `formLabel`.
+
+- `scope` is the **complete construction scope** shown on the service. Construction disciplines (plumbing, electrical, painting, flooring, waterproofing, carpentry, masonry, tiling, roofing, false ceilings) belong here as project components. Do not add them as standalone services.
+- The home page list order is `featuredServiceSlugs` (residential first). The footer uses the same order.
+- The contact dropdown uses `serviceOptions` (the seven service names only).
+- `constructionDisciplines` is the secondary line shown under "Complete construction. One professional team." on the home page.
 
 ### Update projects
 Edit **`data/projects.ts`**. The six current projects are **sample / demonstration projects** and are labelled that way on the site.
 
-To add a real project, copy an entry and change its fields (`slug` becomes the URL `/projects/<slug>`). Use `filters` to control which filter tabs it appears under. When all projects are real, set `showSampleNotice = false` to remove the sample labels.
+To add a real project, copy an entry and change its fields (`slug` becomes the URL `/projects/<slug>`). Use `filters` (`residential`, `villas`, `apartments`, `commercial`) to control which filter tabs it appears under, and `constructionScope` for the "Complete construction scope" list on its detail page. When all projects are real, set `showSampleNotice = false` to remove the sample labels.
 
 ### Replace images
 - Site-wide imagery lives in **`data/images.ts`**; project imagery lives in each project's `heroImage` and `gallery` in `data/projects.ts`.

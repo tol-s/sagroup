@@ -9,7 +9,7 @@ import clsx from "@/lib/clsx";
 
 /** Projects index with instant client-side filtering. */
 export default function ProjectsGrid() {
-  const [filter, setFilter] = useState<"all" | ProjectFilter>("all");
+  const [filter, setFilter] = useState<"all" | ProjectFilter>(projectFilters[0].value);
   const visible = filter === "all" ? projects : projects.filter((p) => p.filters.includes(filter));
 
   return (

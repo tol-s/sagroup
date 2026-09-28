@@ -125,6 +125,16 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
                 </Reveal>
               ))}
             </ul>
+            <h3 className="label mb-4 mt-12 text-concrete">Complete construction scope</h3>
+            <Reveal>
+              <ul className="flex flex-wrap gap-2">
+                {project.constructionScope.map((item) => (
+                  <li key={item} className="label border border-ink/15 px-3 py-2 text-graphite">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
           </div>
         </div>
       </section>

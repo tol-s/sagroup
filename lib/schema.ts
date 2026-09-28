@@ -7,7 +7,7 @@ import type { Project } from "@/data/projects";
 export function localBusinessSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": ["GeneralContractor", "HomeAndConstructionBusiness"],
+    "@type": ["HomeAndConstructionBusiness", "ProfessionalService"],
     "@id": `${site.url}/#business`,
     name: site.companyName,
     slogan: site.tagline,
@@ -35,7 +35,7 @@ export function localBusinessSchema() {
     })),
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Architecture and construction services",
+      name: "Architectural design and residential construction services",
       itemListElement: services.map((s) => ({
         "@type": "Offer",
         itemOffered: { "@type": "Service", name: s.title, description: s.shortDescription, areaServed: "Karachi" },

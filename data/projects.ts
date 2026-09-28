@@ -1,6 +1,6 @@
 import { images } from "./images";
 
-export type ProjectFilter = "modern-homes" | "villas" | "elevation" | "turnkey" | "renovation";
+export type ProjectFilter = "residential" | "villas" | "apartments" | "commercial";
 
 export type GalleryImage = {
   src: string;
@@ -23,8 +23,28 @@ export type Project = {
   cardImage?: string;
   gallery: GalleryImage[];
   features: string[];
+  /** Complete construction scope delivered within the project (components, not separate services). */
+  constructionScope: string[];
   filters: ProjectFilter[];
 };
+
+/** Full design-and-build scope for a complete residential project. */
+const completeResidentialScope = [
+  "Architectural planning",
+  "CAD drawings & 3D elevation",
+  "Grey structure",
+  "Masonry",
+  "Roofing",
+  "Plumbing",
+  "Electrical",
+  "Waterproofing",
+  "Flooring",
+  "Tiling",
+  "Carpentry",
+  "Painting",
+  "False ceilings",
+  "Interior finishing",
+];
 
 /**
  * IMPORTANT: These are SAMPLE / DEMONSTRATION projects that show how the
@@ -34,13 +54,13 @@ export type Project = {
  */
 export const showSampleNotice = true;
 
+/** Project categories. The first entry is selected by default on /projects. */
 export const projectFilters: { value: "all" | ProjectFilter; label: string }[] = [
-  { value: "all", label: "All" },
-  { value: "modern-homes", label: "Modern Homes" },
+  { value: "residential", label: "Residential Houses" },
   { value: "villas", label: "Villas" },
-  { value: "elevation", label: "Elevation" },
-  { value: "turnkey", label: "Turnkey" },
-  { value: "renovation", label: "Renovation" },
+  { value: "apartments", label: "Apartments / Flats" },
+  { value: "commercial", label: "Commercial" },
+  { value: "all", label: "All" },
 ];
 
 export const projects: Project[] = [
@@ -48,10 +68,10 @@ export const projects: Project[] = [
     slug: "the-concrete-residence",
     title: "The Concrete Residence",
     location: "DHA Karachi",
-    category: "Modern Residential Construction",
-    type: "Double-Storey Residence",
+    category: "Residential House",
+    type: "Double-Storey Residence, 500 sq. yd.",
     style: "Contemporary Minimal",
-    scope: "Architecture, CAD drawings, grey structure, finishing and interiors",
+    scope: "Architectural design, CAD drawings, 3D elevation, grey structure, finishing and interiors",
     description:
       "A contemporary residence built around clean horizontal lines, large openings, textured surfaces and a restrained material palette.",
     overview:
@@ -69,16 +89,17 @@ export const projects: Project[] = [
       { src: images.facade, alt: "Detail of white architectural surfaces and shadows", caption: "Material details" },
     ],
     features: ["Modern facade", "Large windows", "Open living spaces", "Architectural lighting", "Minimal staircase", "Contemporary interiors"],
-    filters: ["modern-homes", "elevation", "turnkey"],
+    constructionScope: completeResidentialScope,
+    filters: ["residential"],
   },
   {
     slug: "the-monochrome-house",
     title: "The Monochrome House",
     location: "Bahria Town Karachi",
-    category: "Modern Home",
-    type: "Double-Storey Residence",
+    category: "Residential House",
+    type: "Double-Storey Residence, 240 sq. yd.",
     style: "Minimal Monochrome",
-    scope: "Architecture, elevation design, grey structure and finishing",
+    scope: "Architectural design, modern elevation, grey structure and complete finishing",
     description:
       "A clean modern residence using white architectural volumes, dark frames, large windows and subtle lighting.",
     overview:
@@ -95,16 +116,17 @@ export const projects: Project[] = [
       { src: images.bathroom, alt: "Contemporary bathroom", caption: "Bathroom" },
     ],
     features: ["White facade", "Dark aluminium frames", "Large glazing", "Modern lighting", "Geometric massing", "Minimal interiors"],
-    filters: ["modern-homes", "elevation"],
+    constructionScope: completeResidentialScope,
+    filters: ["residential"],
   },
   {
     slug: "the-courtyard-residence",
     title: "The Courtyard Residence",
     location: "Clifton Karachi",
-    category: "Contemporary Residential",
-    type: "Family Residence",
+    category: "Residential House",
+    type: "Family Residence, 500 sq. yd.",
     style: "Courtyard Architecture",
-    scope: "Architecture, structural planning, turnkey construction",
+    scope: "Architectural design, structural planning and turnkey construction",
     description:
       "A modern family home organised around a private courtyard to maximise daylight, privacy and natural ventilation.",
     overview:
@@ -123,16 +145,17 @@ export const projects: Project[] = [
       { src: images.bathroom3, alt: "Bathroom with stone finishes", caption: "Bathroom" },
     ],
     features: ["Central courtyard", "Open living", "Natural lighting", "Modern staircase", "Landscape integration", "Large openings"],
-    filters: ["modern-homes", "turnkey"],
+    constructionScope: completeResidentialScope,
+    filters: ["residential"],
   },
   {
     slug: "the-modern-villa",
     title: "The Modern Villa",
     location: "DHA Phase 6 Karachi",
-    category: "Luxury Villa",
-    type: "Triple-Storey Residence",
+    category: "Villa",
+    type: "Triple-Storey Residence, 1,000 sq. yd.",
     style: "Contemporary Luxury",
-    scope: "Architecture, 3D visualisation, turnkey construction and interiors",
+    scope: "Architectural design, 3D visualization, turnkey construction and interiors",
     description:
       "A premium modern villa using strong vertical elements, large openings and layered facade volumes.",
     overview:
@@ -151,16 +174,17 @@ export const projects: Project[] = [
       { src: images.lighting, alt: "Detail of architectural lighting", caption: "Lighting details" },
     ],
     features: ["Double-height entrance", "Modern facade", "Architectural lighting", "Large glazing", "Premium interiors", "Contemporary staircase"],
-    filters: ["villas", "elevation", "turnkey"],
+    constructionScope: completeResidentialScope,
+    filters: ["residential", "villas"],
   },
   {
     slug: "the-urban-residence",
     title: "The Urban Residence",
     location: "Gulshan-e-Iqbal Karachi",
-    category: "Residential Construction",
-    type: "Double-Storey Family Home",
+    category: "Residential House",
+    type: "Double-Storey Family Home, 120 sq. yd.",
     style: "Modern Practical",
-    scope: "Architecture, CAD drawings, grey structure and finishing",
+    scope: "Architectural design, CAD drawings, grey structure and finishing",
     description:
       "A practical modern family residence designed around efficient circulation, natural light and contemporary architecture.",
     overview:
@@ -176,16 +200,17 @@ export const projects: Project[] = [
       { src: images.bedroom3, alt: "Family bedroom", caption: "Bedroom" },
     ],
     features: ["Functional planning", "Modern elevation", "Natural lighting", "Efficient floor plan", "Contemporary interiors"],
-    filters: ["modern-homes", "elevation"],
+    constructionScope: completeResidentialScope,
+    filters: ["residential"],
   },
   {
     slug: "the-stone-and-glass-house",
     title: "The Stone & Glass House",
     location: "Scheme 33 Karachi",
-    category: "Modern Architecture",
-    type: "Contemporary Residence",
+    category: "Villa",
+    type: "Contemporary Residence, 1,000 sq. yd.",
     style: "Stone + Glass",
-    scope: "Architecture, facade, turnkey construction and landscape",
+    scope: "Architectural design, facade, turnkey construction and landscape",
     description:
       "A contemporary residence combining stone textures, glass openings and warm architectural lighting.",
     overview:
@@ -203,7 +228,8 @@ export const projects: Project[] = [
       { src: images.lamp, alt: "Warm pendant lighting detail", caption: "Details" },
     ],
     features: ["Stone facade", "Large glass openings", "Warm lighting", "Modern staircase", "Contemporary interiors", "Landscape integration"],
-    filters: ["modern-homes", "villas", "turnkey"],
+    constructionScope: completeResidentialScope,
+    filters: ["residential", "villas"],
   },
 ];
 

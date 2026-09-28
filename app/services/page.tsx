@@ -11,18 +11,18 @@ import { site } from "@/data/site";
 import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Construction & Architecture Services in Karachi",
+  title: "Residential House Construction & Architectural Design in Karachi",
   description:
-    "Architectural design, CAD drawings, 3D visualisation, modern elevations, structural planning, grey structure, finishing, interiors, renovation and turnkey house construction in Karachi.",
+    "Residential house construction for 120, 240, 500 and 1,000 sq. yd. plots, architectural design with CAD drawings and 3D elevations, apartment and flat construction, grey structure, interior and finishing, and renovation in Karachi.",
   alternates: { canonical: "/services" },
   openGraph: { url: "/services", title: `Services | ${site.companyName}` },
 };
 
 const groups = [
-  { title: "Design", range: [0, 6] },
-  { title: "Structure", range: [6, 9] },
-  { title: "Services & Finishing", range: [9, 20] },
-  { title: "Complete Delivery", range: [20, 23] },
+  { title: "Primary focus", tier: "primary" },
+  { title: "Major services", tier: "major" },
+  { title: "Supporting services", tier: "supporting" },
+  { title: "Additional", tier: "additional" },
 ] as const;
 
 export default function ServicesPage() {
@@ -42,10 +42,10 @@ export default function ServicesPage() {
       <JsonLd data={serviceListSchema} />
       <PageHero
         eyebrow="Services"
-        title="Everything your home needs."
+        title="We design before we build."
         image={images.servicesHero}
         imageAlt="Modern residence with clean architectural lines"
-        intro="Twenty-three services, from the first sketch to the final coat of paint. Choose a single service or let us deliver the complete project."
+        intro="Integrated architectural and construction services for residential houses, villas and apartments. We design the building before we build it, then deliver the complete construction scope from concept to completion."
       />
 
       {/* INDEX */}
@@ -59,7 +59,7 @@ export default function ServicesPage() {
               <Reveal key={g.title} delay={gi * 0.06}>
                 <p className="font-display text-lg font-medium uppercase tracking-tight">{g.title}</p>
                 <ul className="mt-4 border-t border-ink/10">
-                  {services.slice(g.range[0], g.range[1]).map((s) => (
+                  {services.filter((s) => s.tier === g.tier).map((s) => (
                     <li key={s.slug} className="border-b border-ink/10">
                       <Link href={`#${s.slug}`} className="group flex items-baseline gap-3 py-2.5 text-[0.95rem] text-graphite transition-colors hover:text-ink">
                         <span className="label w-6 text-concrete">{s.number}</span>
@@ -82,7 +82,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <CTASection title={"Not sure what\nyou need?"} copy="Share your plot details and goals. We will recommend the right scope, whether that is drawings only, grey structure, finishing or a complete turnkey build." />
+      <CTASection title={"Not sure what\nyou need?"} copy="Share your plot size, location and goals. We will recommend the right scope, whether that is architectural design only, grey structure, finishing or a complete design-and-build project." />
     </>
   );
 }

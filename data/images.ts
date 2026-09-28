@@ -71,7 +71,8 @@ export const images = {
   house10: unsplash("1449844908441-8829872d2607"),
   house11: unsplash("1480074568708-e7b720bb3f09"),
   house12: unsplash("1600585154526-990dced4db0d"),
-  house13: unsplash("1600573472550-8090b5e0745e"),  facade: unsplash("1487958449943-2429e8be8625"),
+  house13: unsplash("1600573472550-8090b5e0745e"),
+  apartments: unsplash("1567496898669-ee935f5f647a"),  facade: unsplash("1487958449943-2429e8be8625"),
   facade2: unsplash("1511818966892-d7d671e672a2"),
 
   // Materials & details

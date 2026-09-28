@@ -13,8 +13,8 @@ import { site } from "@/data/site";
 import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "About Us | Architecture & Construction Company in Karachi",
-  description: `${site.companyName} is a Karachi-based residential architecture and construction company delivering modern homes from architectural planning and CAD design to grey structure, finishing and handover.`,
+  title: "About Us | Architectural Design & Residential Construction in Karachi",
+  description: `${site.companyName} is a Karachi-based architectural design and residential construction company. We design homes before we build them, then deliver the complete project from CAD drawings and 3D elevations to grey structure, finishing and handover.`,
   alternates: { canonical: "/about" },
   openGraph: { url: "/about", title: `About ${site.companyName}` },
 };
@@ -22,23 +22,23 @@ export const metadata: Metadata = {
 const pillars = [
   {
     title: "Architecture",
-    text: "Every project starts with a considered design: plans that work for the family, elevations with proportion and presence, and details resolved before construction begins.",
+    text: "Every project starts with professional architectural planning: optimized layouts, functional spaces, natural light, ventilation and a modern elevation with proportion and presence.",
     image: images.plans,
   },
   {
+    title: "Planning",
+    text: "The design is resolved into 2D plans, CAD drawings and 3D visualization, and the construction scope is finalized, before any work begins on site.",
+    image: images.engineer,
+  },
+  {
     title: "Construction",
-    text: "From excavation and RCC to masonry and services, the structure is built to drawing by experienced trades, with supervision at every critical stage.",
+    text: "Foundation, RCC structure, masonry and roofing are executed according to the approved drawings, with quality materials and supervision at every critical stage.",
     image: images.structure,
   },
   {
-    title: "Quality",
-    text: "Materials are specified, checked and installed properly. Workmanship is inspected stage by stage, not only at the end.",
+    title: "Finishing",
+    text: "Building services, interiors and final finishing are completed with attention to detail, so the finished home matches the design it started from.",
     image: images.masonry,
-  },
-  {
-    title: "Project Management",
-    text: "Scheduling, material coordination, contractor management and progress reporting are handled by one accountable team.",
-    image: images.engineer,
   },
 ];
 
@@ -52,7 +52,7 @@ export default function AboutPage() {
         title="We build with purpose."
         image={images.aboutHero}
         imageAlt="Contemporary architecture with strong geometry"
-        intro="A Karachi residential construction company that understands architecture and construction equally, and takes responsibility for both."
+        intro="An architectural design and residential construction company in Karachi. We believe a home should be designed before it is built."
       />
 
       {/* WHO WE ARE */}
@@ -65,10 +65,10 @@ export default function AboutPage() {
           <div className="md:col-span-6 md:col-start-7">
             <Reveal>
               <p className="lead text-ink">
-                {site.companyName} designs and builds modern residences across Karachi. We bring architectural planning, CAD design, structural coordination and complete construction execution together under one team.
+                {site.companyName} designs and constructs residential houses, villas and apartments across Karachi. We combine professional architectural planning, optimized layouts, modern elevations and functional spaces with construction execution, quality materials and complete finishing.
               </p>
               <p className="mt-6 leading-relaxed text-graphite">
-                Homeowners come to us because they want more than a contractor. They want a home that is designed properly, built correctly and finished beautifully, without having to coordinate a dozen separate parties themselves. That is exactly what we do.
+                Homeowners come to us when they want a home that is professionally designed, not just built. We don&apos;t just build houses. We design and construct them properly, with attention to detail and contemporary aesthetics from the first drawing to the final finish.
               </p>
             </Reveal>
             {stats.length > 0 && (
@@ -96,14 +96,14 @@ export default function AboutPage() {
           <AnimatedText
             id="philosophy-title"
             as="h2"
-            text={"Good homes are designed\nslowly and built carefully."}
+            text={"A home should be designed\nbefore it is built."}
             className="display display-lg max-w-6xl uppercase"
           />
           <div className="mt-16 grid gap-10 md:grid-cols-3 md:gap-8">
             {[
               ["Design before building", "Decisions made on drawings cost nothing. Decisions made on site cost time and money. We resolve the design first."],
               ["Honest materials", "We recommend materials for how they perform and age, and we are clear about what is included and what it costs."],
-              ["Accountability", "One team answers for the design, the structure and the finish, so responsibility never falls between contractors."],
+              ["Accountability", "One team answers for the design, the construction and the finish, so responsibility never falls between separate parties."],
             ].map(([t, d], i) => (
               <Reveal key={t} delay={i * 0.08} className="border-t border-bone/15 pt-6">
                 <p className="font-serif text-3xl italic text-bronze-light">0{i + 1}</p>

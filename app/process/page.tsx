@@ -13,7 +13,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Our House Construction Process",
   description:
-    "How we build homes in Karachi: consultation, site review, architectural design, CAD drawings, structural planning, grey structure, services, finishing, final inspection and handover.",
+    "How we design and build homes in Karachi: consultation, site review, architectural design, CAD and 3D visualization, construction planning, construction, interior and finishing, and handover.",
   alternates: { canonical: "/process" },
   openGraph: { url: "/process", title: `Construction Process | ${site.companyName}` },
 };
@@ -34,12 +34,12 @@ export default function ProcessPage() {
         title="From architectural planning to final handover."
         image={images.processHero}
         imageAlt="Construction professional at work on site"
-        intro="Ten clear stages. Each one reviewed with you before the next begins, so you always know what is happening and what comes next."
+        intro="Eight clear stages. The home is fully designed before construction begins, and each stage is reviewed with you before the next one starts."
       />
 
       <section aria-labelledby="timeline-title" className="py-24 md:py-40">
         <div className="wrap">
-          <SectionHeading id="timeline-title" eyebrow="Ten stages" title="How we build your home." />
+          <SectionHeading id="timeline-title" eyebrow="Eight stages" title="How we design and build your home." />
           <div className="mt-16 md:mt-28">
             <ProcessTimeline />
           </div>

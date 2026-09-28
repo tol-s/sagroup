@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { nav, site } from "@/data/site";
-import { services } from "@/data/services";
+import { featuredServiceSlugs, services } from "@/data/services";
 import { contactName, whatsappLink } from "@/lib/contact";
 import Logo from "./Logo";
 
@@ -14,7 +14,7 @@ export default function Footer() {
             <Logo />
             <p className="display display-sm mt-10 max-w-md text-bone/90">{site.tagline}</p>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-bone/55">
-              Residential architecture, construction and complete execution across {site.location.city}.
+              Architectural design and residential construction across {site.location.city}.
             </p>
           </div>
 
@@ -39,8 +39,9 @@ export default function Footer() {
           <div className="md:col-span-2">
             <p className="label mb-5 text-bone/45">Services</p>
             <ul className="space-y-3 text-bone/85">
-              {services
-                .filter((s) => ["architectural-design", "cad-design-drawings", "modern-elevation-design", "grey-structure-construction", "interior-design-execution", "turnkey-construction"].includes(s.slug))
+              {featuredServiceSlugs
+                .map((slug) => services.find((s) => s.slug === slug))
+                .filter((s): s is (typeof services)[number] => Boolean(s))
                 .map((s) => (
                   <li key={s.slug}>
                     <Link href={`/services#${s.slug}`} className="link-underline hover:text-bone">

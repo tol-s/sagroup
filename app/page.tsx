@@ -14,6 +14,7 @@ import { images } from "@/data/images";
 import { qualityStages, reasons, serviceAreas } from "@/data/home";
 import { processSteps } from "@/data/process";
 import { showSampleNotice } from "@/data/projects";
+import { constructionDisciplines } from "@/data/services";
 import { site } from "@/data/site";
 
 export default function HomePage() {
@@ -54,7 +55,7 @@ export default function HomePage() {
                   We combine architectural design, structural planning, quality materials and professional construction execution to deliver modern residential spaces across Karachi.
                 </p>
                 <p className="mt-6 leading-relaxed text-graphite">
-                  One team takes responsibility for the drawings, the structure and the finish, so what is designed is exactly what gets built.
+                  We don&apos;t just build houses. We design and construct them properly, so the home that is built is exactly the home that was designed.
                 </p>
                 <div className="mt-10">
                   <Button href="/about" variant="outline">About our company</Button>
@@ -68,7 +69,7 @@ export default function HomePage() {
       {/* SERVICES */}
       <section aria-labelledby="services-title" className="bg-paper py-24 md:py-40">
         <div className="wrap">
-          <SectionHeading id="services-title" index="02" eyebrow="Services" title="Design. Build. Deliver." intro="Architecture, engineering and every construction trade under one roof, coordinated by one team." />
+          <SectionHeading id="services-title" index="02" eyebrow="Services" title="Design. Build. Deliver." intro="Architecturally designed residential homes, villas and apartments, planned and constructed by one professional team." />
           <div className="mt-16 md:mt-24">
             <ServicesList />
           </div>
@@ -101,7 +102,19 @@ export default function HomePage() {
       {/* QUALITY */}
       <section aria-labelledby="quality-title" className="relative bg-ink py-24 text-bone md:py-40">
         <div className="wrap">
-          <SectionHeading id="quality-title" index="04" eyebrow="Quality" tone="light" title={"Quality is built\ninto every stage."} intro="Quality is not a finishing touch. It is checked at every stage, from the foundation to the final coat of paint." />
+          <SectionHeading
+            id="quality-title"
+            index="04"
+            eyebrow="Complete construction"
+            tone="light"
+            title={"Complete construction.\nOne professional team."}
+            intro="From structural work to building services, interiors and final finishing, we coordinate every stage required to deliver a complete project while keeping architectural quality and design consistency at the center."
+          />
+          <div className="mt-8 grid gap-8 md:grid-cols-12">
+            <Reveal delay={0.2} className="md:col-span-9 md:col-start-4">
+              <p className="label leading-loose text-bone/45">{constructionDisciplines.join(" · ")}</p>
+            </Reveal>
+          </div>
           <ol className="mt-16 grid grid-cols-2 gap-x-4 gap-y-10 md:mt-24 md:grid-cols-4 md:gap-x-6 md:gap-y-16">
             {qualityStages.map((q, i) => (
               <Reveal as="li" key={q.title} delay={(i % 4) * 0.08} className={i % 2 === 1 ? "md:mt-16" : ""}>
@@ -177,14 +190,14 @@ export default function HomePage() {
       <section aria-labelledby="process-title" className="border-t border-ink/10 bg-paper py-24 md:py-32">
         <div className="wrap">
           <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
-            <SectionHeading id="process-title" index="07" eyebrow="Process" title="Ten steps to handover." className="flex-1" />
+            <SectionHeading id="process-title" index="07" eyebrow="Process" title="Eight steps to handover." className="flex-1" />
             <Reveal className="shrink-0">
               <Button href="/process" variant="outline">See the full process</Button>
             </Reveal>
           </div>
-          <ol className="mt-16 grid grid-cols-2 border-l border-t border-ink/10 sm:grid-cols-3 lg:grid-cols-5">
+          <ol className="mt-16 grid grid-cols-2 border-l border-t border-ink/10 lg:grid-cols-4">
             {processSteps.map((s, i) => (
-              <Reveal as="li" key={s.number} delay={(i % 5) * 0.05} className="border-b border-r border-ink/10 p-5 md:p-7">
+              <Reveal as="li" key={s.number} delay={(i % 4) * 0.05} className="border-b border-r border-ink/10 p-5 md:p-7">
                 <p className="font-serif text-2xl italic text-bronze">{s.number}</p>
                 <h3 className="mt-6 font-display text-base font-medium uppercase tracking-tight md:text-lg">{s.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-graphite">{s.summary}</p>
@@ -207,7 +220,7 @@ export default function HomePage() {
               <AnimatedText id="karachi-title" as="h2" text={"Building across\nKarachi."} className="display display-lg uppercase" />
               <Reveal delay={0.1}>
                 <p className="lead mt-8 max-w-lg text-graphite">
-                  Serving residential construction requirements across Karachi, from new builds on empty plots to complete renovations of existing homes.
+                  Serving residential construction requirements across Karachi, from 120 sq. yd. family homes to 1,000 sq. yd. residences, apartments and complete renovations of existing homes.
                 </p>
               </Reveal>
             </div>

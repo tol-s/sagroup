@@ -1,305 +1,223 @@
 import { images } from "./images";
 
+export type ServiceTier = "primary" | "major" | "supporting" | "additional";
+
+export type ScopeGroup = {
+  title: string;
+  items: string[];
+};
+
 export type Service = {
   slug: string;
   number: string;
   title: string;
+  /** Importance of the service. Used for the service index and card eyebrow. */
+  tier: ServiceTier;
   shortDescription: string;
   description: string;
   image: string;
+  /** Heading shown above `included` (defaults to "What is included") */
+  includedLabel?: string;
   included: string[];
+  /**
+   * Complete construction scope: the construction disciplines handled within this service.
+   * Trades (plumbing, electrical, painting...) live here as project components, never as standalone services.
+   */
+  scope?: ScopeGroup[];
   /** Name used in the contact form dropdown */
   formLabel: string;
 };
 
+export const tierLabels: Record<ServiceTier, string> = {
+  primary: "Primary focus",
+  major: "Major service",
+  supporting: "Supporting service",
+  additional: "Additional service",
+};
+
 /**
  * SERVICES
- * Edit, reorder, add or remove services here. Numbers are displayed as written.
- * Each service gets its own section on /services (anchor: /services#slug).
+ * The seven primary services. Each gets its own section on /services (anchor: /services#slug).
+ * Individual construction disciplines (plumbing, electrical, painting, flooring, waterproofing,
+ * carpentry, masonry, tiling, roofing, false ceilings) are listed inside each service's `scope`.
  */
 export const services: Service[] = [
   {
-    slug: "architectural-design",
+    slug: "residential-house-construction",
     number: "01",
-    title: "Architectural Design",
-    shortDescription: "Planning shaped by your plot, your lifestyle and the way you want to live.",
+    title: "Residential House Construction",
+    tier: "primary",
+    shortDescription: "Professionally designed and constructed homes, from 120 sq. yd. family houses to 1,000 sq. yd. residences.",
     description:
-      "Architectural planning based on plot dimensions, lifestyle, functional requirements and desired aesthetic. We study orientation, light, privacy and circulation before a single line is fixed, so every room earns its place.",
-    image: images.facade,
-    included: ["Requirement and lifestyle brief", "Space programming", "Zoning and circulation", "Concept floor plans", "Design development", "Client review sessions"],
-    formLabel: "Architectural Design",
+      "Professionally designed and constructed residential homes from concept to completion. Every house begins with architectural planning, an optimized layout and a modern elevation, then moves into construction planning, quality materials and complete execution through to interiors, finishing and handover. One professionally managed residential project, from design to completion.",
+    image: images.house,
+    includedLabel: "Plot sizes & project types",
+    included: [
+      "120 sq. yd. houses",
+      "240 sq. yd. houses",
+      "500 sq. yd. houses",
+      "1,000 sq. yd. houses",
+      "Villas & contemporary residences",
+      "Grey structure",
+      "Turnkey construction",
+      "Renovation & remodeling",
+    ],
+    scope: [
+      { title: "Architectural planning", items: ["2D plans", "CAD drawings", "3D elevations", "3D visualization"] },
+      { title: "Construction", items: ["Grey structure", "Foundation", "RCC structure", "Masonry", "Roofing", "Plastering"] },
+      { title: "Building services", items: ["Plumbing", "Electrical", "Waterproofing"] },
+      { title: "Interior & finishing", items: ["Flooring", "Tiling", "Painting", "Carpentry", "False ceilings", "Kitchens", "Bathrooms"] },
+      { title: "Final delivery", items: ["Complete inspection", "Final finishing", "Handover"] },
+    ],
+    formLabel: "Residential House Construction",
   },
   {
-    slug: "cad-design-drawings",
+    slug: "apartment-flat-construction",
     number: "02",
-    title: "CAD Design & Drawings",
-    shortDescription: "Precise, buildable drawings that leave nothing to guesswork on site.",
+    title: "Apartment & Flat Construction",
+    tier: "major",
+    shortDescription: "Apartment buildings and residential flats, planned and built with the same architectural care as a home.",
     description:
-      "Professional CAD drawings that translate the design into clear instructions for every trade on site, reducing errors, rework and cost overruns.",
-    image: images.drawings,
-    included: ["Floor plans", "Elevations", "Sections", "Dimensions", "Door and window schedules", "Construction drawings", "Detail drawings"],
-    formLabel: "CAD Design & Drawings",
+      "Professional residential construction and development for apartment buildings, residential flats and multi-storey residential buildings. Layouts are planned for natural light, ventilation and efficient use of space, and every floor is constructed and finished according to the approved architectural design.",
+    image: images.apartments,
+    included: ["Apartment buildings", "Residential flats", "Multi-storey residential buildings", "Complete construction", "Complete finishing"],
+    scope: [
+      { title: "Planning & structure", items: ["Architectural planning", "Structural construction", "Grey structure", "Masonry", "Roofing"] },
+      { title: "Building services", items: ["Plumbing", "Electrical", "Waterproofing"] },
+      { title: "Interior & finishing", items: ["Flooring", "Tiling", "Painting", "Carpentry", "False ceilings", "Complete finishing"] },
+    ],
+    formLabel: "Apartment & Flat Construction",
   },
   {
-    slug: "3d-visualization",
+    slug: "commercial-construction",
     number: "03",
-    title: "3D Architectural Visualization",
-    shortDescription: "See the home before it is built, and make decisions with confidence.",
+    title: "Commercial Construction",
+    tier: "additional",
+    shortDescription: "Commercial buildings, shops, plazas and offices, delivered with the same planning discipline.",
     description:
-      "Photorealistic or presentation-quality 3D concepts to visualize the home before construction. Test materials, colours and lighting while changes are still easy.",
-    image: images.house3,
-    included: ["Exterior 3D views", "Elevation renders", "Material and colour options", "Day and night lighting studies", "Interior concept views"],
-    formLabel: "3D Visualization",
-  },
-  {
-    slug: "modern-elevation-design",
-    number: "04",
-    title: "Modern Elevation Design",
-    shortDescription: "Contemporary front elevations with proportion, texture and presence.",
-    description:
-      "Contemporary front elevations built on clean geometry, honest materials and balanced proportions. Designed to look striking by day and considered by night.",
-    image: images.house2,
-    included: ["Clean geometry", "Modern materials", "Architectural lighting", "Texture", "Glass", "Stone", "Metal", "Balanced proportions"],
-    formLabel: "Modern Elevation",
-  },
-  {
-    slug: "structural-design-planning",
-    number: "05",
-    title: "Structural Design & Planning",
-    shortDescription: "The engineering that keeps a beautiful home standing for generations.",
-    description:
-      "Structural planning coordinated with the architecture, so spans, openings and cantilevers are designed to be built safely and efficiently.",
-    image: images.engineer,
-    included: ["Foundations", "Footings", "Columns", "Beams", "Slabs", "Staircases", "Structural elements"],
-    formLabel: "Structural Planning",
-  },
-  {
-    slug: "site-survey-planning",
-    number: "06",
-    title: "Site Survey & Planning",
-    shortDescription: "Understanding the plot before committing to the plan.",
-    description:
-      "Site assessment and project planning based on plot conditions and requirements, including access, levels, neighbouring structures and services.",
-    image: images.site,
-    included: ["Plot measurement", "Level and access review", "Existing structure assessment", "Services and utilities review", "Preliminary project plan"],
-    formLabel: "Other",
+      "Alongside our residential work, we plan and construct commercial buildings, shops and plazas, offices and retail spaces, with the same focus on proper drawings, structural quality and clean, durable finishing.",
+    image: images.glass,
+    included: ["Commercial buildings", "Shops & plazas", "Offices", "Retail spaces"],
+    scope: [
+      { title: "Structure", items: ["Structural work", "Masonry", "Roofing"] },
+      { title: "Building services", items: ["Plumbing", "Electrical"] },
+      { title: "Interior & finishing", items: ["Flooring", "Tiling", "Painting", "Carpentry", "False ceilings", "Finishing"] },
+    ],
+    formLabel: "Commercial Construction",
   },
   {
     slug: "grey-structure-construction",
-    number: "07",
+    number: "04",
     title: "Grey Structure Construction",
-    shortDescription: "Foundations, RCC frame and masonry executed to drawing.",
+    tier: "supporting",
+    shortDescription: "Foundation, RCC structure and masonry, executed to approved architectural and structural drawings.",
     description:
-      "The structural shell of your home, executed with supervised workmanship, correct curing and quality materials, following the approved architectural and structural drawings.",
+      "Professionally planned structural construction. The grey structure is executed according to proper architectural and structural planning, with supervised workmanship, correct curing and quality materials, creating a sound base for everything that follows.",
     image: images.structure,
-    included: ["Excavation", "Earthwork", "PCC", "Foundation", "Footings", "RCC", "Columns", "Beams", "Slabs", "Brick and block masonry", "Roof structure", "Staircase structure", "Basic waterproofing preparation"],
-    formLabel: "Grey Structure",
+    included: ["Foundation", "RCC structure", "Masonry", "Roofing", "Plastering"],
+    scope: [
+      {
+        title: "Structural execution",
+        items: ["Excavation & earthwork", "PCC & footings", "Columns, beams & slabs", "Brick & block masonry", "Staircase structure", "Waterproofing preparation"],
+      },
+      { title: "Coordinated with", items: ["Plumbing provisions", "Electrical conduits", "Approved structural drawings"] },
+    ],
+    formLabel: "Grey Structure Construction",
   },
   {
-    slug: "brickwork-masonry",
-    number: "08",
-    title: "Brickwork & Masonry",
-    shortDescription: "True lines, proper bonding and walls built to last.",
-    description: "Professional masonry execution according to architectural and structural drawings, with attention to alignment, bonding and openings.",
-    image: images.masonry,
-    included: ["Brick masonry", "Block masonry", "Boundary walls", "Openings and lintels", "Line and level checks"],
-    formLabel: "Brickwork & Masonry",
+    slug: "architectural-design",
+    number: "05",
+    title: "Architectural Design",
+    tier: "major",
+    shortDescription: "A better home starts with better architectural planning: 2D plans, CAD drawings, 3D elevations and visualization.",
+    description:
+      "We design the building before we build it. Plans are developed around your plot, lifestyle and budget, with optimized layouts, natural light, ventilation and efficient use of space, then resolved into modern elevations, detailed CAD drawings and 3D visualization, always with practical construction in mind.",
+    image: images.plans,
+    included: ["2D architectural plans", "CAD drawings", "3D elevation", "3D visualization"],
+    scope: [
+      {
+        title: "Design priorities",
+        items: ["Optimized layouts", "Functional planning", "Space optimization", "Modern elevations", "Natural light", "Ventilation", "Aesthetic consistency", "Construction practicality"],
+      },
+    ],
+    formLabel: "Architectural Design",
   },
   {
-    slug: "plastering",
-    number: "09",
-    title: "Plastering",
-    shortDescription: "Level, well-prepared surfaces that make every finish look better.",
-    description: "Internal and external plastering with proper levels and surface preparation, ready for paint, texture or cladding.",
-    image: images.scaffolding,
-    included: ["Internal plaster", "External plaster", "Surface preparation", "Level and plumb checks", "Curing"],
-    formLabel: "Other",
-  },
-  {
-    slug: "electrical-work",
-    number: "10",
-    title: "Electrical Work",
-    shortDescription: "Safe, well-planned electrical infrastructure for modern living.",
-    description: "Complete electrical infrastructure planned around furniture layouts, lighting design and future needs.",
-    image: images.electrical,
-    included: ["Conduits", "Wiring", "Distribution boards", "Lighting points", "Power points", "Switch points", "Electrical infrastructure"],
-    formLabel: "Electrical",
-  },
-  {
-    slug: "plumbing-sanitary",
-    number: "11",
-    title: "Plumbing & Sanitary",
-    shortDescription: "Reliable water supply and drainage, hidden neatly behind the finish.",
-    description: "Water supply, drainage and sanitary installations executed with correct slopes, pressure testing and clean routing.",
-    image: images.bathroom2,
-    included: ["Water supply", "Drainage", "Sewerage", "Bathroom plumbing", "Kitchen plumbing", "Water tanks", "Pipe installation"],
-    formLabel: "Plumbing",
-  },
-  {
-    slug: "waterproofing",
-    number: "12",
-    title: "Waterproofing",
-    shortDescription: "Protection against seepage for roofs, terraces and wet areas.",
-    description: "Waterproofing treatments applied at the right stage, protecting structure and finishes from Karachi's humidity and monsoon rain.",
-    image: images.house9,
-    included: ["Roof waterproofing", "Bathroom waterproofing", "Terrace waterproofing", "Wet-area treatment"],
-    formLabel: "Waterproofing",
-  },
-  {
-    slug: "flooring-tiling",
-    number: "13",
-    title: "Flooring & Tiling",
-    shortDescription: "Precise layouts, clean joints and durable surfaces.",
-    description: "Floor and wall finishes laid to planned layouts, with correct levels, slopes and joint alignment.",
-    image: images.interior2,
-    included: ["Porcelain", "Ceramic", "Marble", "Granite", "Outdoor flooring", "Bathroom tiles", "Kitchen tiles"],
-    formLabel: "Flooring & Tiling",
-  },
-  {
-    slug: "false-ceiling",
-    number: "14",
-    title: "False Ceiling",
-    shortDescription: "Modern ceilings with integrated, layered lighting.",
-    description: "Modern false ceilings designed together with the lighting plan, concealing services and adding depth to every room.",
+    slug: "interior-finishing",
+    number: "06",
+    title: "Interior & Finishing",
+    tier: "supporting",
+    shortDescription: "Complete interior execution: flooring, tiles, paint, ceilings, woodwork, kitchens and bathrooms.",
+    description:
+      "Complete interior execution that carries the architectural design through to the final detail. Floors, walls, ceilings, joinery, kitchens and bathrooms are delivered as one coordinated finishing scope, keeping materials and aesthetics consistent throughout the home.",
     image: images.living3,
-    included: ["Gypsum ceilings", "Cove and profile lighting", "Concealed services", "Access panels", "Finishing"],
-    formLabel: "False Ceiling",
-  },
-  {
-    slug: "painting-finishing",
-    number: "15",
-    title: "Painting & Finishing",
-    shortDescription: "The final layer, applied with patience and preparation.",
-    description: "Interior and exterior painting with thorough surface preparation for an even, lasting finish.",
-    image: images.painting,
-    included: ["Surface preparation", "Interior painting", "Exterior painting", "Texture", "Finishing"],
-    formLabel: "Painting & Finishing",
-  },
-  {
-    slug: "kitchen-design-execution",
-    number: "16",
-    title: "Kitchen Design & Execution",
-    shortDescription: "Kitchens planned around how you cook, store and gather.",
-    description: "Complete kitchen design and execution, from workflow planning to cabinets, countertops and lighting.",
-    image: images.kitchen,
-    included: ["Kitchen layout", "Cabinets", "Countertops", "Storage", "Lighting", "Complete execution"],
-    formLabel: "Kitchen",
-  },
-  {
-    slug: "woodwork-carpentry",
-    number: "17",
-    title: "Woodwork & Carpentry",
-    shortDescription: "Custom joinery that brings warmth and craft into the home.",
-    description: "Doors, wardrobes, cabinets and wall panels built to measure, with durable hardware and careful detailing.",
-    image: images.bedroom,
-    included: ["Doors", "Wardrobes", "Cabinets", "Wall panels", "Custom woodwork"],
-    formLabel: "Woodwork",
-  },
-  {
-    slug: "aluminum-glass",
-    number: "18",
-    title: "Aluminum & Glass",
-    shortDescription: "Slim frames and large openings that bring light inside.",
-    description: "Aluminium windows, doors and architectural glazing that frame views and bring daylight deep into the plan.",
-    image: images.glass,
-    included: ["Windows", "Doors", "Glass partitions", "Shower enclosures", "Architectural glazing"],
-    formLabel: "Aluminum & Glass",
-  },
-  {
-    slug: "facade-exterior-finishing",
-    number: "19",
-    title: "Facade & Exterior Finishing",
-    shortDescription: "Stone, cladding, texture and light: the face of your home.",
-    description: "Execution of the approved elevation using stone, cladding, textures, metal elements and architectural lighting.",
-    image: images.facade,
-    included: ["Stone", "Cladding", "Texture", "Paint", "Metal elements", "Architectural lighting"],
-    formLabel: "Facade",
-  },
-  {
-    slug: "interior-design-execution",
-    number: "20",
-    title: "Interior Design & Execution",
-    shortDescription: "Calm, cohesive interiors designed and delivered by one team.",
-    description: "Interior planning and execution that connects architecture, materials and lighting into one coherent home.",
-    image: images.interiorLuxe,
-    included: ["Interior planning", "Materials", "Lighting", "Finishes", "Execution"],
-    formLabel: "Interior Design",
+    included: ["Flooring & tiles", "Paint", "False ceilings", "Woodwork", "Kitchens", "Bathrooms"],
+    scope: [
+      { title: "Finishing scope", items: ["Flooring", "Tiling", "Painting", "Carpentry", "False ceilings", "Kitchens", "Bathrooms"] },
+      { title: "Coordinated with", items: ["Electrical & lighting points", "Plumbing fixtures", "Wet-area waterproofing"] },
+    ],
+    formLabel: "Interior & Finishing",
   },
   {
     slug: "renovation-remodeling",
-    number: "21",
+    number: "07",
     title: "Renovation & Remodeling",
-    shortDescription: "Modern transformation of existing homes.",
-    description: "Modern transformation of existing homes, from new elevations and layouts to complete interior renewal.",
+    tier: "supporting",
+    shortDescription: "Modern transformation of existing houses, flats and offices, planned before work begins.",
+    description:
+      "Modern transformation of existing homes, flats and offices. Every renovation starts with architectural redesign and space planning, then is delivered as one complete project, from structural changes and services to new kitchens, bathrooms and finishes.",
     image: images.living4,
-    included: ["Condition assessment", "Layout changes", "Elevation upgrades", "Services replacement", "Complete refinishing"],
-    formLabel: "Renovation",
-  },
-  {
-    slug: "turnkey-construction",
-    number: "22",
-    title: "Turnkey Construction",
-    shortDescription: "One team, one contract, from design through handover.",
-    description: "Complete end-to-end project management from design through handover. You make the decisions; we manage everything else.",
-    image: images.villa,
-    included: ["Design and drawings", "Approvals coordination support", "Grey structure", "Services", "Finishing", "Handover"],
-    formLabel: "Turnkey Construction",
-  },
-  {
-    slug: "project-management",
-    number: "23",
-    title: "Project Management",
-    shortDescription: "Supervision, coordination and quality control on your behalf.",
-    description: "Dedicated management that keeps your project on schedule, on specification and transparent at every stage.",
-    image: images.worker,
-    included: ["Site supervision", "Contractor coordination", "Material coordination", "Progress tracking", "Quality control", "Construction scheduling"],
-    formLabel: "Project Management",
+    included: ["House renovation", "Flat renovation", "Office renovation", "Kitchen remodeling", "Bathroom remodeling"],
+    scope: [
+      { title: "Planning", items: ["Architectural redesign", "Space planning"] },
+      { title: "Construction & services", items: ["Masonry", "Plumbing", "Electrical", "Waterproofing"] },
+      {
+        title: "Interior & finishing",
+        items: ["Flooring", "Tiling", "Painting", "Carpentry", "Kitchens", "Bathrooms", "False ceilings", "Final finishing"],
+      },
+    ],
+    formLabel: "Renovation & Remodeling",
   },
 ];
 
-/** Services highlighted on the home page, in display order. */
+/** Services shown on the home page, in display order (residential first). */
 export const featuredServiceSlugs = [
+  "residential-house-construction",
   "architectural-design",
-  "cad-design-drawings",
-  "modern-elevation-design",
-  "structural-design-planning",
+  "apartment-flat-construction",
   "grey-structure-construction",
-  "painting-finishing",
+  "interior-finishing",
   "renovation-remodeling",
-  "turnkey-construction",
+  "commercial-construction",
 ];
 
-/** Short titles for the home page list (keeps numbering 01–08 as specified). */
-export const featuredServiceTitles: Record<string, string> = {
-  "painting-finishing": "Complete Finishing",
-  "renovation-remodeling": "Renovation",
-  "structural-design-planning": "Structural Planning",
-};
+/** Optional shorter titles for the home page list. */
+export const featuredServiceTitles: Record<string, string> = {};
+
+/** Construction disciplines handled within projects (shown as secondary scope, never as primary services). */
+export const constructionDisciplines = [
+  "Structural Work",
+  "Masonry",
+  "Roofing",
+  "Plumbing",
+  "Electrical",
+  "Waterproofing",
+  "Flooring",
+  "Tiling",
+  "Carpentry",
+  "Painting",
+  "False Ceilings",
+];
 
 /** Options shown in the contact form "Service Required" dropdown. */
 export const serviceOptions = [
+  "Residential House Construction",
+  "Apartment & Flat Construction",
+  "Commercial Construction",
+  "Grey Structure Construction",
   "Architectural Design",
-  "CAD Design & Drawings",
-  "3D Visualization",
-  "Modern Elevation",
-  "Structural Planning",
-  "Grey Structure",
-  "Brickwork & Masonry",
-  "Electrical",
-  "Plumbing",
-  "Waterproofing",
-  "Flooring & Tiling",
-  "False Ceiling",
-  "Painting & Finishing",
-  "Kitchen",
-  "Woodwork",
-  "Aluminum & Glass",
-  "Facade",
-  "Interior Design",
-  "Renovation",
-  "Turnkey Construction",
-  "Project Management",
-  "Other",
+  "Interior & Finishing",
+  "Renovation & Remodeling",
 ] as const;
 
 export function getService(slug: string) {
