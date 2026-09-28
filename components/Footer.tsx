@@ -96,7 +96,12 @@ export default function Footer() {
           <p>
             © {year} {site.companyName}. All Rights Reserved.
           </p>
-          <p>Project imagery shown is sample photography for demonstration.</p>
+          <p>
+            Designed &amp; built by{" "}
+            <a href="https://tegnol.agency/" target="_blank" rel="noopener" className="link-underline font-medium text-bone">
+              tegnol.agency
+            </a>
+          </p>
         </div>
       </div>
     </footer>

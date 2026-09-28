@@ -160,7 +160,7 @@ To add a real project, copy an entry and change its fields (`slug` becomes the U
 - Recommended: landscape images at least 2400px wide for heroes, 1600px for galleries. `next/image` handles resizing and modern formats.
 
 ### Testimonials
-Edit **`data/testimonials.ts`**. Replace placeholders with real, client-approved quotes and set `placeholder: false`.
+Edit **`data/testimonials.ts`**. The six current testimonials (English and Roman Urdu) are **samples with fictional names**. Replace them with real, client-approved quotes (set `lang` to `"en"` or `"ur-Latn"`), then set `showSampleTestimonialNotice = false` to remove the "Sample testimonials" label.
 
 ### Colours and fonts
 Design tokens (`bone`, `ink`, `concrete`, `bronze`, ...) are defined in `styles/globals.css` under `@theme`. Fonts (Inter, Inter Tight, Instrument Serif) are loaded in `app/layout.tsx` via `next/font`.
