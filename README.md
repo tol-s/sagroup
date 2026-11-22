@@ -72,7 +72,7 @@ npm run dev                  # http://localhost:3000
 | `CONTACT_EMAIL_2` | Yes | Second recipient of every enquiry (`atiqu8104@gmail.com`) |
 | `EMAIL_FROM` | Yes | Sender, e.g. `SA Group <enquiries@yourdomain.com>` |
 | `RESEND_API_KEY` | Yes | Resend API key (server-side only) |
-| `NEXT_PUBLIC_SITE_URL` | No | Public URL for canonical links and sitemap. Defaults to `https://sagroup.vercel.app` |
+| `NEXT_PUBLIC_SITE_URL` | No | Public URL for canonical links and sitemap. Defaults to `https://sagroup.pk` (set in Vercel to the same) |
 
 Never commit `.env` / `.env.local`. They are git-ignored; only `.env.example` is tracked.
 
@@ -142,7 +142,7 @@ Edit **`data/site.ts`**. `companyName` updates the logo wordmark, page titles, f
 - The **first** entry is the main business line (SA Group, +92 333 2008343, `person: false`). Every "Call Now" button and the mobile contact bar call it, and WhatsApp buttons use `whatsappBusiness` (the same number). Then Atiq Ur Rehman, CEO (+92 315 1209720) and M Abubakar, Project Director (+92 300 2237363). On mobile the home hero shows only the main line.
 - WhatsApp pre-filled message: `whatsappMessage`.
 - Link preview (WhatsApp, Facebook): `app/opengraph-image.tsx` builds the share card from the home banner photo, logo, name and phones (fonts in `assets/og`).
-- Division logos: `public/divisions/`, set via `logo` in `divisions`.
+- Division logos: `public/divisions/` (white on transparent, shown in a black square), set via `logo` in `divisions`.
 - Social links: set `href` for each profile. Empty links render as greyed-out text, not as links.
 - Stats: add a `value` to show a statistic on the About page. Leave empty to hide. Only publish verified numbers.
 

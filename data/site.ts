@@ -9,7 +9,7 @@ export const site = {
   tagline: "Modern Design. Solid Construction. Complete Execution.",
   description:
     "Architectural design and residential construction company in Karachi. Professionally designed and constructed houses, villas and apartments, from 2D plans, CAD drawings and 3D elevations to grey structure, finishing and handover.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://sagroup.vercel.app",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://sagroup.pk",
 
   // The first entry is the main business number: every "Call Now" button dials it.
   // `person: false` marks the business line (not shown as a team member).
@@ -74,7 +74,7 @@ export const divisions: {
     description: "Architecture, construction and real estate. Design and construction of houses, villas, apartments and commercial buildings in Karachi, from the naksha to the keys.",
     urdu: "Ghar ka naksha, grey structure, finishing aur mukammal turnkey construction.",
     points: ["Architectural design & 3D elevation", "Grey structure & finishing", "Turnkey houses & apartments"],
-    logo: "/divisions/sa-builders.png",
+    logo: "/divisions/sa-builders-white.png",
     cta: { label: "Discuss your project", message: "Hi SA Builders & Developers, I would like to discuss a construction project." },
   },
   {
