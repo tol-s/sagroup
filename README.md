@@ -139,7 +139,7 @@ public/                 Static files (put your own photos in public/images)
 Edit **`data/site.ts`**. `companyName` updates the logo wordmark, page titles, footer, emails and structured data everywhere.
 
 - Phone numbers: edit the `phones` array. Each entry has `name` and `role` (shown next to the number), `display` (shown on site), `tel` (for `tel:` links, e.g. `+923452008343`) and `whatsapp` (digits only, country code first, e.g. `923452008343`). Keep them in sync.
-- The **first** entry is the main contact (currently Atiq Ur Rehman, CEO, +92 345 2008343). Every "Call Now" button, WhatsApp button, floating WhatsApp icon and mobile contact bar links to it. The second entry (M Abubakar, +92 321 2008343) is shown as the secondary contact.
+- The **first** entry is the main contact (currently Atiq Ur Rehman, CEO, +92 345 2008343). Every "Call Now" button, WhatsApp button, floating WhatsApp icon and mobile contact bar links to it. The second entry (M Abubakar, Project Director, +92 321 2008343) is shown as the secondary contact.
 - WhatsApp pre-filled message: `whatsappMessage`.
 - Social links: set `href` for each profile. Empty links render as greyed-out text, not as links.
 - Stats: add a `value` to show a statistic on the About page. Leave empty to hide. Only publish verified numbers.
@@ -171,10 +171,16 @@ Edit **`data/calculator.ts`**. The home page calculator, the `/calculator` page,
 
 - `workTypes`: PKR **per sq ft of covered area** for grey structure, finishing, turnkey and architectural design. **These are starting estimates and must be confirmed by SA Group**; update them whenever material prices change.
 - `plotSizes`: Karachi plot sizes (120 to 1,000 sq. yd.), the typical covered area for G / G+1 / G+2 and the typical timeline.
-- `packages`: what each package includes (no brand names until confirmed).
+- `packages`, `packageSpecs`, `packageTerms`: the four SA Builders & Developers packages (SA Core, SA Element, SA Sovereign, SA Signature) with their 20-item material specification and execution terms, taken from the specification sheet SAB/MAT-SPEC/2026. A work type with `rate: 0` shows "Price on request".
 - `faqs`: questions and answers shown on the home page and calculator page.
 
 The "Get exact quote on WhatsApp" button sends the visitor's selections to the WhatsApp Business number.
+
+### Divisions
+Edit `divisions` in **`data/site.ts`** (SA Builders & Developers, SA Building Materials). To show a logo, put it in `public/divisions/` and set `logo`.
+
+### Interactive floor plans
+A project with `floorPlans` in `data/projects.ts` gets the interactive plan explorer (tap a room to zoom in, Tour, colour by room type). Each room has a `box` in image pixels `[left, top, right, bottom]`. Residence B-01 is the featured design on the home page.
 
 ### Contact channels
 In **`data/site.ts`**: `phones` (Call buttons), `whatsappBusiness` (every WhatsApp button on the site), `email` (info@sagroup.pk) and `social` (Facebook, Instagram).

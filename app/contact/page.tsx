@@ -5,7 +5,6 @@ import ContactForm from "@/components/ContactForm";
 import Reveal from "@/components/Reveal";
 import Button from "@/components/Button";
 import JsonLd from "@/components/JsonLd";
-import { images } from "@/data/images";
 import { site } from "@/data/site";
 import { telLink, whatsappLink } from "@/lib/contact";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -27,18 +26,15 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
       <PageHero
         eyebrow="Contact"
         title="Let's build your home."
-        image={images.contactHero}
-        imageAlt="Modern house at dusk"
         intro="Tell us about your plot, your vision and your requirements. The first consultation is free."
       >
         <div className="flex flex-wrap gap-3">
-          <Button href={telLink(0)} variant="light">Call Now</Button>
-          <Button href={whatsappLink()} variant="ghost-light">WhatsApp</Button>
-          <Button href="#enquiry" variant="ghost-light" icon={false}>Free Consultation</Button>
+          <Button href={telLink(0)}>Call Now</Button>
+          <Button href={whatsappLink()} variant="outline">WhatsApp</Button>
         </div>
       </PageHero>
 
-      <section className="py-20 md:py-32" aria-labelledby="enquiry-title">
+      <section className="py-8 md:py-14" aria-labelledby="enquiry-title">
         <div className="wrap grid gap-16 lg:grid-cols-12 lg:gap-8">
           <aside className="lg:col-span-4" aria-label="Contact details">
             <div className="lg:sticky lg:top-28">
@@ -49,7 +45,7 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
                     <p className="label text-concrete">{p.label} contact</p>
                     <p className="mt-2 text-lg font-medium tracking-tight">
                       {p.name}
-                      {p.role ? <span className="font-normal text-graphite">, {p.role}</span> : null}
+                      <span className="font-normal text-graphite">, {p.role}</span>
                     </p>
                     <a href={`tel:${p.tel}`} className="mt-2 block font-display text-[clamp(1.6rem,2.6vw,2.4rem)] font-medium tracking-tight hover:text-bronze">
                       {p.display}

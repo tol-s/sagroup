@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileContactBar from "@/components/MobileContactBar";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import EstimateButton from "@/components/EstimateButton";
 import CustomCursor from "@/components/CustomCursor";
 import SmoothScroll from "@/components/SmoothScroll";
 import JsonLd from "@/components/JsonLd";
@@ -80,6 +81,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Footer />
         <MobileContactBar />
         <WhatsAppFloat />
+        <EstimateButton />
         <CustomCursor />
       </body>
     </html>

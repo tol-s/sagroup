@@ -8,16 +8,44 @@ import AnimatedText from "./AnimatedText";
 type Props = {
   eyebrow: string;
   title: string;
-  image: string;
-  imageAlt: string;
+  /** Omit image for a compact, light header (no banner) so content is visible straight away. */
+  image?: string;
+  imageAlt?: string;
   intro?: string;
   children?: ReactNode;
   meta?: { label: string; value: string }[];
   tall?: boolean;
 };
 
-/** Full-bleed dark hero used by inner pages. */
-export default function PageHero({ eyebrow, title, image, imageAlt, intro, children, meta, tall }: Props) {
+/** Inner page header: full-bleed dark hero with an image, or a compact light header without one. */
+export default function PageHero(props: Props) {
+  return props.image ? <ImageHero {...props} image={props.image} /> : <CompactHeader {...props} />;
+}
+
+function CompactHeader({ eyebrow, title, intro, children }: Props) {
+  return (
+    <section className="border-b border-ink/10 bg-bone pb-8 pt-24 md:pb-12 md:pt-32">
+      <div className="wrap grid gap-6 md:grid-cols-12 md:items-end md:gap-8">
+        <div className={children ? "md:col-span-7" : "md:col-span-9"}>
+          <motion.p
+            className="label mb-4 flex items-center gap-3 text-concrete"
+            initial={{ opacity: 0, x: -12 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="h-px w-8 bg-current" aria-hidden />
+            {eyebrow}
+          </motion.p>
+          <AnimatedText as="h1" trigger="load" delay={0.1} text={title} className="display text-[clamp(2rem,4.6vw,4.25rem)] max-w-[20ch]" />
+          {intro && <p className="mt-4 max-w-2xl text-[0.95rem] leading-relaxed text-graphite md:text-base">{intro}</p>}
+        </div>
+        {children && <div className="md:col-span-5 md:justify-self-end">{children}</div>}
+      </div>
+    </section>
+  );
+}
+
+function ImageHero({ eyebrow, title, image, imageAlt = "", intro, children, meta, tall }: Props & { image: string }) {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });

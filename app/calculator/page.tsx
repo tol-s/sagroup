@@ -5,8 +5,7 @@ import SectionHeading from "@/components/SectionHeading";
 import CTASection from "@/components/CTASection";
 import JsonLd from "@/components/JsonLd";
 import { FaqSection, PackagesSection, TimelineSection } from "@/components/home/HomeSections";
-import { images } from "@/data/images";
-import { faqs } from "@/data/calculator";
+import { faqs, packageTerms } from "@/data/calculator";
 import { site } from "@/data/site";
 import { breadcrumbSchema } from "@/lib/schema";
 
@@ -31,26 +30,29 @@ export default function CalculatorPage() {
       <PageHero
         eyebrow="Cost calculator"
         title="Plan your budget."
-        image={images.plans}
-        imageAlt="Architectural plans for a house"
         intro="An instant construction estimate for your plot in Karachi. Apne ghar ka budget pehle se plan karein."
       />
 
-      <section aria-labelledby="calc-title" className="py-20 md:py-28">
+      <section aria-label="Cost calculator" className="py-8 md:py-14">
         <div className="wrap">
-          <SectionHeading id="calc-title" eyebrow="Instant estimate" title="Calculate your cost." />
-          <div className="mt-14 md:mt-20">
-            <CostCalculator />
-          </div>
+          <CostCalculator />
         </div>
       </section>
 
       <section aria-labelledby="pkg-title" className="border-t border-ink/10 bg-paper py-20 md:py-28">
         <div className="wrap">
-          <SectionHeading id="pkg-title" eyebrow="Packages" title="What's included." />
-          <div className="mt-14">
-            <PackagesSection />
+          <SectionHeading id="pkg-title" eyebrow="Packages" title="What's included." intro="Material specifications for each SA Builders & Developers package. Tap a package to see every item." />
+          <div className="mt-12">
+            <PackagesSection table />
           </div>
+          <ul className="mt-10 grid gap-6 border-t border-ink/10 pt-8 sm:grid-cols-2 lg:grid-cols-4">
+            {packageTerms.map((t) => (
+              <li key={t.title}>
+                <p className="label text-ink">{t.title}</p>
+                <p className="mt-2 text-sm leading-relaxed text-graphite">{t.text}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

@@ -7,6 +7,8 @@ import Reveal from "@/components/Reveal";
 import Button from "@/components/Button";
 import CTASection from "@/components/CTASection";
 import JsonLd from "@/components/JsonLd";
+import Divisions from "@/components/Divisions";
+import { contactName } from "@/lib/contact";
 import { images } from "@/data/images";
 import { serviceAreas } from "@/data/home";
 import { site } from "@/data/site";
@@ -50,8 +52,6 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About us"
         title="We build with purpose."
-        image={images.aboutHero}
-        imageAlt="Contemporary architecture with strong geometry"
         intro="An architectural design and residential construction company in Karachi. We believe a home should be designed before it is built."
       />
 
@@ -86,6 +86,28 @@ export default function AboutPage() {
         <div className="wrap mt-16 grid gap-6 md:mt-28 md:grid-cols-12">
           <ImageReveal src={images.aboutStudio} alt="Architectural drawings and plans" className="aspect-[4/3] md:col-span-7" sizes="(min-width: 768px) 58vw, 100vw" direction="left" />
           <ImageReveal src={images.aboutSite} alt="Residential construction site" className="aspect-[4/3] md:col-span-5 md:mt-40 md:aspect-[3/4]" sizes="(min-width: 768px) 40vw, 100vw" direction="right" />
+        </div>
+      </section>
+
+      {/* DIVISIONS + LEADERSHIP */}
+      <section aria-labelledby="divisions-title" className="border-t border-ink/10 bg-paper py-20 md:py-28">
+        <div className="wrap">
+          <SectionHeading id="divisions-title" eyebrow="SA Group" title="Our divisions." intro="Two specialist companies under one trusted name." />
+          <div className="mt-12">
+            <Divisions />
+          </div>
+          <h3 className="label mb-5 mt-16 text-concrete">Leadership</h3>
+          <ul className="grid gap-4 sm:grid-cols-2">
+            {site.phones.map((p) => (
+              <li key={p.tel} className="border border-ink/10 bg-bone p-6">
+                <p className="font-display text-xl font-medium uppercase tracking-tight">{p.name}</p>
+                <p className="mt-1 text-graphite">{p.role}</p>
+                <a href={`tel:${p.tel}`} className="link-underline mt-4 inline-block text-sm" aria-label={`Call ${contactName(p)}`}>
+                  {p.display}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

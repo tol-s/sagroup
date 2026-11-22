@@ -7,7 +7,7 @@ export function whatsappLink(message: string = site.whatsappMessage) {
 
 /** "Atiq Ur Rehman, CEO" style label for a phone entry. */
 export function contactName(phone: (typeof site.phones)[number]) {
-  return phone.role ? `${phone.name}, ${phone.role}` : phone.name;
+  return `${phone.name}, ${phone.role}`;
 }
 
 export function telLink(phoneIndex = 0) {

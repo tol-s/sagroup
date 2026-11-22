@@ -14,7 +14,7 @@ export const site = {
   // The first entry is the main number: every "Call Now" and WhatsApp button links to it.
   phones: [
     { label: "Primary", name: "Atiq Ur Rehman", role: "CEO", display: "+92 345 2008343", tel: "+923452008343", whatsapp: "923452008343" },
-    { label: "Secondary", name: "M Abubakar", role: "", display: "+92 321 2008343", tel: "+923212008343", whatsapp: "923212008343" },
+    { label: "Secondary", name: "M Abubakar", role: "Project Director", display: "+92 321 2008343", tel: "+923212008343", whatsapp: "923212008343" },
   ],
 
   // WhatsApp Business: every WhatsApp button on the site opens a chat with this number.
@@ -49,6 +49,41 @@ export const site = {
 
   foundedYear: "",
 } as const;
+
+/**
+ * SA GROUP DIVISIONS
+ * Shown on the home page, About page and footer. To show a division's logo,
+ * put the file in public/divisions/ and set `logo` (e.g. "/divisions/sa-builders.png").
+ */
+export const divisions: {
+  name: string;
+  line2: string;
+  short: string;
+  description: string;
+  urdu: string;
+  points: string[];
+  logo?: string;
+  cta: { label: string; message: string };
+}[] = [
+  {
+    name: "SA Builders",
+    line2: "& Developers",
+    short: "SA Builders & Developers",
+    description: "Architecture, construction and real estate. Design and construction of houses, villas, apartments and commercial buildings in Karachi, from the naksha to the keys.",
+    urdu: "Ghar ka naksha, grey structure, finishing aur mukammal turnkey construction.",
+    points: ["Architectural design & 3D elevation", "Grey structure & finishing", "Turnkey houses & apartments"],
+    cta: { label: "Discuss your project", message: "Hi SA Builders & Developers, I would like to discuss a construction project." },
+  },
+  {
+    name: "SA Building",
+    line2: "Materials",
+    short: "SA Building Materials",
+    description: "The building materials division of SA Group, supplying construction materials for building projects in Karachi.",
+    urdu: "Construction ka saman, ek bharosemand naam se.",
+    points: ["Construction material supply", "A division of SA Group", "Rates and availability on WhatsApp"],
+    cta: { label: "Ask for material rates", message: "Hi SA Building Materials, please share current rates and availability for construction materials." },
+  },
+];
 
 export const nav = [
   { label: "Home", href: "/" },

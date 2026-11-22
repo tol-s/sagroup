@@ -6,7 +6,6 @@ import CTASection from "@/components/CTASection";
 import Reveal from "@/components/Reveal";
 import JsonLd from "@/components/JsonLd";
 import { services } from "@/data/services";
-import { images } from "@/data/images";
 import { site } from "@/data/site";
 import { breadcrumbSchema } from "@/lib/schema";
 
@@ -43,13 +42,11 @@ export default function ServicesPage() {
       <PageHero
         eyebrow="Services"
         title="We design before we build."
-        image={images.servicesHero}
-        imageAlt="Modern residence with clean architectural lines"
         intro="Integrated architectural and construction services for residential houses, villas and apartments. We design the building before we build it, then deliver the complete construction scope from concept to completion."
       />
 
       {/* INDEX */}
-      <section aria-labelledby="index-title" className="py-20 md:py-28">
+      <section aria-labelledby="index-title" className="py-8 md:py-14">
         <div className="wrap">
           <h2 id="index-title" className="label mb-10 text-concrete">
             Service index

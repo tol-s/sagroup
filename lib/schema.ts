@@ -1,4 +1,4 @@
-import { site } from "@/data/site";
+import { divisions, site } from "@/data/site";
 import { services } from "@/data/services";
 import { serviceAreas } from "@/data/home";
 import { images } from "@/data/images";
@@ -28,7 +28,7 @@ export function localBusinessSchema() {
     ],
     contactPoint: site.phones.map((p) => ({
       "@type": "ContactPoint",
-      name: p.role ? `${p.name}, ${p.role}` : p.name,
+      name: `${p.name}, ${p.role}`,
       telephone: p.tel,
       contactType: "customer service",
       areaServed: "PK",
@@ -42,6 +42,8 @@ export function localBusinessSchema() {
         itemOffered: { "@type": "Service", name: s.title, description: s.shortDescription, areaServed: "Karachi" },
       })),
     },
+    subOrganization: divisions.map((d) => ({ "@type": "Organization", name: d.short, description: d.description })),
+    employee: site.phones.map((p) => ({ "@type": "Person", name: p.name, jobTitle: p.role })),
     sameAs: site.social.map((s) => s.href).filter(Boolean),  };
 }
 

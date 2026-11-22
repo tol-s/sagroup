@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { nav, site } from "@/data/site";
+import { divisions, nav, site } from "@/data/site";
 import { featuredServiceSlugs, services } from "@/data/services";
 import { contactName, whatsappLink } from "@/lib/contact";
 import Logo from "./Logo";
@@ -16,6 +16,12 @@ export default function Footer() {
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-bone/55">
               Architectural design and residential construction across {site.location.city}.
             </p>
+            <p className="label mt-8 text-bone/45">Our divisions</p>
+            <ul className="mt-3 space-y-1.5 text-sm text-bone/80">
+              {divisions.map((d) => (
+                <li key={d.short}>{d.short}</li>
+              ))}
+            </ul>
           </div>
 
           <nav aria-label="Footer" className="md:col-span-2">

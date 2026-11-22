@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import type { Project } from "@/data/projects";
+import { showSampleNotice, type Project } from "@/data/projects";
 import clsx from "@/lib/clsx";
 
 type Props = {
@@ -42,6 +42,11 @@ export default function ProjectCard({ project, index, aspect = "aspect-[4/5]", s
             <ArrowRight className="size-4" strokeWidth={1.5} aria-hidden />
           </div>
           <span className="label absolute left-4 top-4 bg-bone/90 px-2.5 py-1.5 text-ink backdrop-blur-sm">{String(index + 1).padStart(2, "0")}</span>
+          {project.sample && showSampleNotice ? (
+            <span className="label absolute right-4 top-4 bg-ink/70 px-2.5 py-1.5 text-bone/85 backdrop-blur-sm">Sample</span>
+          ) : project.status ? (
+            <span className="label absolute right-4 top-4 bg-bronze px-2.5 py-1.5 text-ink">{project.status}</span>
+          ) : null}
         </div>
         <div className="mt-5 flex items-start justify-between gap-6">
           <div>

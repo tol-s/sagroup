@@ -5,7 +5,6 @@ import SectionHeading from "@/components/SectionHeading";
 import CTASection from "@/components/CTASection";
 import Reveal from "@/components/Reveal";
 import JsonLd from "@/components/JsonLd";
-import { images } from "@/data/images";
 import { processSteps } from "@/data/process";
 import { site } from "@/data/site";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -32,17 +31,13 @@ export default function ProcessPage() {
       <PageHero
         eyebrow="Construction process"
         title="From architectural planning to final handover."
-        image={images.processHero}
-        imageAlt="Construction professional at work on site"
         intro="Eight clear stages. The home is fully designed before construction begins, and each stage is reviewed with you before the next one starts."
       />
 
-      <section aria-labelledby="timeline-title" className="py-24 md:py-40">
+      <section aria-labelledby="timeline-title" className="py-10 md:py-16">
         <div className="wrap">
-          <SectionHeading id="timeline-title" eyebrow="Eight stages" title="How we design and build your home." />
-          <div className="mt-16 md:mt-28">
-            <ProcessTimeline />
-          </div>
+          <h2 id="timeline-title" className="sr-only">How we design and build your home</h2>
+          <ProcessTimeline />
         </div>
       </section>
 

@@ -26,6 +26,38 @@ export type Project = {
   /** Complete construction scope delivered within the project (components, not separate services). */
   constructionScope: string[];
   filters: ProjectFilter[];
+  /** true = sample / demonstration project (labelled "Sample" on the site). */
+  sample?: boolean;
+  /** Short status badge, e.g. "3D design". */
+  status?: string;
+  /** Interactive floor plans (see components/FloorPlanExplorer). */
+  floorPlans?: FloorPlan[];
+  /** Quick facts shown on the project page and featured section. */
+  facts?: { label: string; value: string }[];
+};
+
+export type RoomKind = "bedroom" | "living" | "kitchen" | "bath" | "outdoor" | "circulation";
+
+export type Room = {
+  id: string;
+  name: string;
+  /** Size as written on the drawing, e.g. 15'0" x 18'0" */
+  size?: string;
+  kind: RoomKind;
+  /** Room outline in image pixels: [left, top, right, bottom] */
+  box: [number, number, number, number];
+  note?: string;
+};
+
+export type FloorPlan = {
+  id: string;
+  label: string;
+  /** Roman Urdu label */
+  urdu: string;
+  image: string;
+  width: number;
+  height: number;
+  rooms: Room[];
 };
 
 /** Full design-and-build scope for a complete residential project. */
@@ -65,6 +97,96 @@ export const projectFilters: { value: "all" | ProjectFilter; label: string }[] =
 
 export const projects: Project[] = [
   {
+    slug: "residence-b-01",
+    title: "Residence B-01",
+    location: "Karachi",
+    category: "Residential House",
+    type: "Double-storey family residence (G+1)",
+    style: "Contemporary Modern",
+    scope: "Architectural planning, furnished floor plans and 3D exterior visualisation",
+    status: "SA Group design",
+    description:
+      "A contemporary double-storey family home designed by SA Group: five bedrooms, two lounges, open terraces and a bold modern elevation.",
+    overview:
+      "Residence B-01 is planned around how a Pakistani family actually lives. The ground floor keeps guests and family separate: a formal drawing room and guest room near the entrance, with the lounge, dining and a modular kitchen with a separate dirty kitchen behind. Upstairs, three bedrooms with attached baths, a family lounge, a kitchenette, a gym and two open terraces make the first floor a home of its own.",
+    designApproach:
+      "The elevation layers white volumes, charcoal frames and stone cladding, with deep projections that shade the windows from the Karachi sun. A pergola on the roof, glass balcony railings and concealed lighting give the house its night-time presence, while planters at the boundary wall soften the street front.",
+    heroImage: "/projects/b01/night-front.jpg",
+    cardImage: "/projects/b01/gate.jpg",
+    gallery: [
+      { src: "/projects/b01/night-front.jpg", alt: "Residence B-01 front elevation at night with stone cladding and calligraphy panel", caption: "Front elevation, night" },
+      { src: "/projects/b01/corner.jpg", alt: "Residence B-01 seen from the street corner at night", caption: "Street view" },
+      { src: "/projects/b01/gate.jpg", alt: "Residence B-01 main gate, porch and boundary wall", caption: "Main gate and porch" },
+      { src: "/projects/b01/ground-floor.webp", alt: "Furnished 3D ground floor plan of Residence B-01", caption: "Ground floor plan" },
+      { src: "/projects/b01/first-floor.webp", alt: "Furnished 3D first floor plan of Residence B-01", caption: "First floor plan" },
+    ],
+    features: ["Separate drawing room", "Modular + dirty kitchen", "Attached baths", "Walk-in closets", "Two open terraces", "Rooftop pergola"],
+    constructionScope: ["Architectural planning", "Furnished floor plans", "3D elevation", "Exterior lighting design", "Landscape planning"],
+    filters: ["residential"],
+    facts: [
+      { label: "Floors", value: "Ground + 1" },
+      { label: "Bedrooms", value: "4 + guest" },
+      { label: "Bathrooms", value: "5 + 2 powder" },
+      { label: "Lounges", value: "2" },
+    ],
+    floorPlans: [
+      {
+        id: "ground",
+        label: "Ground floor",
+        urdu: "Neeche ki manzil",
+        image: "/projects/b01/ground-floor.webp",
+        width: 1054,
+        height: 1492,
+        rooms: [
+          { id: "g-porch", name: "Porch", size: "13'0\" x 18'0\"", kind: "outdoor", box: [530, 985, 832, 1250], note: "Covered car parking at the main gate." },
+          { id: "g-garden", name: "Garden", size: "18'6\" x 10'0\"", kind: "outdoor", box: [140, 1100, 446, 1312], note: "Private lawn beside the master bedroom." },
+          { id: "g-foyer", name: "Foyer", size: "6'0\" x 15'0\"", kind: "circulation", box: [440, 768, 546, 1082], note: "Entrance hall that connects every part of the house." },
+          { id: "g-drawing", name: "Drawing Room", size: "15'0\" x 14'0\"", kind: "living", box: [550, 735, 832, 968], note: "Formal guest room, kept apart from family areas." },
+          { id: "g-pow1", name: "Powder Room", size: "6'0\" x 5'0\"", kind: "bath", box: [563, 640, 702, 728] },
+          { id: "g-pow2", name: "Powder Room", size: "5'0\" x 5'0\"", kind: "bath", box: [702, 640, 802, 728] },
+          { id: "g-lounge", name: "Lounge", size: "15'6\" x 17'0\"", kind: "living", box: [546, 385, 798, 628], note: "Family TV lounge, open to the dining area." },
+          { id: "g-dining", name: "Dining", size: "12'0\" x 13'6\"", kind: "living", box: [590, 165, 790, 382] },
+          { id: "g-kitchen", name: "Modular Kitchen", size: "12'0\" x 14'0\"", kind: "kitchen", box: [398, 62, 586, 302], note: "Island kitchen with full-height storage." },
+          { id: "g-dkitchen", name: "Dirty Kitchen", size: "8'0\" x 6'0\"", kind: "kitchen", box: [588, 66, 728, 165], note: "Separate kitchen for heavy desi cooking." },
+          { id: "g-guest", name: "Guest Room", size: "11'0\" x 13'0\"", kind: "bedroom", box: [188, 188, 378, 354] },
+          { id: "g-bath1", name: "Bathroom", size: "8'0\" x 6'0\"", kind: "bath", box: [188, 66, 358, 170] },
+          { id: "g-stairs", name: "Staircase", kind: "circulation", box: [192, 368, 402, 552] },
+          { id: "g-bed1", name: "Bedroom 01", size: "15'0\" x 18'0\"", kind: "bedroom", box: [185, 790, 436, 1082], note: "Master bedroom with walk-in closet and attached bath." },
+          { id: "g-wic", name: "Walk-in Closet", size: "6'0\" x 5'0\"", kind: "bedroom", box: [185, 690, 362, 790] },
+          { id: "g-bath2", name: "Bathroom", size: "10'0\" x 8'0\"", kind: "bath", box: [185, 555, 366, 690] },
+        ],
+      },
+      {
+        id: "first",
+        label: "First floor",
+        urdu: "Upar ki manzil",
+        image: "/projects/b01/first-floor.webp",
+        width: 1054,
+        height: 1492,
+        rooms: [
+          { id: "f-lounge", name: "Family Lounge", size: "21'6\" x 20'6\"", kind: "living", box: [382, 440, 742, 800], note: "The heart of the first floor, between all the bedrooms." },
+          { id: "f-bed2", name: "Bedroom 02", size: "15'6\" x 13'0\"", kind: "bedroom", box: [138, 200, 428, 422] },
+          { id: "f-bath1", name: "Bathroom", size: "8'0\" x 8'0\"", kind: "bath", box: [134, 70, 292, 200] },
+          { id: "f-wic1", name: "Walk-in Closet", size: "6'0\" x 8'0\"", kind: "bedroom", box: [292, 70, 412, 212] },
+          { id: "f-balcony1", name: "Balcony", size: "5'0\" x 8'0\"", kind: "outdoor", box: [414, 70, 516, 200] },
+          { id: "f-bed3", name: "Bedroom 03", size: "14'6\" x 16'0\"", kind: "bedroom", box: [515, 198, 806, 452] },
+          { id: "f-wic2", name: "Walk-in Closet", size: "6'0\" x 8'0\"", kind: "bedroom", box: [518, 70, 626, 200] },
+          { id: "f-bath2", name: "Bathroom", size: "8'0\" x 8'0\"", kind: "bath", box: [626, 70, 772, 188] },
+          { id: "f-balcony2", name: "Side Balcony", size: "13'6\" x 3'0\"", kind: "outdoor", box: [788, 185, 882, 432] },
+          { id: "f-stairs", name: "Staircase", kind: "circulation", box: [138, 430, 388, 642] },
+          { id: "f-terrace1", name: "Terrace", size: "16'0\" x 8'0\"", kind: "outdoor", box: [744, 452, 892, 742] },
+          { id: "f-kitchenette", name: "Kitchenette", size: "6'0\" x 9'0\"", kind: "kitchen", box: [640, 740, 838, 880] },
+          { id: "f-gym", name: "Gaming / Gym", size: "10'0\" x 10'0\"", kind: "living", box: [638, 880, 842, 1082] },
+          { id: "f-bath3", name: "Bathroom", size: "10'0\" x 8'0\"", kind: "bath", box: [138, 645, 352, 772] },
+          { id: "f-wic3", name: "Walk-in Closet", size: "6'0\" x 5'0\"", kind: "bedroom", box: [138, 775, 358, 864] },
+          { id: "f-bed4", name: "Bedroom 04", size: "15'0\" x 18'0\"", kind: "bedroom", box: [138, 864, 456, 1192] },
+          { id: "f-balcony3", name: "Front Balcony", size: "10'0\" x 3'0\"", kind: "outdoor", box: [124, 1194, 456, 1292] },
+          { id: "f-terrace2", name: "Front Terrace", size: "18'6\" x 8'0\"", kind: "outdoor", box: [546, 1084, 936, 1272] },
+        ],
+      },
+    ],
+  },
+  {
     slug: "the-concrete-residence",
     title: "The Concrete Residence",
     location: "DHA Karachi",
@@ -91,6 +213,7 @@ export const projects: Project[] = [
     features: ["Modern facade", "Large windows", "Open living spaces", "Architectural lighting", "Minimal staircase", "Contemporary interiors"],
     constructionScope: completeResidentialScope,
     filters: ["residential"],
+    sample: true,
   },
   {
     slug: "the-monochrome-house",
@@ -118,6 +241,7 @@ export const projects: Project[] = [
     features: ["White facade", "Dark aluminium frames", "Large glazing", "Modern lighting", "Geometric massing", "Minimal interiors"],
     constructionScope: completeResidentialScope,
     filters: ["residential"],
+    sample: true,
   },
   {
     slug: "the-courtyard-residence",
@@ -147,6 +271,7 @@ export const projects: Project[] = [
     features: ["Central courtyard", "Open living", "Natural lighting", "Modern staircase", "Landscape integration", "Large openings"],
     constructionScope: completeResidentialScope,
     filters: ["residential"],
+    sample: true,
   },
   {
     slug: "the-modern-villa",
@@ -176,6 +301,7 @@ export const projects: Project[] = [
     features: ["Double-height entrance", "Modern facade", "Architectural lighting", "Large glazing", "Premium interiors", "Contemporary staircase"],
     constructionScope: completeResidentialScope,
     filters: ["residential", "villas"],
+    sample: true,
   },
   {
     slug: "the-urban-residence",
@@ -202,6 +328,7 @@ export const projects: Project[] = [
     features: ["Functional planning", "Modern elevation", "Natural lighting", "Efficient floor plan", "Contemporary interiors"],
     constructionScope: completeResidentialScope,
     filters: ["residential"],
+    sample: true,
   },
   {
     slug: "the-stone-and-glass-house",
@@ -230,8 +357,15 @@ export const projects: Project[] = [
     features: ["Stone facade", "Large glass openings", "Warm lighting", "Modern staircase", "Contemporary interiors", "Landscape integration"],
     constructionScope: completeResidentialScope,
     filters: ["residential", "villas"],
+    sample: true,
   },
 ];
+
+/** The project featured on the home page (with interactive floor plans). */
+export const featuredProject = projects.find((p) => p.floorPlans?.length) ?? projects[0];
+
+/** Projects that are sample / demonstration work exist (controls the sample notices). */
+export const hasSampleProjects = showSampleNotice && projects.some((p) => p.sample);
 
 export function getProject(slug: string) {
   return projects.find((p) => p.slug === slug);

@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { MessageCircle, Phone } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown, MessageCircle, Phone } from "lucide-react";
 import {
   estimateDisclaimer,
   floorOptions,
@@ -22,7 +23,9 @@ function Choice({
   onClick,
   children,
   hint,
+  className,
 }: {
+  className?: string;
   active: boolean;
   disabled?: boolean;
   onClick: () => void;
@@ -39,6 +42,7 @@ function Choice({
         "flex min-h-12 flex-col justify-center border px-4 py-2.5 text-left transition-colors duration-300",
         active ? "border-ink bg-ink text-bone" : "border-ink/15 bg-paper text-ink hover:border-ink/50",
         disabled && "cursor-not-allowed opacity-35 hover:border-ink/15",
+        className,
       )}
     >
       <span className="text-[0.95rem] font-medium tracking-tight">{children}</span>
@@ -65,6 +69,8 @@ export default function CostCalculator() {
   }, [custom, customArea, plot, effectiveFloors]);
 
   const total = area * work.rate;
+  /** Packages without a published rate are quoted on request. */
+  const onRequest = work.rate === 0;
   const floor = floorOptions.find((f) => f.id === effectiveFloors);
   const floorLabel = floor ? `${floor.label} (${floor.hint.toLowerCase()})` : "";
 
@@ -72,14 +78,14 @@ export default function CostCalculator() {
     `Hi ${site.companyName}, I used the cost calculator on your website.`,
     custom ? `Covered area: ${area.toLocaleString("en-PK")} sq ft` : `Plot: ${plot.label}, ${floorLabel} (approx. ${area.toLocaleString("en-PK")} sq ft covered)`,
     `Work: ${work.label}`,
-    `Estimate shown: ${formatPKR(total)}`,
+    onRequest ? "Please share the price for this package." : `Estimate shown: ${formatPKR(total)}`,
     "Please share an exact quotation.",
   ].join("\n");
 
   return (
-    <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
       {/* INPUTS */}
-      <div className="space-y-9 lg:col-span-7">
+      <div className="min-w-0 space-y-7 md:space-y-9 lg:col-span-7">
         <fieldset>
           <legend className="label mb-1 text-concrete">1. Plot size</legend>
           <p className="mb-4 text-sm text-graphite">Aapka plot kitne gaz ka hai?</p>
@@ -137,24 +143,72 @@ export default function CostCalculator() {
         <fieldset>
           <legend className="label mb-1 text-concrete">{custom ? "2" : "3"}. Type of work</legend>
           <p className="mb-4 text-sm text-graphite">Aap ko kya kaam karwana hai?</p>
-          <div className="grid gap-2 sm:grid-cols-2">
-            {workTypes.map((w) => (
-              <Choice key={w.id} active={workId === w.id} onClick={() => setWorkId(w.id)} hint={w.hint}>
+          <div className="grid grid-cols-2 gap-2">
+            {workTypes.map((w, i) => (
+              <Choice
+                key={w.id}
+                active={workId === w.id}
+                onClick={() => setWorkId(w.id)}
+                hint={w.pkg ? `${w.pkg} · ${w.hint}` : w.hint}
+                className={i === workTypes.length - 1 && workTypes.length % 2 ? "col-span-2" : undefined}
+              >
                 {w.label}
               </Choice>
             ))}
           </div>
         </fieldset>
+
+        {/* MOBILE: live estimate pinned to the bottom of the screen while choosing */}
+        <div className="sticky bottom-[calc(4.25rem+env(safe-area-inset-bottom))] z-30 md:bottom-4 lg:hidden">
+          <div className="flex items-center gap-3 bg-ink py-3 pl-4 pr-3 text-bone shadow-[0_-8px_30px_rgba(0,0,0,0.18)]">
+            <div className="min-w-0 flex-1">
+              <p className="label text-bone/55">Estimated cost</p>
+              <AnimatePresence mode="popLayout" initial={false}>
+                <motion.p
+                  key={total}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.25 }}
+                  className="whitespace-nowrap font-display text-[1.3rem] font-medium leading-tight tracking-tight min-[400px]:text-[1.5rem]"
+                >
+                  {onRequest ? "Price on request" : area > 0 ? formatCroreLakh(total) : "Enter area"}
+                </motion.p>
+              </AnimatePresence>
+              {area > 0 && (
+                <p className="truncate text-xs text-bone/55">
+                  {onRequest ? `${area.toLocaleString("en-PK")} sq ft · ${work.pkg ?? work.label}` : `${area.toLocaleString("en-PK")} sq ft × ${formatPKR(work.rate)}`}
+                </p>
+              )}
+            </div>
+            <a
+              href={whatsappLink(message)}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Get exact quote on WhatsApp"
+              className="grid size-11 shrink-0 place-items-center bg-[#25D366] text-ink"
+            >
+              <MessageCircle className="size-5" strokeWidth={1.75} aria-hidden />
+            </a>
+            <a href="#calc-result" className="label inline-flex h-11 shrink-0 items-center gap-1 border border-bone/30 px-2.5">
+              Details <ChevronDown className="size-3.5" aria-hidden />
+            </a>
+          </div>
+        </div>
       </div>
 
       {/* RESULT */}
-      <div className="lg:col-span-5">
+      <div id="calc-result" className="min-w-0 scroll-mt-20 lg:col-span-5">
         <div className="bg-ink p-6 text-bone md:p-8 lg:sticky lg:top-28" aria-live="polite">
           <p className="label text-bone/55">Estimated cost</p>
           <p className="mt-3 font-display text-[clamp(2rem,4.2vw,3.25rem)] font-medium leading-none tracking-[-0.03em]">
-            {area > 0 ? formatCroreLakh(total) : "PKR —"}
+            {onRequest ? "Price on request" : area > 0 ? formatCroreLakh(total) : "PKR —"}
           </p>
-          {area > 0 && <p className="mt-2 text-sm text-bone/60">{formatPKR(total)}</p>}
+          {onRequest ? (
+            <p className="mt-2 text-sm text-bone/60">{work.pkg} includes luxury finishing and full furnishing. Ask us on WhatsApp for a quotation.</p>
+          ) : (
+            area > 0 && <p className="mt-2 text-sm text-bone/60">{formatPKR(total)}</p>
+          )}
 
           <dl className="mt-8 divide-y divide-bone/10 border-y border-bone/10 text-sm">
             {!custom && (
@@ -169,9 +223,15 @@ export default function CostCalculator() {
               <dt className="text-bone/55">Covered area {custom ? "" : "(approx.)"}</dt>
               <dd>{area.toLocaleString("en-PK")} sq ft</dd>
             </div>
+            {work.pkg && (
+              <div className="flex justify-between gap-4 py-3">
+                <dt className="text-bone/55">Package</dt>
+                <dd>{work.pkg}</dd>
+              </div>
+            )}
             <div className="flex justify-between gap-4 py-3">
               <dt className="text-bone/55">Rate</dt>
-              <dd>{formatPKR(work.rate)} / sq ft</dd>
+              <dd>{onRequest ? "On request" : `${formatPKR(work.rate)} / sq ft`}</dd>
             </div>
             {work.split && area > 0 && (
               <>

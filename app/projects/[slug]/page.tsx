@@ -11,6 +11,7 @@ import ImageReveal from "@/components/ImageReveal";
 import CTASection from "@/components/CTASection";
 import JsonLd from "@/components/JsonLd";
 import { getAdjacentProjects, getProject, projects, showSampleNotice } from "@/data/projects";
+import FloorPlanExplorer from "@/components/FloorPlanExplorer";
 import { site } from "@/data/site";
 import { breadcrumbSchema, projectSchema } from "@/lib/schema";
 
@@ -44,6 +45,8 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
   const project = getProject(slug);
   if (!project) notFound();
   const { prev, next } = getAdjacentProjects(project.slug);
+  const isSample = showSampleNotice && project.sample;
+  const gallery = project.floorPlans ? project.gallery.filter((g) => !project.floorPlans!.some((f) => f.image === g.src)) : project.gallery;
 
   const details = [
     { label: "Location", value: project.location },
@@ -59,8 +62,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
       <JsonLd data={projectSchema(project)} />
 
       <PageHero
-        tall
-        eyebrow={showSampleNotice ? "Sample project" : "Project"}
+        eyebrow={isSample ? "Sample project" : (project.status ?? "Project")}
         title={project.title}
         image={project.heroImage}
         imageAlt={`${project.title}, ${project.location}`}
@@ -82,7 +84,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
               <p className="text-[clamp(1.4rem,2.4vw,2.25rem)] leading-[1.3] tracking-[-0.015em]">{project.description}</p>
               <p className="lead mt-8 text-graphite">{project.overview}</p>
             </Reveal>
-            {showSampleNotice && (
+            {isSample && (
               <p className="mt-10 max-w-xl border-l-2 border-bronze pl-4 text-sm text-graphite">
                 This is a sample / demonstration project used to illustrate our design direction and project presentation.
               </p>
@@ -104,11 +106,25 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
         </div>
       </section>
 
+      {/* INTERACTIVE FLOOR PLANS */}
+      {project.floorPlans && (
+        <section aria-labelledby="plans-title" className="border-t border-ink/10 bg-paper py-20 md:py-28">
+          <div className="wrap">
+            <p className="label mb-6 text-concrete">Floor plans · Naksha</p>
+            <AnimatedText id="plans-title" as="h2" text="Walk through the house." className="display display-md uppercase" />
+            <p className="lead mt-6 max-w-2xl text-graphite">Choose a floor, then tap any room to zoom in and see its size. Press Tour to walk through every room.</p>
+            <div className="mt-12 md:mt-16">
+              <FloorPlanExplorer plans={project.floorPlans} title={project.title} />
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* DESIGN APPROACH */}
       <section aria-labelledby="approach-title" className="bg-paper py-24 md:py-36">
         <div className="wrap grid gap-12 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-5">
-            <ImageReveal src={project.gallery[1]?.src ?? project.heroImage} alt={project.gallery[1]?.alt ?? project.title} className="aspect-[4/5] w-full" sizes="(min-width: 768px) 40vw, 100vw" direction="left" />
+            <ImageReveal src={gallery[1]?.src ?? project.heroImage} alt={gallery[1]?.alt ?? project.title} className="aspect-[4/5] w-full" sizes="(min-width: 768px) 40vw, 100vw" direction="left" />
           </div>
           <div className="flex flex-col justify-center md:col-span-6 md:col-start-7">
             <p className="label mb-6 text-concrete">Design approach</p>
@@ -147,9 +163,9 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
               <p className="label mb-6 text-concrete">Project gallery</p>
               <AnimatedText id="gallery-title" as="h2" text="Inside and out." className="display display-md uppercase" />
             </div>
-            <p className="label hidden text-concrete md:block">{project.gallery.length} images · Click to enlarge</p>
+            <p className="label hidden text-concrete md:block">{gallery.length} images · Click to enlarge</p>
           </div>
-          <ProjectGallery images={project.gallery} title={project.title} />
+          <ProjectGallery images={gallery} title={project.title} />
         </div>
       </section>
 

@@ -1,9 +1,10 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
-let initialLoad = true;
+/** Becomes true after the first page has hydrated; later pages are client navigations. */
+let hydrated = false;
 
 /**
  * Wraps each page (via app/template.tsx). On client-side navigation a dark curtain
@@ -11,12 +12,10 @@ let initialLoad = true;
  */
 export default function PageTransition({ children }: { children: ReactNode }) {
   const reduce = useReducedMotion();
-  const [animate] = useState(() => {
-    if (typeof window === "undefined") return false;
-    const shouldAnimate = !initialLoad;
-    initialLoad = false;
-    return shouldAnimate;
-  });
+  const [animate] = useState(() => hydrated);
+  useEffect(() => {
+    hydrated = true;
+  }, []);
 
   if (reduce || !animate) return <>{children}</>;
   return (

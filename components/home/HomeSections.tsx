@@ -4,7 +4,8 @@ import { ArrowUpRight, Check, Clock, Compass, MapPin, MessageCircle, Plus } from
 import Reveal from "../Reveal";
 import Button from "../Button";
 import { featuredServiceSlugs, services, type Service } from "@/data/services";
-import { faqs, formatPKR, packages, plotSizes, workTypes } from "@/data/calculator";
+import { faqs, plotSizes } from "@/data/calculator";
+import PackageCompare from "@/components/PackageCompare";
 import { whatsappLink } from "@/lib/contact";
 import clsx from "@/lib/clsx";
 
@@ -64,54 +65,10 @@ export function ServiceCards() {
 }
 
 /** What each package includes, with the starting rate from the calculator data. */
-export function PackagesSection() {
-  return (
-    <ul className="grid gap-6 lg:grid-cols-3">
-      {packages.map((p, i) => {
-        const rate = workTypes.find((w) => w.id === p.id)?.rate ?? 0;
-        return (
-          <Reveal
-            as="li"
-            key={p.id}
-            delay={i * 0.06}
-            className={clsx("flex flex-col border p-7 md:p-9", p.featured ? "border-ink bg-ink text-bone" : "border-ink/10 bg-paper")}
-          >
-            {p.featured && <p className="label mb-4 text-bronze-light">Most chosen</p>}
-            <h3 className="font-display text-2xl font-medium uppercase tracking-tight">{p.title}</h3>
-            <p className={clsx("mt-2 text-sm leading-relaxed", p.featured ? "text-bone/65" : "text-graphite")}>{p.subtitle}</p>
-            <p className="mt-6">
-              <span className={clsx("label", p.featured ? "text-bone/55" : "text-concrete")}>From </span>
-              <span className="font-display text-3xl font-medium tracking-tight">{formatPKR(rate)}</span>
-              <span className={clsx("text-sm", p.featured ? "text-bone/55" : "text-concrete")}> / sq ft</span>
-            </p>
-            <ul className={clsx("mt-6 flex-1 space-y-3 border-t pt-6 text-[0.95rem]", p.featured ? "border-bone/15" : "border-ink/10")}>
-              {p.items.map((item) => (
-                <li key={item} className="flex gap-3">
-                  <Check className={clsx("mt-0.5 size-4 shrink-0", p.featured ? "text-bronze-light" : "text-bronze")} strokeWidth={2} aria-hidden />
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <a
-              href={whatsappLink(`Hi, I would like a quotation for ${p.title}. My plot size is: `)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={clsx(
-                "label mt-8 inline-flex h-12 items-center justify-center gap-2 px-6 transition-colors",
-                p.featured ? "bg-bone text-ink hover:bg-white" : "border border-ink/30 hover:bg-ink hover:text-bone",
-              )}
-            >
-              <MessageCircle className="size-4" strokeWidth={1.5} aria-hidden />
-              Get quotation
-            </a>
-          </Reveal>
-        );
-      })}
-    </ul>
-  );
+export function PackagesSection({ table = false }: { table?: boolean }) {
+  return <PackageCompare table={table} />;
 }
 
-/** Typical construction timeline by plot size. */
 export function TimelineSection() {
   const shown = plotSizes.filter((p) => ["120", "240", "500", "1000"].includes(p.id));
   return (
