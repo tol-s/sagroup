@@ -40,15 +40,15 @@ export default async function Image() {
     (
       <div style={{ width: "100%", height: "100%", display: "flex", position: "relative", background: "#141412", fontFamily: "Inter" }}>
         {banner && (
-          <img src={banner} alt="" width={1200} height={630} style={{ position: "absolute", inset: 0, width: 1200, height: 630, objectFit: "cover" }} />
+          <img src={banner} alt="" width={1200} height={630} style={{ position: "absolute", inset: 0, width: 1200, height: 630, objectFit: "cover", opacity: 0.2 }} />
         )}
-        {/* Shade overlay: darker on the left where the text sits */}
+        {/* Shadow at the bottom so the contacts stay crisp */}
         <div
           style={{
             position: "absolute",
             inset: 0,
             display: "flex",
-            background: "linear-gradient(90deg, rgba(14,14,13,0.94) 0%, rgba(14,14,13,0.82) 45%, rgba(14,14,13,0.45) 100%)",
+            background: "linear-gradient(180deg, rgba(20,20,18,0.35) 0%, rgba(20,20,18,0.55) 45%, rgba(20,20,18,0.97) 100%)",
           }}
         />
         <div style={{ position: "relative", display: "flex", flexDirection: "column", justifyContent: "space-between", width: "100%", padding: "56px 64px", color: "#f4f1ec" }}>
