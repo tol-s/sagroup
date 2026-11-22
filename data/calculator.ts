@@ -1,10 +1,13 @@
 /**
  * CONSTRUCTION COST CALCULATOR
  *
- * IMPORTANT: The rates below are STARTING ESTIMATES for Karachi and must be
- * confirmed by SA Group before relying on them. Update them here whenever
- * material prices change; the calculator, the packages section and the
- * /calculator page all read from this file.
+ * Package rates confirmed by SA Group (November 2026):
+ *   Grey Structure 2,800 · Turnkey Standard 4,000 · Turnkey Premium 5,000 ·
+ *   Turnkey Signature on request.
+ * Finishing-only rates are derived as turnkey minus grey structure (1,200 / 2,200).
+ * The architectural design rate (120) is still a starting estimate to confirm.
+ * Update them here whenever material prices change; the calculator, the
+ * packages section and the /calculator page all read from this file.
  *
  * All rates are in PKR per square foot of covered area.
  */
@@ -25,12 +28,12 @@ export type WorkType = {
 };
 
 export const workTypes: WorkType[] = [
-  { id: "grey", label: "Grey Structure", pkg: "SA Core", hint: "Dhancha: foundation, RCC, blocks, plaster", rate: 3700 },
-  { id: "turnkey", label: "Turnkey (Standard)", pkg: "SA Element", hint: "Mukammal ghar, standard finishing", rate: 8000, split: { grey: 3700, finishing: 4300 } },
-  { id: "premium-turnkey", label: "Turnkey (Premium)", pkg: "SA Sovereign", hint: "Structure + high-end finishing", rate: 9300, split: { grey: 3700, finishing: 5600 } },
+  { id: "grey", label: "Grey Structure", pkg: "SA Core", hint: "Dhancha: foundation, RCC, blocks, plaster", rate: 2800 },
+  { id: "turnkey", label: "Turnkey (Standard)", pkg: "SA Element", hint: "Mukammal ghar, standard finishing", rate: 4000, split: { grey: 2800, finishing: 1200 } },
+  { id: "premium-turnkey", label: "Turnkey (Premium)", pkg: "SA Sovereign", hint: "Structure + high-end finishing", rate: 5000, split: { grey: 2800, finishing: 2200 } },
   { id: "signature-turnkey", label: "Turnkey (Signature)", pkg: "SA Signature", hint: "Luxury finishing + full furnishing", rate: 0 },
-  { id: "finishing", label: "Finishing (Standard)", hint: "Grey structure ready? Tiles, paint, doors", rate: 4300 },
-  { id: "premium-finishing", label: "Finishing (Premium)", hint: "Premium tiles, fittings, ceilings", rate: 5600 },
+  { id: "finishing", label: "Finishing (Standard)", hint: "Grey structure ready? Tiles, paint, doors", rate: 1200 },
+  { id: "premium-finishing", label: "Finishing (Premium)", hint: "Premium tiles, fittings, ceilings", rate: 2200 },
   { id: "design", label: "Architectural Design", hint: "Naksha, 3D elevation, CAD drawings", rate: 120 },
 ];
 
