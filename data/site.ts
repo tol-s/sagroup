@@ -13,8 +13,8 @@ export const site = {
 
   // The first entry is the main number: every "Call Now" and WhatsApp button links to it.
   phones: [
-    { label: "Primary", name: "Atiq Ur Rehman", role: "CEO", display: "+92 345 2008343", tel: "+923452008343", whatsapp: "923452008343" },
-    { label: "Secondary", name: "M Abubakar", role: "Project Director", display: "+92 321 2008343", tel: "+923212008343", whatsapp: "923212008343" },
+    { label: "Primary", name: "Atiq Ur Rehman", role: "CEO", display: "+92 315 1209720", tel: "+923151209720", whatsapp: "923151209720" },
+    { label: "Secondary", name: "M Abubakar", role: "Project Director", display: "+92 300 2237363", tel: "+923002237363", whatsapp: "923002237363" },
   ],
 
   // WhatsApp Business: every WhatsApp button on the site opens a chat with this number.
