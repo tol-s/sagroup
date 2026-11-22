@@ -87,7 +87,8 @@ export default function HomeHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.6, ease }}
           >
-            {site.phones.map((p, i) => (
+            {/* Banner: main business line and the CEO only */}
+            {site.phones.slice(0, 2).map((p, i) => (
               <li key={p.tel} className={i === 0 ? "col-span-2" : "hidden md:block"}>
                 <a href={`tel:${p.tel}`} className="group block" aria-label={`Call ${contactName(p)} on ${p.display}`}>
                   <span className="block text-[0.68rem] uppercase leading-snug tracking-[0.14em] text-bone/55 md:hidden">
