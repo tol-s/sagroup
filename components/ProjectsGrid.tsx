@@ -9,14 +9,19 @@ import clsx from "@/lib/clsx";
 
 /** Projects index with instant client-side filtering. */
 export default function ProjectsGrid() {
-  const [filter, setFilter] = useState<"all" | ProjectFilter>(projectFilters[0].value);
+  // Only offer categories that have projects; hide the bar when there is nothing to filter.
+  const countOf = (v: "all" | ProjectFilter) => (v === "all" ? projects.length : projects.filter((p) => p.filters.includes(v)).length);
+  const filters = projectFilters.filter((f) => f.value !== "all" && countOf(f.value) > 0);
+  const showFilters = filters.length > 1;
+  const [filter, setFilter] = useState<"all" | ProjectFilter>(showFilters ? filters[0].value : "all");
   const visible = filter === "all" ? projects : projects.filter((p) => p.filters.includes(filter));
 
   return (
     <div>
+      {showFilters && (
       <div role="toolbar" aria-label="Filter projects" className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-2 md:mx-0 md:flex-wrap md:px-0">
-        {projectFilters.map((f) => {
-          const count = f.value === "all" ? projects.length : projects.filter((p) => p.filters.includes(f.value as ProjectFilter)).length;
+        {[...filters, { value: "all" as const, label: "All" }].map((f) => {
+          const count = countOf(f.value);
           const active = filter === f.value;
           return (
             <button
@@ -36,13 +41,14 @@ export default function ProjectsGrid() {
           );
         })}
       </div>
+      )}
 
       <p className="sr-only" aria-live="polite">
         Showing {visible.length} {visible.length === 1 ? "project" : "projects"}
       </p>
 
       <LayoutGroup>
-        <motion.div layout className="mt-12 grid gap-x-8 gap-y-16 md:mt-16 md:grid-cols-2 md:gap-y-20">
+        <motion.div layout className={clsx("grid gap-x-8 gap-y-16 md:grid-cols-2 md:gap-y-20", showFilters && "mt-12 md:mt-16")}>
           <AnimatePresence mode="popLayout">
             {visible.map((p, i) => (
               <motion.div

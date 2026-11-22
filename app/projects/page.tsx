@@ -9,7 +9,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Projects | Modern Homes & Villas in Karachi",
-  description: "Modern residences, villas and contemporary elevations. Explore how we present architecture and construction projects across Karachi.",
+  description: "Modern homes designed by SA Group in Karachi. Explore 3D elevations and interactive floor plans of our residential designs.",
   alternates: { canonical: "/projects" },
   openGraph: { url: "/projects", title: `Projects | ${site.companyName}` },
 };
@@ -21,7 +21,7 @@ export default function ProjectsPage() {
       <PageHero
         eyebrow="Projects"
         title="Modern homes. Built properly."
-        intro="Residences shaped by clean geometry, natural light and carefully chosen materials."
+        intro="Homes designed by SA Group. Open a project to see the 3D views and walk through the floor plans."
       />
 
       <section aria-label="Project portfolio" className="py-8 md:py-14">

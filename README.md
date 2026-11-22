@@ -186,7 +186,7 @@ A project with `floorPlans` in `data/projects.ts` gets the interactive plan expl
 In **`data/site.ts`**: `phones` (Call buttons), `whatsappBusiness` (every WhatsApp button on the site), `email` (info@sagroup.pk) and `social` (Facebook, Instagram).
 
 ### Update projects
-Edit **`data/projects.ts`**. The six current projects are **sample / demonstration projects** and are labelled that way on the site.
+Edit **`data/projects.ts`**. Residence B-01 and The Linear A-097 are real SA Group designs. The six entries marked `sample: true` use stock photography and are hidden (`showDemoProjects = false`).
 
 To add a real project, copy an entry and change its fields (`slug` becomes the URL `/projects/<slug>`). Use `filters` (`residential`, `villas`, `apartments`, `commercial`) to control which filter tabs it appears under, and `constructionScope` for the "Complete construction scope" list on its detail page. When all projects are real, set `showSampleNotice = false` to remove the sample labels.
 

@@ -79,12 +79,14 @@ const completeResidentialScope = [
 ];
 
 /**
- * IMPORTANT: These are SAMPLE / DEMONSTRATION projects that show how the
- * portfolio will be presented. They are not claims of completed work.
- * Replace them with real projects (and real photography) when available.
- * The notice shown on the website is controlled by `showSampleNotice` below.
+ * DEMO PROJECTS: entries marked `sample: true` use stock photography and are
+ * NOT SA Group work, so they are hidden from the website. Set
+ * `showDemoProjects = true` only if they should be shown again (they would then
+ * be labelled as samples). Real SA Group projects never carry `sample`.
  */
-export const showSampleNotice = true;
+export const showDemoProjects = false;
+/** Sample labels only apply when demo projects are shown. */
+export const showSampleNotice = showDemoProjects;
 
 /** Project categories. The first entry is selected by default on /projects. */
 export const projectFilters: { value: "all" | ProjectFilter; label: string }[] = [
@@ -95,7 +97,7 @@ export const projectFilters: { value: "all" | ProjectFilter; label: string }[] =
   { value: "all", label: "All" },
 ];
 
-export const projects: Project[] = [
+const allProjects: Project[] = [
   {
     slug: "residence-b-01",
     title: "Residence B-01",
@@ -394,6 +396,9 @@ export const projects: Project[] = [
     sample: true,
   },
 ];
+
+/** Projects shown on the website. */
+export const projects: Project[] = showDemoProjects ? allProjects : allProjects.filter((p) => !p.sample);
 
 /** The project featured on the home page (with interactive floor plans). */
 export const featuredProject = projects.find((p) => p.floorPlans?.length) ?? projects[0];
