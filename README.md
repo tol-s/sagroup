@@ -72,7 +72,7 @@ npm run dev                  # http://localhost:3000
 | `CONTACT_EMAIL_2` | Yes | Second recipient of every enquiry (`atiqu8104@gmail.com`) |
 | `EMAIL_FROM` | Yes | Sender, e.g. `SA Group <enquiries@yourdomain.com>` |
 | `RESEND_API_KEY` | Yes | Resend API key (server-side only) |
-| `NEXT_PUBLIC_SITE_URL` | No | Public URL for canonical links and sitemap. Defaults to `https://sagroup.pk` (set in Vercel to the same) |
+| `NEXT_PUBLIC_SITE_URL` | No | Public URL for canonical links and sitemap. Defaults to `https://sagroup.vercel.app`. Set it to `https://sagroup.pk` only after sagroup.pk DNS points to Vercel, otherwise link previews break |
 
 Never commit `.env` / `.env.local`. They are git-ignored; only `.env.example` is tracked.
 

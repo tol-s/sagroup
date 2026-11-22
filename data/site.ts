@@ -9,7 +9,11 @@ export const site = {
   tagline: "Modern Design. Solid Construction. Complete Execution.",
   description:
     "Architectural design and residential construction company in Karachi. Professionally designed and constructed houses, villas and apartments, from 2D plans, CAD drawings and 3D elevations to grey structure, finishing and handover.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://sagroup.pk",
+  // Where the site is actually served (links, sitemap, link-preview images).
+  // Switch to https://sagroup.pk (env NEXT_PUBLIC_SITE_URL) once sagroup.pk DNS points to Vercel.
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://sagroup.vercel.app",
+  /** Domain shown to people (link preview card, print). */
+  domain: "sagroup.pk",
 
   // The first entry is the main business number: every "Call Now" button dials it.
   // `person: false` marks the business line (not shown as a team member).

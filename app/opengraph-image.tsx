@@ -34,7 +34,7 @@ export default async function Image() {
     bannerDataUrl(),
   ]);
   const [main, ...people] = site.phones;
-  const domain = site.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+  const domain = site.domain;
 
   const png = new ImageResponse(
     (
