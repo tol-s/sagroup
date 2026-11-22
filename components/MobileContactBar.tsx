@@ -16,7 +16,7 @@ export default function MobileContactBar() {
         <Phone className="size-4" strokeWidth={1.5} aria-hidden />
         Call
       </a>
-      <a href={whatsappLink(0)} target="_blank" rel="noopener noreferrer" className={`${item} h-16 border-x border-ink/10`} aria-label="Chat on WhatsApp">
+      <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className={`${item} h-16 border-x border-ink/10`} aria-label="Chat on WhatsApp">
         <MessageCircle className="size-4" strokeWidth={1.5} aria-hidden />
         WhatsApp
       </a>

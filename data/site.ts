@@ -17,8 +17,11 @@ export const site = {
     { label: "Secondary", name: "M Abubakar", role: "", display: "+92 321 2008343", tel: "+923212008343", whatsapp: "923212008343" },
   ],
 
-  // Public contact email shown on the website (enquiry recipients are configured via env vars).
-  emails: ["talhasaeed687@gmail.com", "atiqu8104@gmail.com"],
+  // WhatsApp Business: every WhatsApp button on the site opens a chat with this number.
+  whatsappBusiness: { display: "+92 333 2008343", number: "923332008343" },
+
+  // Public business email shown on the website (enquiry recipients are configured via env vars).
+  email: "info@sagroup.pk",
 
   location: {
     city: "Karachi",
@@ -31,12 +34,10 @@ export const site = {
   whatsappMessage:
     "Hi, I am interested in constructing a modern home in Karachi. I would like to discuss my project.",
 
-  // Leave href empty ("") until real profiles exist. Empty links render as "Coming soon".
+  // Social profiles shown in the footer and contact page.
   social: [
-    { label: "Instagram", href: "" },
-    { label: "Facebook", href: "" },
-    { label: "LinkedIn", href: "" },
-    { label: "YouTube", href: "" },
+    { label: "Facebook", href: "https://www.facebook.com/sagroup.pk" },
+    { label: "Instagram", href: "https://www.instagram.com/sagroup.pk" },
   ],
 
   // Optional statistics. Leave value empty ("") to hide a stat. Do not publish unverified numbers.
@@ -54,6 +55,6 @@ export const nav = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Projects", href: "/projects" },
-  { label: "Process", href: "/process" },
+  { label: "Cost Calculator", href: "/calculator" },
   { label: "Contact", href: "/contact" },
 ] as const;

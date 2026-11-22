@@ -29,6 +29,11 @@ export default function Footer() {
                 </li>
               ))}
               <li>
+                <Link href="/process" className="link-underline text-bone/85 hover:text-bone">
+                  Process
+                </Link>
+              </li>
+              <li>
                 <Link href="/privacy" className="link-underline text-bone/85 hover:text-bone">
                   Privacy Policy
                 </Link>
@@ -64,27 +69,27 @@ export default function Footer() {
                 </li>
               ))}
               <li>
-                <a href={whatsappLink(0)} target="_blank" rel="noopener noreferrer" className="link-underline text-bone/85">
-                  WhatsApp
+                <span className="block text-sm text-bone/55">WhatsApp Business</span>
+                <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="link-underline text-lg text-bone">
+                  {site.whatsappBusiness.display}
+                </a>
+              </li>
+              <li>
+                <a href={`mailto:${site.email}`} className="link-underline text-bone/85">
+                  {site.email}
                 </a>
               </li>
               <li className="text-bone/60">{site.location.display}</li>
             </ul>
             <p className="label mb-4 mt-10 text-bone/45">Social</p>
             <ul className="flex flex-wrap gap-x-5 gap-y-2">
-              {site.social.map((s) =>
-                s.href ? (
-                  <li key={s.label}>
-                    <a href={s.href} target="_blank" rel="noopener noreferrer" className="link-underline text-sm text-bone/85">
-                      {s.label}
-                    </a>
-                  </li>
-                ) : (
-                  <li key={s.label} className="text-sm text-bone/35" title="Profile link coming soon">
+              {site.social.map((s) => (
+                <li key={s.label}>
+                  <a href={s.href} target="_blank" rel="noopener noreferrer" className="link-underline text-sm text-bone/85">
                     {s.label}
-                  </li>
-                ),
-              )}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

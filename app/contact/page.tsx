@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { MessageCircle, Phone, MapPin } from "lucide-react";
+import { Mail, MessageCircle, Phone, MapPin, Share2 } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import ContactForm from "@/components/ContactForm";
 import Reveal from "@/components/Reveal";
@@ -33,7 +33,7 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
       >
         <div className="flex flex-wrap gap-3">
           <Button href={telLink(0)} variant="light">Call Now</Button>
-          <Button href={whatsappLink(0)} variant="ghost-light">WhatsApp</Button>
+          <Button href={whatsappLink()} variant="ghost-light">WhatsApp</Button>
           <Button href="#enquiry" variant="ghost-light" icon={false}>Free Consultation</Button>
         </div>
       </PageHero>
@@ -58,12 +58,42 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
                       <a href={telLink(i)} className="label inline-flex h-10 items-center gap-2 border border-ink/20 px-4 hover:bg-ink hover:text-bone">
                         <Phone className="size-3.5" strokeWidth={1.5} aria-hidden /> Call
                       </a>
-                      <a href={whatsappLink(i)} target="_blank" rel="noopener noreferrer" className="label inline-flex h-10 items-center gap-2 border border-ink/20 px-4 hover:bg-ink hover:text-bone">
-                        <MessageCircle className="size-3.5" strokeWidth={1.5} aria-hidden /> WhatsApp
-                      </a>
                     </div>
                   </li>
                 ))}
+                <li className="border-b border-ink/10 py-6">
+                  <p className="label text-concrete">WhatsApp Business</p>
+                  <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="mt-2 block font-display text-[clamp(1.6rem,2.6vw,2.4rem)] font-medium tracking-tight hover:text-bronze">
+                    {site.whatsappBusiness.display}
+                  </a>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="label inline-flex h-10 items-center gap-2 border border-ink/20 px-4 hover:bg-ink hover:text-bone">
+                      <MessageCircle className="size-3.5" strokeWidth={1.5} aria-hidden /> Chat on WhatsApp
+                    </a>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3 border-b border-ink/10 py-6">
+                  <Mail className="mt-0.5 size-4 text-concrete" strokeWidth={1.5} aria-hidden />
+                  <div>
+                    <p className="label text-concrete">Email</p>
+                    <a href={`mailto:${site.email}`} className="link-underline mt-2 inline-block">
+                      {site.email}
+                    </a>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3 border-b border-ink/10 py-6">
+                  <Share2 className="mt-0.5 size-4 text-concrete" strokeWidth={1.5} aria-hidden />
+                  <div>
+                    <p className="label text-concrete">Follow us</p>
+                    <p className="mt-2 flex flex-wrap gap-x-5 gap-y-1">
+                      {site.social.map((s) => (
+                        <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="link-underline">
+                          {s.label}
+                        </a>
+                      ))}
+                    </p>
+                  </div>
+                </li>
                 <li className="flex items-start gap-3 border-b border-ink/10 py-6">
                   <MapPin className="mt-0.5 size-4 text-concrete" strokeWidth={1.5} aria-hidden />
                   <div>

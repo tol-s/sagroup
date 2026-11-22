@@ -1,8 +1,8 @@
 import { site } from "@/data/site";
 
-export function whatsappLink(phoneIndex = 0, message: string = site.whatsappMessage) {
-  const phone = site.phones[phoneIndex] ?? site.phones[0];
-  return `https://wa.me/${phone.whatsapp}?text=${encodeURIComponent(message)}`;
+/** WhatsApp Business chat link with a pre-filled message. */
+export function whatsappLink(message: string = site.whatsappMessage) {
+  return `https://wa.me/${site.whatsappBusiness.number}?text=${encodeURIComponent(message)}`;
 }
 
 /** "Atiq Ur Rehman, CEO" style label for a phone entry. */

@@ -15,6 +15,7 @@ export function localBusinessSchema() {
     url: site.url,
     image: images.hero,
     telephone: site.phones.map((p) => p.tel),
+    email: site.email,
     address: {
       "@type": "PostalAddress",
       addressLocality: site.location.city,

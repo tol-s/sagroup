@@ -202,7 +202,7 @@ export default function ContactForm({ initialService }: { initialService?: strin
               <p>{serverError}</p>
               <p className="mt-2">
                 Call {site.phones[0].name} on <a className="underline" href={telLink(0)}>{site.phones[0].display}</a> or{" "}
-                <a className="underline" href={whatsappLink(0)} target="_blank" rel="noopener noreferrer">message us on WhatsApp</a>.
+                <a className="underline" href={whatsappLink()} target="_blank" rel="noopener noreferrer">message us on WhatsApp</a>.
               </p>
             </motion.div>
           )}

@@ -31,6 +31,7 @@ This repository is standalone. It shares no code, database, environment variable
 | `/services` | The 7 primary services grouped by priority, each with image, description, inclusions, complete construction scope and CTA (anchors: `/services#slug`) |
 | `/projects` | Portfolio with instant filters (Residential Houses by default, Villas, Apartments / Flats, Commercial, All) |
 | `/projects/[slug]` | Project detail: hero, overview, details, design approach, features, gallery with lightbox, previous/next |
+| `/calculator` | Construction cost calculator, packages, timeline and FAQ |
 | `/process` | Interactive 8-step design and construction timeline |
 | `/contact` | Lead form, phone numbers, WhatsApp |
 | `/privacy` | Privacy policy |
@@ -164,6 +165,19 @@ Each service has `slug`, `number`, `title`, `tier`, `shortDescription`, `descrip
 - The home page list order is `featuredServiceSlugs` (residential first). The footer uses the same order.
 - The contact dropdown uses `serviceOptions` (the seven service names only).
 - `constructionDisciplines` is the secondary line shown under "Complete construction. One professional team." on the home page.
+
+### Update the cost calculator (rates, plot sizes, packages, FAQs)
+Edit **`data/calculator.ts`**. The home page calculator, the `/calculator` page, the packages section, the timeline and the FAQ all read from it.
+
+- `workTypes`: PKR **per sq ft of covered area** for grey structure, finishing, turnkey and architectural design. **These are starting estimates and must be confirmed by SA Group**; update them whenever material prices change.
+- `plotSizes`: Karachi plot sizes (120 to 1,000 sq. yd.), the typical covered area for G / G+1 / G+2 and the typical timeline.
+- `packages`: what each package includes (no brand names until confirmed).
+- `faqs`: questions and answers shown on the home page and calculator page.
+
+The "Get exact quote on WhatsApp" button sends the visitor's selections to the WhatsApp Business number.
+
+### Contact channels
+In **`data/site.ts`**: `phones` (Call buttons), `whatsappBusiness` (every WhatsApp button on the site), `email` (info@sagroup.pk) and `social` (Facebook, Instagram).
 
 ### Update projects
 Edit **`data/projects.ts`**. The six current projects are **sample / demonstration projects** and are labelled that way on the site.

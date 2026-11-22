@@ -7,7 +7,7 @@ export default function Testimonials() {
   return (
     <section aria-labelledby="testimonials-title" className="border-t border-ink/10 bg-paper py-24 md:py-36">
       <div className="wrap">
-        <SectionHeading id="testimonials-title" index="09" eyebrow="Client words" title="In their words." />
+        <SectionHeading id="testimonials-title" index="07" eyebrow="Client words" title="In their words." />
         {showSampleTestimonialNotice && (
           <p className="mt-8 text-xs uppercase tracking-[0.18em] text-concrete">Sample testimonials</p>
         )}

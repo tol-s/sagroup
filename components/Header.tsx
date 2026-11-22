@@ -165,7 +165,7 @@ export default function Header() {
                 </div>
                 <div className="flex flex-col items-start gap-3">
                   <p className="label text-bone/50">{site.location.display}</p>
-                  <a href={whatsappLink(0)} target="_blank" rel="noopener noreferrer" className="label border border-bone/40 px-5 py-3">
+                  <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="label border border-bone/40 px-5 py-3">
                     WhatsApp Us
                   </a>
                 </div>
