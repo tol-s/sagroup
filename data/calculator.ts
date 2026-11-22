@@ -50,8 +50,8 @@ export const floorOptions: { id: FloorsId; label: string; hint: string; count: n
  * on the plot's society / location (for example about 50% in Bahria Town and
  * 65% in Aligarh Muslim Society), so the visitor picks the percentage.
  */
-export const coverageChoices = [50, 55, 60, 65, 70, 75];
-export const defaultCoverage = 60;
+export const coverageChoices = [50, 55, 60, 65, 70, 75, 80, 100];
+export const defaultCoverage = 65;
 
 export const SQFT_PER_SQYD = 9;
 

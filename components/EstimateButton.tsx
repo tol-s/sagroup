@@ -48,7 +48,7 @@ export default function EstimateButton() {
             href={onHome ? "#calculator" : "/calculator"}
             className="group flex items-center gap-4 rounded-full bg-ink py-2 pl-2 pr-6 text-bone shadow-[0_12px_40px_rgba(0,0,0,0.28)] ring-1 ring-bone/10 transition-colors hover:bg-charcoal"
           >
-            <span className="grid size-11 place-items-center rounded-full bg-bronze text-ink">
+            <span className="grid size-11 place-items-center rounded-full bg-[#7a5f43] text-white">
               <Calculator className="size-5" strokeWidth={1.6} aria-hidden />
             </span>
             <span className="leading-tight">

@@ -45,7 +45,7 @@ export default function ProjectCard({ project, index, aspect = "aspect-[4/5]", s
           {project.sample && showSampleNotice ? (
             <span className="label absolute right-4 top-4 bg-ink/70 px-2.5 py-1.5 text-bone/85 backdrop-blur-sm">Sample</span>
           ) : project.status ? (
-            <span className="label absolute right-4 top-4 bg-bronze px-2.5 py-1.5 text-ink">{project.status}</span>
+            <span className="label absolute right-4 top-4 bg-[#7a5f43] px-2.5 py-1.5 text-white">{project.status}</span>
           ) : null}
         </div>
         <div className="mt-5 flex items-start justify-between gap-6">

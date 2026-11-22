@@ -62,7 +62,11 @@ export default function CostCalculator() {
   const [workId, setWorkId] = useState<WorkTypeId>("turnkey");
   const [custom, setCustom] = useState(false);
   const [customArea, setCustomArea] = useState("");
-  const [pct, setPct] = useState(defaultCoverage);
+  const [presetPct, setPresetPct] = useState(defaultCoverage);
+  const [customPct, setCustomPct] = useState("");
+  // A typed percentage (1 to 100) overrides the preset buttons.
+  const typedPct = Math.max(0, Math.min(100, Number(customPct) || 0));
+  const pct = typedPct > 0 ? typedPct : presetPct;
   const [otherYd, setOtherYd] = useState("");
 
   // Any plot size in sq yd: typed values override the preset buttons.
@@ -183,15 +187,37 @@ export default function CostCalculator() {
           <fieldset>
             <legend className="label mb-1 text-concrete">2. Covered area %</legend>
             <p className="mb-4 text-sm text-graphite">Plot ka kitna hissa har manzil par banega?</p>
-            <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
+            <div className="grid grid-cols-4 gap-2 sm:grid-cols-8">
               {coverageChoices.map((c) => (
-                <Choice key={c} active={pct === c} onClick={() => setPct(c)}>
+                <Choice key={c} active={!typedPct && presetPct === c} onClick={() => { setPresetPct(c); setCustomPct(""); }}>
                   {c}%
                 </Choice>
               ))}
             </div>
+            <div className="mt-3 flex items-center gap-3">
+              <label htmlFor="custom-pct" className="text-sm text-graphite">
+                Other %
+              </label>
+              <span className="flex items-center gap-2">
+                <input
+                  id="custom-pct"
+                  type="number"
+                  inputMode="numeric"
+                  min={1}
+                  max={100}
+                  placeholder="e.g. 58"
+                  value={customPct}
+                  onChange={(e) => setCustomPct(e.target.value)}
+                  className={clsx(
+                    "w-24 border px-3 py-2 text-base focus:border-ink focus:outline-none",
+                    typedPct ? "border-ink bg-bone" : "border-ink/20 bg-paper",
+                  )}
+                />
+                <span className="text-sm text-graphite">%</span>
+              </span>
+            </div>
             <p className="mt-3 text-xs leading-relaxed text-concrete">
-              Depends on your society or area, e.g. about 50% in Bahria Town, 65% in Aligarh Muslim Society. Not sure? Keep 60% and we will confirm.
+              Depends on your society or area, e.g. about 50% in Bahria Town, 65% in Aligarh Muslim Society. Not sure? Keep 65% and we will confirm.
             </p>
             <p className="mt-1 text-xs font-medium text-graphite">
               {plotSqft.toLocaleString("en-PK")} sq ft × {pct}% = approx. {perFloor.toLocaleString("en-PK")} sq ft per floor
@@ -235,7 +261,7 @@ export default function CostCalculator() {
         <div className="sticky bottom-[calc(4.25rem+env(safe-area-inset-bottom))] z-30 md:bottom-4 lg:hidden">
           <div className="flex items-center gap-3 bg-ink py-3 pl-4 pr-3 text-bone shadow-[0_-8px_30px_rgba(0,0,0,0.18)]">
             <div className="min-w-0 flex-1">
-              <p className="label text-bone/55">Estimated cost</p>
+              <p className="label text-white/75">Estimated cost</p>
               <AnimatePresence mode="popLayout" initial={false}>
                 <motion.p
                   key={total}
@@ -249,7 +275,7 @@ export default function CostCalculator() {
                 </motion.p>
               </AnimatePresence>
               {area > 0 && (
-                <p className="truncate text-xs text-bone/55">
+                <p className="truncate text-xs text-white/75">
                   {onRequest ? `${area.toLocaleString("en-PK")} sq ft · ${work.pkg ?? work.label}` : `${area.toLocaleString("en-PK")} sq ft × ${formatPKR(work.rate)}`}
                 </p>
               )}
@@ -273,20 +299,20 @@ export default function CostCalculator() {
       {/* RESULT */}
       <div id="calc-result" className="min-w-0 scroll-mt-20 lg:col-span-5">
         <div className="bg-ink p-6 text-bone md:p-8 lg:sticky lg:top-28" aria-live="polite">
-          <p className="label text-bone/55">Estimated cost</p>
+          <p className="label text-white/75">Estimated cost</p>
           <p className="mt-3 font-display text-[clamp(2rem,4.2vw,3.25rem)] font-medium leading-none tracking-[-0.03em]">
             {onRequest ? "Price on request" : area > 0 ? formatCroreLakh(total) : "PKR —"}
           </p>
           {onRequest ? (
-            <p className="mt-2 text-sm text-bone/60">{work.pkg} includes luxury finishing and full furnishing. Ask us on WhatsApp for a quotation.</p>
+            <p className="mt-2 text-sm text-white/80">{work.pkg} includes luxury finishing and full furnishing. Ask us on WhatsApp for a quotation.</p>
           ) : (
-            area > 0 && <p className="mt-2 text-sm text-bone/60">{formatPKR(total)}</p>
+            area > 0 && <p className="mt-2 text-sm text-white/80">{formatPKR(total)}</p>
           )}
 
           <dl className="mt-8 divide-y divide-bone/10 border-y border-bone/10 text-sm">
             {!custom && (
               <div className="flex justify-between gap-4 py-3">
-                <dt className="text-bone/55">Plot</dt>
+                <dt className="text-white/75">Plot</dt>
                 <dd className="text-right">
                   {plot.label} ({plotSqft.toLocaleString("en-PK")} sq ft), {floorLabel}
                 </dd>
@@ -294,39 +320,39 @@ export default function CostCalculator() {
             )}
             {!custom && (
               <div className="flex justify-between gap-4 py-3">
-                <dt className="text-bone/55">Coverage</dt>
+                <dt className="text-white/75">Coverage</dt>
                 <dd className="text-right">{pct}% per floor</dd>
               </div>
             )}
             <div className="flex justify-between gap-4 py-3">
-              <dt className="text-bone/55">Covered area {custom ? "" : "(approx.)"}</dt>
+              <dt className="text-white/75">Covered area {custom ? "" : "(approx.)"}</dt>
               <dd>{area.toLocaleString("en-PK")} sq ft</dd>
             </div>
             {work.pkg && (
               <div className="flex justify-between gap-4 py-3">
-                <dt className="text-bone/55">Package</dt>
+                <dt className="text-white/75">Package</dt>
                 <dd>{work.pkg}</dd>
               </div>
             )}
             <div className="flex justify-between gap-4 py-3">
-              <dt className="text-bone/55">Rate</dt>
+              <dt className="text-white/75">Rate</dt>
               <dd>{onRequest ? "On request" : `${formatPKR(work.rate)} / sq ft`}</dd>
             </div>
             {work.split && area > 0 && (
               <>
                 <div className="flex justify-between gap-4 py-3">
-                  <dt className="text-bone/55">Grey structure</dt>
+                  <dt className="text-white/75">Grey structure</dt>
                   <dd>{formatPKR(area * work.split.grey)}</dd>
                 </div>
                 <div className="flex justify-between gap-4 py-3">
-                  <dt className="text-bone/55">Finishing</dt>
+                  <dt className="text-white/75">Finishing</dt>
                   <dd>{formatPKR(area * work.split.finishing)}</dd>
                 </div>
               </>
             )}
             {!custom && work.id !== "design" && (
               <div className="flex justify-between gap-4 py-3">
-                <dt className="text-bone/55">Typical time (complete house)</dt>
+                <dt className="text-white/75">Typical time (complete house)</dt>
                 <dd>{plot.timeline}</dd>
               </div>
             )}
@@ -347,7 +373,7 @@ export default function CostCalculator() {
               Call {site.phones[0].display}
             </a>
           </div>
-          <p className="mt-6 text-xs leading-relaxed text-bone/50">{estimateDisclaimer}</p>
+          <p className="mt-6 text-xs leading-relaxed text-white/70">{estimateDisclaimer}</p>
         </div>
       </div>
     </div>
