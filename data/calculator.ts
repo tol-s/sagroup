@@ -46,16 +46,12 @@ export const floorOptions: { id: FloorsId; label: string; hint: string; count: n
 ];
 
 /**
- * COVERAGE: the share of the plot that may be built on each floor, set by the
- * society's by-laws. Add more societies here as { id, label, pct }.
+ * COVERAGE: the share of the plot that may be built on each floor. It depends
+ * on the plot's society / location (for example about 50% in Bahria Town and
+ * 65% in Aligarh Muslim Society), so the visitor picks the percentage.
  */
-export const coverageOptions: { id: string; label: string; pct: number }[] = [
-  { id: "bahria", label: "Bahria Town", pct: 50 },
-  { id: "aligarh", label: "Aligarh Muslim Society", pct: 65 },
-];
-/** Starting value for "Other society" (the visitor can change it). */
-export const defaultCustomCoverage = 60;
-export const coverageRange = { min: 40, max: 80, step: 5 };
+export const coverageChoices = [50, 55, 60, 65, 70, 75];
+export const defaultCoverage = 60;
 
 export const SQFT_PER_SQYD = 9;
 

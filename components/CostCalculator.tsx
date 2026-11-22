@@ -6,10 +6,9 @@ import { ChevronDown, MessageCircle, Phone } from "lucide-react";
 import {
   estimateDisclaimer,
   floorOptions,
-  coverageOptions,
-  coverageRange,
+  coverageChoices,
   coveredArea,
-  defaultCustomCoverage,
+  defaultCoverage,
   SQFT_PER_SQYD,
   formatCroreLakh,
   formatPKR,
@@ -63,14 +62,11 @@ export default function CostCalculator() {
   const [workId, setWorkId] = useState<WorkTypeId>("turnkey");
   const [custom, setCustom] = useState(false);
   const [customArea, setCustomArea] = useState("");
-  const [societyId, setSocietyId] = useState<string>("other");
-  const [otherPct, setOtherPct] = useState(defaultCustomCoverage);
+  const [pct, setPct] = useState(defaultCoverage);
 
   const plot = plotSizes.find((p) => p.id === plotId) ?? plotSizes[0];
   const work = workTypes.find((w) => w.id === workId) ?? workTypes[0];
   const effectiveFloors = floors;
-  const society = coverageOptions.find((c) => c.id === societyId);
-  const pct = society ? society.pct : otherPct;
   const floorCount = floorOptions.find((f) => f.id === floors)?.count ?? 1;
   const perFloor = Math.round(plot.sqyd * SQFT_PER_SQYD * (pct / 100));
 
@@ -78,7 +74,6 @@ export default function CostCalculator() {
     if (custom) return Math.max(0, Math.min(200000, Number(customArea) || 0));
     return coveredArea(plot.sqyd, pct, floorCount);
   }, [custom, customArea, plot, pct, floorCount]);
-  const societyLabel = society ? society.label : "Other society";
 
   const total = area * work.rate;
   /** Packages without a published rate are quoted on request. */
@@ -90,7 +85,7 @@ export default function CostCalculator() {
     `Hi ${site.companyName}, I used the cost calculator on your website.`,
     custom
       ? `Covered area: ${area.toLocaleString("en-PK")} sq ft`
-      : `Plot: ${plot.label}, ${societyLabel} (${pct}% coverage), ${floorLabel}, approx. ${area.toLocaleString("en-PK")} sq ft covered`,
+      : `Plot: ${plot.label}, ${pct}% covered, ${floorLabel}, approx. ${area.toLocaleString("en-PK")} sq ft covered`,
     `Work: ${work.label}`,
     onRequest ? "Please share the price for this package." : `Estimate shown: ${formatPKR(total)}`,
     "Please share an exact quotation.",
@@ -141,39 +136,19 @@ export default function CostCalculator() {
 
         {!custom && (
           <fieldset>
-            <legend className="label mb-1 text-concrete">2. Society / coverage</legend>
-            <p className="mb-4 text-sm text-graphite">Aapki society plot ka kitna hissa banane deti hai?</p>
-            <div className="grid grid-cols-3 gap-2">
-              {coverageOptions.map((c) => (
-                <Choice key={c.id} active={societyId === c.id} onClick={() => setSocietyId(c.id)} hint={`${c.pct}% covered`}>
-                  {c.label}
+            <legend className="label mb-1 text-concrete">2. Covered area %</legend>
+            <p className="mb-4 text-sm text-graphite">Plot ka kitna hissa har manzil par banega?</p>
+            <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
+              {coverageChoices.map((c) => (
+                <Choice key={c} active={pct === c} onClick={() => setPct(c)}>
+                  {c}%
                 </Choice>
               ))}
-              <Choice active={societyId === "other"} onClick={() => setSocietyId("other")} hint={`${otherPct}% covered`}>
-                Other society
-              </Choice>
             </div>
-            {societyId === "other" && (
-              <div className="mt-4 flex items-center gap-4">
-                <label htmlFor="coverage" className="shrink-0 text-sm text-graphite">
-                  Coverage
-                </label>
-                <input
-                  id="coverage"
-                  type="range"
-                  min={coverageRange.min}
-                  max={coverageRange.max}
-                  step={coverageRange.step}
-                  value={otherPct}
-                  onChange={(e) => setOtherPct(Number(e.target.value))}
-                  className="h-2 w-full cursor-pointer accent-ink"
-                />
-                <output htmlFor="coverage" className="w-12 shrink-0 text-right font-medium tabular-nums">
-                  {otherPct}%
-                </output>
-              </div>
-            )}
-            <p className="mt-3 text-xs text-concrete">
+            <p className="mt-3 text-xs leading-relaxed text-concrete">
+              Depends on your society or area, e.g. about 50% in Bahria Town, 65% in Aligarh Muslim Society. Not sure? Keep 60% and we will confirm.
+            </p>
+            <p className="mt-1 text-xs font-medium text-graphite">
               {plot.label} × {pct}% = approx. {perFloor.toLocaleString("en-PK")} sq ft per floor
             </p>
           </fieldset>
@@ -275,9 +250,7 @@ export default function CostCalculator() {
             {!custom && (
               <div className="flex justify-between gap-4 py-3">
                 <dt className="text-bone/55">Coverage</dt>
-                <dd className="text-right">
-                  {pct}% ({societyLabel})
-                </dd>
+                <dd className="text-right">{pct}% per floor</dd>
               </div>
             )}
             <div className="flex justify-between gap-4 py-3">
