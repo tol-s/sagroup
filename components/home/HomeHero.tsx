@@ -56,21 +56,18 @@ export default function HomeHero() {
           className="display display-xl uppercase"
         />
 
-        <div className="mt-6 grid gap-5 border-t border-bone/20 pt-5 md:mt-14 md:grid-cols-12 md:gap-8 md:pt-8">
+        <div className="mt-6 grid gap-5 border-t border-bone/20 pt-5 md:mt-14 md:grid-cols-12 md:items-center md:gap-8 md:pt-8">
           <motion.p
-            className="text-[0.95rem] leading-relaxed text-bone/80 md:col-span-12 lg:col-span-4 md:text-[clamp(1.0625rem,1.35vw,1.3125rem)] md:leading-[1.6]"
+            className="max-w-md text-[0.95rem] leading-relaxed text-bone/80 md:col-span-12 md:text-base lg:col-span-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.3, ease }}
           >
-            <span className="md:hidden">From design and grey structure to finishing and handover, we build your home from concept to completion.</span>
-            <span className="hidden md:inline">
-              From architectural planning and CAD design to grey structure, finishing and final handover, we manage your home construction from concept to completion.
-            </span>
+            From design and grey structure to finishing and handover, we build your home end to end.
           </motion.p>
 
           <motion.div
-            className="grid grid-cols-2 gap-2 md:col-span-7 md:flex md:flex-nowrap md:items-start md:gap-3 lg:col-span-5 lg:col-start-5"
+            className="grid grid-cols-2 gap-2 md:col-span-7 md:flex md:flex-nowrap md:items-center md:gap-3 lg:col-span-5 lg:col-start-5"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.45, ease }}
