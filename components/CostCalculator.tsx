@@ -108,7 +108,7 @@ export default function CostCalculator() {
       : byPlot
         ? `Plot: ${plot.label} (${plotSqft.toLocaleString("en-PK")} sq ft plot area)`
         : `Plot: ${plot.label} (${plotSqft.toLocaleString("en-PK")} sq ft), ${pct}% covered, ${floorLabel}, approx. ${area.toLocaleString("en-PK")} sq ft covered`,
-    `Package: ${work.pkg ? `${work.pkg} (${work.label})` : work.label}`,
+    `Work: ${work.label}`,
     onRequest ? "Please share the price for this package." : `Estimate shown: ${formatPKR(total)}`,
     "Please share an exact quotation.",
   ].join("\n");
@@ -250,10 +250,10 @@ export default function CostCalculator() {
                 key={w.id}
                 active={workId === w.id}
                 onClick={() => setWorkId(w.id)}
-                hint={w.pkg ? `${w.label} · ${w.hint}` : w.hint}
+                hint={w.hint}
                 className={i === workTypes.length - 1 && workTypes.length % 2 ? "col-span-2" : undefined}
               >
-                {w.pkg ?? w.label}
+                {w.label}
               </Choice>
             ))}
           </div>
@@ -278,7 +278,7 @@ export default function CostCalculator() {
               </AnimatePresence>
               {area > 0 && (
                 <p className="truncate text-xs text-white/75">
-                  {onRequest ? `${area.toLocaleString("en-PK")} sq ft · ${work.pkg ?? work.label}` : `${area.toLocaleString("en-PK")} sq ft × ${formatPKR(work.rate)}`}
+                  {onRequest ? `${area.toLocaleString("en-PK")} sq ft · ${work.label}` : `${area.toLocaleString("en-PK")} sq ft × ${formatPKR(work.rate)}`}
                 </p>
               )}
             </div>
@@ -306,7 +306,7 @@ export default function CostCalculator() {
             {onRequest ? "Price on request" : area > 0 ? formatCroreLakh(total) : "PKR —"}
           </p>
           {onRequest ? (
-            <p className="mt-2 text-sm text-white/80">{work.pkg} includes luxury finishing and full furnishing. Ask us on WhatsApp for a quotation.</p>
+            <p className="mt-2 text-sm text-white/80">{work.label} includes luxury finishing and full furnishing. Ask us on WhatsApp for a quotation.</p>
           ) : (
             area > 0 && <p className="mt-2 text-sm text-white/80">{formatPKR(total)}</p>
           )}
@@ -330,12 +330,10 @@ export default function CostCalculator() {
               <dt className="text-white/75">{byPlot && !custom ? "Plot area" : `Covered area${custom ? "" : " (approx.)"}`}</dt>
               <dd>{area.toLocaleString("en-PK")} sq ft</dd>
             </div>
-            {work.pkg && (
-              <div className="flex justify-between gap-4 py-3">
-                <dt className="text-white/75">Package</dt>
-                <dd>{work.pkg}</dd>
-              </div>
-            )}
+            <div className="flex justify-between gap-4 py-3">
+              <dt className="text-white/75">Package</dt>
+              <dd className="text-right">{work.label}</dd>
+            </div>
             <div className="flex justify-between gap-4 py-3">
               <dt className="text-white/75">Rate</dt>
               <dd>{onRequest ? "On request" : `${formatPKR(work.rate)} / sq ft`}</dd>
