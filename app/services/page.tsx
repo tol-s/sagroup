@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { brandOgImage } from "@/lib/og";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import ServiceCard from "@/components/ServiceCard";
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   description:
     "Residential house construction for 120, 240, 500 and 1,000 sq. yd. plots, architectural design with CAD drawings and 3D elevations, apartment and flat construction, grey structure, interior and finishing, and renovation in Karachi.",
   alternates: { canonical: "/services" },
-  openGraph: { url: "/services", title: `Services | ${site.companyName}` },
+  openGraph: { url: "/services", title: `Services | ${site.companyName}`, images: [brandOgImage] },
 };
 
 const groups = [

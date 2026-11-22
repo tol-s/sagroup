@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { brandOgImage } from "@/lib/og";
 import PageHero from "@/components/PageHero";
 import ProjectsGrid from "@/components/ProjectsGrid";
 import CTASection from "@/components/CTASection";
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
   title: "Projects | Modern Homes & Villas in Karachi",
   description: "Modern homes designed by SA Group in Karachi. Explore 3D elevations and interactive floor plans of our residential designs.",
   alternates: { canonical: "/projects" },
-  openGraph: { url: "/projects", title: `Projects | ${site.companyName}` },
+  openGraph: { url: "/projects", title: `Projects | ${site.companyName}`, images: [brandOgImage] },
 };
 
 export default function ProjectsPage() {

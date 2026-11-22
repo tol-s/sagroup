@@ -43,7 +43,7 @@ export function localBusinessSchema() {
       })),
     },
     subOrganization: divisions.map((d) => ({ "@type": "Organization", name: d.short, description: d.description })),
-    employee: site.phones.map((p) => ({ "@type": "Person", name: p.name, jobTitle: p.role })),
+    employee: site.phones.filter((p) => p.person).map((p) => ({ "@type": "Person", name: p.name, jobTitle: p.role })),
     sameAs: site.social.map((s) => s.href).filter(Boolean),  };
 }
 

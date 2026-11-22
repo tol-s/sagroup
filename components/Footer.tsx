@@ -72,14 +72,13 @@ export default function Footer() {
                   <a href={`tel:${p.tel}`} className="link-underline text-lg text-bone">
                     {p.display}
                   </a>
+                  {!p.person && (
+                    <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="link-underline ml-3 text-sm text-[#25D366]">
+                      WhatsApp
+                    </a>
+                  )}
                 </li>
               ))}
-              <li>
-                <span className="block text-sm text-bone/55">WhatsApp Business</span>
-                <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="link-underline text-lg text-bone">
-                  {site.whatsappBusiness.display}
-                </a>
-              </li>
               <li>
                 <a href={`mailto:${site.email}`} className="link-underline text-bone/85">
                   {site.email}

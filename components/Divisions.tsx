@@ -14,7 +14,7 @@ export default function Divisions() {
           <Reveal key={d.short} delay={i * 0.08} className="flex flex-col border border-ink/10 bg-bone p-6 md:p-8">
             <div className="flex items-center gap-5">
               {d.logo ? (
-                <Image src={d.logo} alt={`${d.short} logo`} width={88} height={88} className="size-20 object-contain md:size-22" />
+                <Image src={d.logo} alt={`${d.short} logo`} width={160} height={98} className="h-14 w-auto shrink-0 object-contain md:h-[4.5rem]" />
               ) : (
                 <span className="grid size-16 shrink-0 place-items-center bg-ink text-bone md:size-20" aria-hidden>
                   <Icon className="size-8 md:size-9" strokeWidth={1.25} />

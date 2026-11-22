@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { brandOgImage } from "@/lib/og";
 import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
 import AnimatedText from "@/components/AnimatedText";
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
   title: "About Us | Architectural Design & Residential Construction in Karachi",
   description: `${site.companyName} is a Karachi-based architectural design and residential construction company. We design homes before we build them, then deliver the complete project from CAD drawings and 3D elevations to grey structure, finishing and handover.`,
   alternates: { canonical: "/about" },
-  openGraph: { url: "/about", title: `About ${site.companyName}` },
+  openGraph: { url: "/about", title: `About ${site.companyName}`, images: [brandOgImage] },
 };
 
 const pillars = [

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { brandOgImage } from "@/lib/og";
 import PageHero from "@/components/PageHero";
 import ProcessTimeline from "@/components/ProcessTimeline";
 import SectionHeading from "@/components/SectionHeading";
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   description:
     "How we design and build homes in Karachi: consultation, site review, architectural design, CAD and 3D visualization, construction planning, construction, interior and finishing, and handover.",
   alternates: { canonical: "/process" },
-  openGraph: { url: "/process", title: `Construction Process | ${site.companyName}` },
+  openGraph: { url: "/process", title: `Construction Process | ${site.companyName}`, images: [brandOgImage] },
 };
 
 export default function ProcessPage() {

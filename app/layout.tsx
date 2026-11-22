@@ -10,7 +10,6 @@ import CustomCursor from "@/components/CustomCursor";
 import SmoothScroll from "@/components/SmoothScroll";
 import JsonLd from "@/components/JsonLd";
 import { site } from "@/data/site";
-import { images } from "@/data/images";
 import { localBusinessSchema } from "@/lib/schema";
 
 const inter = Inter({ subsets: ["latin"], variable: "--nf-inter", display: "swap" });
@@ -52,13 +51,11 @@ export const metadata: Metadata = {
     siteName: site.companyName,
     title: `${site.companyName} | Architectural Design & Residential Construction in Karachi`,
     description: site.description,
-    images: [{ url: images.hero.replace("w=2400", "w=1200"), width: 1200, height: 630, alt: "Modern residence at dusk" }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.companyName} | Architectural Design & Residential Construction in Karachi`,
     description: site.description,
-    images: [images.hero.replace("w=2400", "w=1200")],
   },
   robots: { index: true, follow: true },
   formatDetection: { telephone: true },

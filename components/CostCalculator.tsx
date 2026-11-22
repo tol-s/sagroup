@@ -87,10 +87,13 @@ export default function CostCalculator() {
   const floorCount = floorOptions.find((f) => f.id === floors)?.count ?? 1;
   const perFloor = Math.round(plot.sqyd * SQFT_PER_SQYD * (pct / 100));
 
+  /** Architectural design is priced on the plot area only (sq yd × 9), not on coverage or floors. */
+  const byPlot = workId === "design";
   const area = useMemo(() => {
     if (custom) return Math.max(0, Math.min(200000, Number(customArea) || 0));
+    if (byPlot) return plotYd * SQFT_PER_SQYD;
     return coveredArea(plotYd, pct, floorCount);
-  }, [custom, customArea, plotYd, pct, floorCount]);
+  }, [custom, customArea, byPlot, plotYd, pct, floorCount]);
 
   const total = area * work.rate;
   /** Packages without a published rate are quoted on request. */
@@ -102,8 +105,10 @@ export default function CostCalculator() {
     `Hi ${site.companyName}, I used the cost calculator on your website.`,
     custom
       ? `Covered area: ${area.toLocaleString("en-PK")} sq ft`
-      : `Plot: ${plot.label} (${plotSqft.toLocaleString("en-PK")} sq ft), ${pct}% covered, ${floorLabel}, approx. ${area.toLocaleString("en-PK")} sq ft covered`,
-    `Work: ${work.label}`,
+      : byPlot
+        ? `Plot: ${plot.label} (${plotSqft.toLocaleString("en-PK")} sq ft plot area)`
+        : `Plot: ${plot.label} (${plotSqft.toLocaleString("en-PK")} sq ft), ${pct}% covered, ${floorLabel}, approx. ${area.toLocaleString("en-PK")} sq ft covered`,
+    `Package: ${work.pkg ? `${work.pkg} (${work.label})` : work.label}`,
     onRequest ? "Please share the price for this package." : `Estimate shown: ${formatPKR(total)}`,
     "Please share an exact quotation.",
   ].join("\n");
@@ -183,7 +188,7 @@ export default function CostCalculator() {
           )}
         </fieldset>
 
-        {!custom && (
+        {!custom && !byPlot && (
           <fieldset>
             <legend className="label mb-1 text-concrete">2. Covered area %</legend>
             <p className="mb-4 text-sm text-graphite">Plot ka kitna hissa har manzil par banega?</p>
@@ -216,16 +221,13 @@ export default function CostCalculator() {
                 <span className="text-sm text-graphite">%</span>
               </span>
             </div>
-            <p className="mt-3 text-xs leading-relaxed text-concrete">
-              Depends on your society or area, e.g. about 50% in Bahria Town, 65% in Aligarh Muslim Society. Not sure? Keep 65% and we will confirm.
-            </p>
             <p className="mt-1 text-xs font-medium text-graphite">
               {plotSqft.toLocaleString("en-PK")} sq ft × {pct}% = approx. {perFloor.toLocaleString("en-PK")} sq ft per floor
             </p>
           </fieldset>
         )}
 
-        {!custom && (
+        {!custom && !byPlot && (
           <fieldset>
             <legend className="label mb-1 text-concrete">3. Floors</legend>
             <p className="mb-4 text-sm text-graphite">Kitni manzil banwani hai?</p>
@@ -240,7 +242,7 @@ export default function CostCalculator() {
         )}
 
         <fieldset>
-          <legend className="label mb-1 text-concrete">{custom ? "2" : "4"}. Type of work</legend>
+          <legend className="label mb-1 text-concrete">{custom || byPlot ? "2" : "4"}. Type of work</legend>
           <p className="mb-4 text-sm text-graphite">Aap ko kya kaam karwana hai?</p>
           <div className="grid grid-cols-2 gap-2">
             {workTypes.map((w, i) => (
@@ -248,10 +250,10 @@ export default function CostCalculator() {
                 key={w.id}
                 active={workId === w.id}
                 onClick={() => setWorkId(w.id)}
-                hint={w.pkg ? `${w.pkg} · ${w.hint}` : w.hint}
+                hint={w.pkg ? `${w.label} · ${w.hint}` : w.hint}
                 className={i === workTypes.length - 1 && workTypes.length % 2 ? "col-span-2" : undefined}
               >
-                {w.label}
+                {w.pkg ?? w.label}
               </Choice>
             ))}
           </div>
@@ -314,18 +316,18 @@ export default function CostCalculator() {
               <div className="flex justify-between gap-4 py-3">
                 <dt className="text-white/75">Plot</dt>
                 <dd className="text-right">
-                  {plot.label} ({plotSqft.toLocaleString("en-PK")} sq ft), {floorLabel}
+                  {plot.label} ({plotSqft.toLocaleString("en-PK")} sq ft){byPlot ? "" : `, ${floorLabel}`}
                 </dd>
               </div>
             )}
-            {!custom && (
+            {!custom && !byPlot && (
               <div className="flex justify-between gap-4 py-3">
                 <dt className="text-white/75">Coverage</dt>
                 <dd className="text-right">{pct}% per floor</dd>
               </div>
             )}
             <div className="flex justify-between gap-4 py-3">
-              <dt className="text-white/75">Covered area {custom ? "" : "(approx.)"}</dt>
+              <dt className="text-white/75">{byPlot && !custom ? "Plot area" : `Covered area${custom ? "" : " (approx.)"}`}</dt>
               <dd>{area.toLocaleString("en-PK")} sq ft</dd>
             </div>
             {work.pkg && (

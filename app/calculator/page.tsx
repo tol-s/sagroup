@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { brandOgImage } from "@/lib/og";
 import PageHero from "@/components/PageHero";
 import CostCalculator from "@/components/CostCalculator";
 import SectionHeading from "@/components/SectionHeading";
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   description:
     "Estimate the construction cost of your house in Karachi. Choose plot size (120, 200, 240, 400, 500 or 1,000 sq. yd.), floors and grey structure, finishing or turnkey to get an instant per sq ft estimate.",
   alternates: { canonical: "/calculator" },
-  openGraph: { url: "/calculator", title: `Construction Cost Calculator | ${site.companyName}` },
+  openGraph: { url: "/calculator", title: `Construction Cost Calculator | ${site.companyName}`, images: [brandOgImage] },
 };
 
 export default function CalculatorPage() {

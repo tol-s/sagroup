@@ -28,7 +28,7 @@ export default function ForSaleBox({ project, className }: { project: Project; c
         <a
           href={telLink(0)}
           className="label inline-flex h-12 items-center justify-center gap-2 border border-white/40 px-4 text-white hover:bg-white hover:text-ink md:px-6"
-          aria-label={`Call ${site.phones[0].name} about ${project.title}`}
+          aria-label={`Call ${site.companyName} about ${project.title}`}
         >
           <Phone className="size-4 shrink-0" strokeWidth={1.5} aria-hidden />
           Call

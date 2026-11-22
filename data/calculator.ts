@@ -34,7 +34,7 @@ export const workTypes: WorkType[] = [
   { id: "signature-turnkey", label: "Turnkey (Signature)", pkg: "SA Signature", hint: "Luxury finishing + full furnishing", rate: 0 },
   { id: "finishing", label: "Finishing (Standard)", hint: "Grey structure ready? Tiles, paint, doors", rate: 1200 },
   { id: "premium-finishing", label: "Finishing (Premium)", hint: "Premium tiles, fittings, ceilings", rate: 2200 },
-  { id: "design", label: "Architectural Design", hint: "Naksha, 3D elevation, CAD drawings", rate: 120 },
+  { id: "design", label: "Architectural Design", hint: "Naksha, 3D elevation, CAD · on plot area", rate: 120 },
 ];
 
 export type FloorsId = "g" | "g1" | "g2";
@@ -70,12 +70,12 @@ export type PlotSize = {
 
 /** Karachi plot sizes and typical complete construction time. */
 export const plotSizes: PlotSize[] = [
-  { id: "120", label: "120 sq. yd.", sqyd: 120, timeline: "6–8 months" },
-  { id: "200", label: "200 sq. yd.", sqyd: 200, timeline: "7–9 months" },
-  { id: "240", label: "240 sq. yd.", sqyd: 240, timeline: "8–10 months" },
-  { id: "400", label: "400 sq. yd.", sqyd: 400, timeline: "10–12 months" },
-  { id: "500", label: "500 sq. yd.", sqyd: 500, timeline: "11–13 months" },
-  { id: "1000", label: "1,000 sq. yd.", sqyd: 1000, timeline: "14–18 months" },
+  { id: "120", label: "120 sq. yd.", sqyd: 120, timeline: "4–5 months" },
+  { id: "200", label: "200 sq. yd.", sqyd: 200, timeline: "5–6 months" },
+  { id: "240", label: "240 sq. yd.", sqyd: 240, timeline: "5–6 months" },
+  { id: "400", label: "400 sq. yd.", sqyd: 400, timeline: "7–8 months" },
+  { id: "500", label: "500 sq. yd.", sqyd: 500, timeline: "7–8 months" },
+  { id: "1000", label: "1,000 sq. yd.", sqyd: 1000, timeline: "10–12 months" },
 ];
 
 /** Shown under every estimate. */
@@ -142,7 +142,7 @@ export const packageTerms: { title: string; text: string }[] = [
 export const faqs: { q: string; a: string }[] = [
   {
     q: "How is the construction cost calculated?",
-    a: "Construction in Pakistan is priced per square foot of covered area (the total built-up area of all floors). The covered area depends on your plot size, the coverage your society allows (for example about 50% in Bahria Town or 65% in Aligarh Muslim Society) and the number of floors. Multiply it by the rate for the type of work: grey structure, finishing or complete turnkey. Our calculator does this for you.",
+    a: "Construction in Pakistan is priced per square foot of covered area (the total built-up area of all floors). The covered area depends on your plot size, the covered area % allowed for your plot and the number of floors. Multiply it by the rate for the type of work: grey structure, finishing or complete turnkey. Our calculator does this for you.",
   },
   {
     q: "What is the difference between grey structure and finishing?",
@@ -154,7 +154,7 @@ export const faqs: { q: string; a: string }[] = [
   },
   {
     q: "How long does it take to build a house?",
-    a: "As a guide, a complete 120 sq. yd. house takes about 6–8 months, 240 sq. yd. about 8–10 months, 500 sq. yd. about 11–13 months and 1,000 sq. yd. about 14–18 months. The exact schedule is shared with your quotation.",
+    a: "As a guide, a complete 120 sq. yd. house takes about 4–5 months, 200 or 240 sq. yd. about 5–6 months, 400 or 500 sq. yd. about 7–8 months and 1,000 sq. yd. about 10–12 months. The exact schedule is shared with your quotation.",
   },
   {
     q: "Which brands do you use?",

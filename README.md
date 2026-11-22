@@ -139,8 +139,10 @@ public/                 Static files (put your own photos in public/images)
 Edit **`data/site.ts`**. `companyName` updates the logo wordmark, page titles, footer, emails and structured data everywhere.
 
 - Phone numbers: edit the `phones` array. Each entry has `name` and `role` (shown next to the number), `display` (shown on site), `tel` (for `tel:` links, e.g. `+923151209720`) and `whatsapp` (digits only, country code first, e.g. `923151209720`). Keep them in sync.
-- The **first** entry is the main contact (currently Atiq Ur Rehman, CEO, +92 315 1209720). Every "Call Now" button and the mobile contact bar call it. The second entry (M Abubakar, Project Director, +92 300 2237363) is shown as the secondary contact. WhatsApp buttons use `whatsappBusiness` (+92 333 2008343).
+- The **first** entry is the main business line (SA Group, +92 333 2008343, `person: false`). Every "Call Now" button and the mobile contact bar call it, and WhatsApp buttons use `whatsappBusiness` (the same number). Then Atiq Ur Rehman, CEO (+92 315 1209720) and M Abubakar, Project Director (+92 300 2237363). On mobile the home hero shows only the main line.
 - WhatsApp pre-filled message: `whatsappMessage`.
+- Link preview (WhatsApp, Facebook): `app/opengraph-image.tsx` builds the share card from the home banner photo, logo, name and phones (fonts in `assets/og`).
+- Division logos: `public/divisions/`, set via `logo` in `divisions`.
 - Social links: set `href` for each profile. Empty links render as greyed-out text, not as links.
 - Stats: add a `value` to show a statistic on the About page. Leave empty to hide. Only publish verified numbers.
 

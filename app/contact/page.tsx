@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { brandOgImage } from "@/lib/og";
 import { Mail, MessageCircle, Phone, MapPin, Share2 } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import ContactForm from "@/components/ContactForm";
@@ -11,9 +12,9 @@ import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Contact | Free Construction Consultation in Karachi",
-  description: `Request a free consultation for house construction, architectural design, CAD drawings or renovation in Karachi. Call ${site.phones[0].name} on ${site.phones[0].display} or ${site.phones[1].name} on ${site.phones[1].display}.`,
+  description: `Request a free consultation for house construction, architectural design, CAD drawings or renovation in Karachi. Call or WhatsApp ${site.phones[0].display}.`,
   alternates: { canonical: "/contact" },
-  openGraph: { url: "/contact", title: `Contact ${site.companyName}` },
+  openGraph: { url: "/contact", title: `Contact ${site.companyName}`, images: [brandOgImage] },
 };
 
 export default async function ContactPage({ searchParams }: PageProps<"/contact">) {
@@ -42,7 +43,7 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
               <ul className="border-t border-ink/10">
                 {site.phones.map((p, i) => (
                   <li key={p.tel} className="border-b border-ink/10 py-6">
-                    <p className="label text-concrete">{p.label} contact</p>
+                    <p className="label text-concrete">{p.label}</p>
                     <p className="mt-2 text-lg font-medium tracking-tight">
                       {p.name}
                       <span className="font-normal text-graphite">, {p.role}</span>
@@ -54,20 +55,14 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
                       <a href={telLink(i)} className="label inline-flex h-10 items-center gap-2 border border-ink/20 px-4 hover:bg-ink hover:text-bone">
                         <Phone className="size-3.5" strokeWidth={1.5} aria-hidden /> Call
                       </a>
+                      {!p.person && (
+                        <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="label inline-flex h-10 items-center gap-2 border border-ink/20 px-4 hover:bg-ink hover:text-bone">
+                          <MessageCircle className="size-3.5" strokeWidth={1.5} aria-hidden /> WhatsApp
+                        </a>
+                      )}
                     </div>
                   </li>
                 ))}
-                <li className="border-b border-ink/10 py-6">
-                  <p className="label text-concrete">WhatsApp Business</p>
-                  <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="mt-2 block font-display text-[clamp(1.6rem,2.6vw,2.4rem)] font-medium tracking-tight hover:text-bronze">
-                    {site.whatsappBusiness.display}
-                  </a>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="label inline-flex h-10 items-center gap-2 border border-ink/20 px-4 hover:bg-ink hover:text-bone">
-                      <MessageCircle className="size-3.5" strokeWidth={1.5} aria-hidden /> Chat on WhatsApp
-                    </a>
-                  </div>
-                </li>
                 <li className="flex items-start gap-3 border-b border-ink/10 py-6">
                   <Mail className="mt-0.5 size-4 text-concrete" strokeWidth={1.5} aria-hidden />
                   <div>

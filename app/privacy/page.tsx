@@ -52,7 +52,7 @@ export default function PrivacyPage() {
 
           <h2 className={h2}>Your choices</h2>
           <p className={p}>
-            You can ask us to access, correct or delete the information you have sent us at any time by calling {site.phones[0].name} on {site.phones[0].display} or {site.phones[1].name} on {site.phones[1].display}.
+            You can ask us to access, correct or delete the information you have sent us at any time by calling or messaging {site.phones[0].display}.
           </p>
 
           <h2 className={h2}>Contact</h2>
