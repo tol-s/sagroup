@@ -170,7 +170,8 @@ Each service has `slug`, `number`, `title`, `tier`, `shortDescription`, `descrip
 Edit **`data/calculator.ts`**. The home page calculator, the `/calculator` page, the packages section, the timeline and the FAQ all read from it.
 
 - `workTypes`: PKR **per sq ft of covered area**. Confirmed package rates: Grey Structure 2,800, Turnkey Standard 4,000, Turnkey Premium 5,000, Turnkey Signature on request (`rate: 0`). Finishing-only rates are turnkey minus grey structure. Update them whenever material prices change.
-- `plotSizes`: Karachi plot sizes (120 to 1,000 sq. yd.), the typical covered area for G / G+1 / G+2 and the typical timeline.
+- `plotSizes`: Karachi plot sizes (120 to 1,000 sq. yd.) and the typical timeline.
+- `coverageOptions`: society coverage rules (Bahria Town 50%, Aligarh Muslim Society 65%). Add a society as `{ id, label, pct }`. Visitors can also choose "Other society" and set the % (40 to 80%). Covered area = plot (sq yd) × 9 × coverage % × floors.
 - `packages`, `packageSpecs`, `packageTerms`: the four SA Builders & Developers packages (SA Core, SA Element, SA Sovereign, SA Signature) with their 20-item material specification and execution terms, taken from the specification sheet SAB/MAT-SPEC/2026. A work type with `rate: 0` shows "Price on request".
 - `faqs`: questions and answers shown on the home page and calculator page.
 

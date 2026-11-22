@@ -20,7 +20,7 @@ export default function HomeHero() {
   const ease = [0.16, 1, 0.3, 1] as const;
 
   return (
-    <section ref={ref} data-hero="dark" className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink text-bone">
+    <section ref={ref} data-hero="dark" className="relative isolate flex min-h-[calc(100svh-4rem-env(safe-area-inset-bottom))] flex-col overflow-hidden bg-ink text-bone md:min-h-[100svh]">
       <motion.div className="absolute inset-0 -z-10" style={reduce ? undefined : { y, scale }}>
         <motion.div
           className="absolute inset-0"
@@ -33,9 +33,9 @@ export default function HomeHero() {
       </motion.div>
       <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/40 to-ink/50" aria-hidden />
 
-      <motion.div style={reduce ? undefined : { opacity: fade }} className="wrap flex flex-1 flex-col justify-end pb-10 pt-32 md:pb-14">
+      <motion.div style={reduce ? undefined : { opacity: fade }} className="wrap flex flex-1 flex-col justify-end pb-6 pt-24 md:pb-24 md:pt-32">
         <motion.div
-          className="mb-8 flex items-center justify-between gap-6 md:mb-12"
+          className="mb-5 flex items-center justify-between gap-6 md:mb-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 1 }}
@@ -56,28 +56,36 @@ export default function HomeHero() {
           className="display display-xl uppercase"
         />
 
-        <div className="mt-10 grid gap-10 border-t border-bone/20 pt-8 md:mt-14 md:grid-cols-12 md:gap-8">
+        <div className="mt-6 grid gap-5 border-t border-bone/20 pt-5 md:mt-14 md:grid-cols-12 md:gap-8 md:pt-8">
           <motion.p
-            className="lead text-bone/80 md:col-span-5"
+            className="text-[0.95rem] leading-relaxed text-bone/80 md:col-span-12 lg:col-span-4 md:text-[clamp(1.0625rem,1.35vw,1.3125rem)] md:leading-[1.6]"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.3, ease }}
           >
-            From architectural planning and CAD design to grey structure, finishing and final handover, we manage your home construction from concept to completion.
+            <span className="md:hidden">From design and grey structure to finishing and handover, we build your home from concept to completion.</span>
+            <span className="hidden md:inline">
+              From architectural planning and CAD design to grey structure, finishing and final handover, we manage your home construction from concept to completion.
+            </span>
           </motion.p>
 
           <motion.div
-            className="flex flex-wrap items-start gap-3 md:col-span-4 md:col-start-6 xl:col-span-5"
+            className="grid grid-cols-2 gap-2 md:col-span-7 md:flex md:flex-nowrap md:items-start md:gap-3 lg:col-span-5 lg:col-start-5"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.45, ease }}
           >
-            <Button href="/contact" variant="light">Start Your Project</Button>
-            <Button href={telLink(0)} variant="ghost-light">Call Now</Button>
+            <Button href="/contact" variant="light" className="w-full gap-2 px-2 md:w-auto md:gap-3 md:px-7">
+              <span className="xl:hidden">Start Project</span>
+              <span className="hidden xl:inline">Start Your Project</span>
+            </Button>
+            <Button href={telLink(0)} variant="ghost-light" className="w-full gap-2 px-2 md:w-auto md:gap-3 md:px-7">
+              Call Now
+            </Button>
           </motion.div>
 
           <motion.ul
-            className="space-y-3 md:col-span-3 md:text-right xl:col-span-2"
+            className="grid grid-cols-2 gap-3 md:col-span-5 md:block md:space-y-3 md:text-right lg:col-span-3"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.6, ease }}
@@ -85,8 +93,12 @@ export default function HomeHero() {
             {site.phones.map((p) => (
               <li key={p.tel}>
                 <a href={`tel:${p.tel}`} className="group block" aria-label={`Call ${contactName(p)} on ${p.display}`}>
-                  <span className="label block text-bone/55">{contactName(p)}</span>
-                  <span className="link-underline text-lg tracking-tight">{p.display}</span>
+                  <span className="block text-[0.68rem] uppercase leading-snug tracking-[0.14em] text-bone/55 md:hidden">
+                    {p.name}
+                    <span className="block normal-case tracking-normal text-bone/45">{p.role}</span>
+                  </span>
+                  <span className="label hidden text-bone/55 md:block">{contactName(p)}</span>
+                  <span className="link-underline text-[0.95rem] tracking-tight md:text-lg">{p.display}</span>
                 </a>
               </li>
             ))}

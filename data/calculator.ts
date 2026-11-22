@@ -39,30 +39,47 @@ export const workTypes: WorkType[] = [
 
 export type FloorsId = "g" | "g1" | "g2";
 
-export const floorOptions: { id: FloorsId; label: string; hint: string }[] = [
-  { id: "g", label: "G", hint: "Ground only" },
-  { id: "g1", label: "G+1", hint: "2 floors" },
-  { id: "g2", label: "G+2", hint: "3 floors" },
+export const floorOptions: { id: FloorsId; label: string; hint: string; count: number }[] = [
+  { id: "g", label: "G", hint: "Ground only", count: 1 },
+  { id: "g1", label: "G+1", hint: "2 floors", count: 2 },
+  { id: "g2", label: "G+2", hint: "3 floors", count: 3 },
 ];
+
+/**
+ * COVERAGE: the share of the plot that may be built on each floor, set by the
+ * society's by-laws. Add more societies here as { id, label, pct }.
+ */
+export const coverageOptions: { id: string; label: string; pct: number }[] = [
+  { id: "bahria", label: "Bahria Town", pct: 50 },
+  { id: "aligarh", label: "Aligarh Muslim Society", pct: 65 },
+];
+/** Starting value for "Other society" (the visitor can change it). */
+export const defaultCustomCoverage = 60;
+export const coverageRange = { min: 40, max: 80, step: 5 };
+
+export const SQFT_PER_SQYD = 9;
+
+/** Covered area (sq ft) = plot (sq yd) × 9 × coverage % × number of floors. */
+export function coveredArea(sqyd: number, pct: number, floorCount: number) {
+  return Math.round(sqyd * SQFT_PER_SQYD * (pct / 100)) * floorCount;
+}
 
 export type PlotSize = {
   id: string;
   label: string;
   sqyd: number;
-  /** Typical total covered area (sq ft) for each floor configuration, including mumty */
-  covered: Partial<Record<FloorsId, number>>;
   /** Typical complete construction time */
   timeline: string;
 };
 
-/** Typical covered areas for Karachi plots. Actual area depends on the approved plan and by-laws. */
+/** Karachi plot sizes and typical complete construction time. */
 export const plotSizes: PlotSize[] = [
-  { id: "120", label: "120 sq. yd.", sqyd: 120, covered: { g: 1000, g1: 1950, g2: 2900 }, timeline: "6–8 months" },
-  { id: "200", label: "200 sq. yd.", sqyd: 200, covered: { g: 1450, g1: 2850, g2: 4200 }, timeline: "7–9 months" },
-  { id: "240", label: "240 sq. yd.", sqyd: 240, covered: { g: 1700, g1: 3300, g2: 4900 }, timeline: "8–10 months" },
-  { id: "400", label: "400 sq. yd.", sqyd: 400, covered: { g: 2600, g1: 5100 }, timeline: "10–12 months" },
-  { id: "500", label: "500 sq. yd.", sqyd: 500, covered: { g: 3100, g1: 6100 }, timeline: "11–13 months" },
-  { id: "1000", label: "1,000 sq. yd.", sqyd: 1000, covered: { g: 5200, g1: 10200 }, timeline: "14–18 months" },
+  { id: "120", label: "120 sq. yd.", sqyd: 120, timeline: "6–8 months" },
+  { id: "200", label: "200 sq. yd.", sqyd: 200, timeline: "7–9 months" },
+  { id: "240", label: "240 sq. yd.", sqyd: 240, timeline: "8–10 months" },
+  { id: "400", label: "400 sq. yd.", sqyd: 400, timeline: "10–12 months" },
+  { id: "500", label: "500 sq. yd.", sqyd: 500, timeline: "11–13 months" },
+  { id: "1000", label: "1,000 sq. yd.", sqyd: 1000, timeline: "14–18 months" },
 ];
 
 /** Shown under every estimate. */
@@ -129,7 +146,7 @@ export const packageTerms: { title: string; text: string }[] = [
 export const faqs: { q: string; a: string }[] = [
   {
     q: "How is the construction cost calculated?",
-    a: "Construction in Pakistan is priced per square foot of covered area (the total built-up area of all floors). Multiply the covered area by the rate for the type of work: grey structure, finishing or complete turnkey. Our calculator does this for typical Karachi plot sizes.",
+    a: "Construction in Pakistan is priced per square foot of covered area (the total built-up area of all floors). The covered area depends on your plot size, the coverage your society allows (for example about 50% in Bahria Town or 65% in Aligarh Muslim Society) and the number of floors. Multiply it by the rate for the type of work: grey structure, finishing or complete turnkey. Our calculator does this for you.",
   },
   {
     q: "What is the difference between grey structure and finishing?",

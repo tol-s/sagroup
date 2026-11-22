@@ -34,7 +34,7 @@ export default function Button({ href, children, variant = "solid", className, i
     <>
       <span>{children}</span>
       {icon === false ? null : (
-        <span className="relative inline-flex size-4 overflow-hidden" aria-hidden>
+        <span className="relative inline-flex size-4 shrink-0 overflow-hidden" aria-hidden>
           {icon ?? (
             <>
               <ArrowUpRight className="size-4 transition-transform duration-500 ease-out-expo group-hover/btn:translate-x-full group-hover/btn:-translate-y-full" strokeWidth={1.5} />
