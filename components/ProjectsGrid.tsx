@@ -52,9 +52,9 @@ export default function ProjectsGrid() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.97 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className={clsx(i % 2 === 1 && "md:mt-40")}
+                className={clsx(i % 2 === 1 && "md:mt-20")}
               >
-                <ProjectCard project={p} index={projects.indexOf(p)} aspect="aspect-[4/5]" />
+                <ProjectCard project={p} index={projects.indexOf(p)} aspect="aspect-[16/10]" />
               </motion.div>
             ))}
           </AnimatePresence>

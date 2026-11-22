@@ -203,12 +203,12 @@ export const projects: Project[] = [
       "The Linear shows how a narrow Karachi plot can still make a strong first impression. A tall charcoal fin wall rises past the roof line and frames the house, while the long horizontal slabs of the balcony and roof give it a calm, linear rhythm. Timber-clad gates and a timber screen bring warmth to the street front.",
     designApproach:
       "Two gestures define the elevation: a sloping dark fin wall with integrated cove lighting, and deep horizontal overhangs that shade the first-floor rooms. Warm timber on the gates, door and vertical screen balances the white and charcoal palette, and a glass balcony railing keeps the front light and open. Built-in planters soften the boundary.",
-    heroImage: "/projects/a097/sunset-front.jpg",
-    cardImage: "/projects/a097/day-perspective.jpg",
+    heroImage: "/projects/a097/day-front.jpg",
+    cardImage: "/projects/a097/day-front.jpg",
     gallery: [
+      { src: "/projects/a097/day-front.jpg", alt: "The Linear A-097 front elevation in daylight with timber gates and planters", caption: "Front elevation, day" },
       { src: "/projects/a097/sunset-front.jpg", alt: "The Linear A-097 front elevation at sunset with lit fin wall and timber gates", caption: "Front elevation, sunset" },
       { src: "/projects/a097/day-perspective.jpg", alt: "The Linear A-097 seen from the street in daylight, showing the angled fin wall", caption: "Street perspective, day" },
-      { src: "/projects/a097/day-front.jpg", alt: "The Linear A-097 front elevation in daylight with timber gates and planters", caption: "Front elevation, day" },
     ],
     features: ["Angled fin wall", "Timber-clad gates", "Glass balcony railing", "Cove lighting", "Deep overhangs", "Built-in planters"],
     constructionScope: ["Architectural planning", "3D elevation", "Exterior lighting design", "Facade detailing"],

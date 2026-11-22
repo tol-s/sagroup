@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import PageHero from "@/components/PageHero";
-import ProjectGallery from "@/components/ProjectGallery";
+import RenderViewer from "@/components/RenderViewer";
 import AnimatedText from "@/components/AnimatedText";
 import Reveal from "@/components/Reveal";
 import ImageReveal from "@/components/ImageReveal";
@@ -61,21 +61,25 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
       <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Projects", path: "/projects" }, { name: project.title, path: `/projects/${project.slug}` }])} />
       <JsonLd data={projectSchema(project)} />
 
-      <PageHero
-        eyebrow={isSample ? "Sample project" : (project.status ?? "Project")}
-        title={project.title}
-        image={project.heroImage}
-        imageAlt={`${project.title}, ${project.location}`}
-        meta={[
-          { label: "Location", value: project.location },
-          { label: "Category", value: project.category },
-          { label: "Type", value: project.type },
-          { label: "Style", value: project.style },
-        ]}
-      />
+      <PageHero eyebrow={isSample ? "Sample project" : (project.status ?? "Project")} title={project.title} intro={`${project.type} · ${project.location}`} />
+
+      {/* SHOWCASE: full house visible, front view first */}
+      <section aria-label={`${project.title} views`} className="pt-6 md:pt-10">
+        <div className="wrap">
+          <RenderViewer
+            images={gallery}
+            label={project.sample ? "Photo" : "3D view"}
+            facts={project.facts ?? [
+              { label: "Location", value: project.location },
+              { label: "Category", value: project.category },
+              { label: "Style", value: project.style },
+            ]}
+          />
+        </div>
+      </section>
 
       {/* OVERVIEW */}
-      <section aria-labelledby="overview-title" className="py-24 md:py-36">
+      <section aria-labelledby="overview-title" className="py-16 md:py-28">
         <div className="wrap grid gap-14 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-7">
             <p className="label mb-6 text-concrete">Project overview</p>
@@ -124,7 +128,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
       <section aria-labelledby="approach-title" className="bg-paper py-24 md:py-36">
         <div className="wrap grid gap-12 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-5">
-            <ImageReveal src={gallery[1]?.src ?? project.heroImage} alt={gallery[1]?.alt ?? project.title} className="aspect-[4/5] w-full" sizes="(min-width: 768px) 40vw, 100vw" direction="left" />
+            <ImageReveal src={gallery[2]?.src ?? gallery[1]?.src ?? project.heroImage} alt={gallery[2]?.alt ?? gallery[1]?.alt ?? project.title} className="aspect-[16/9] w-full" sizes="(min-width: 768px) 40vw, 100vw" direction="left" />
           </div>
           <div className="flex flex-col justify-center md:col-span-6 md:col-start-7">
             <p className="label mb-6 text-concrete">Design approach</p>
@@ -152,20 +156,6 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
               </ul>
             </Reveal>
           </div>
-        </div>
-      </section>
-
-      {/* GALLERY */}
-      <section aria-labelledby="gallery-title" className="py-24 md:py-36">
-        <div className="wrap">
-          <div className="mb-14 flex items-end justify-between gap-6">
-            <div>
-              <p className="label mb-6 text-concrete">Project gallery</p>
-              <AnimatedText id="gallery-title" as="h2" text="Inside and out." className="display display-md uppercase" />
-            </div>
-            <p className="label hidden text-concrete md:block">{gallery.length} images · Click to enlarge</p>
-          </div>
-          <ProjectGallery images={gallery} title={project.title} />
         </div>
       </section>
 

@@ -8,7 +8,17 @@ import type { GalleryImage } from "@/data/projects";
 import clsx from "@/lib/clsx";
 
 /** 3D exterior views: big image with crossfade, arrows, swipe and thumbnails. */
-export default function RenderViewer({ images, facts, className }: { images: GalleryImage[]; facts?: { label: string; value: string }[]; className?: string }) {
+export default function RenderViewer({
+  images,
+  facts,
+  className,
+  label = "3D view",
+}: {
+  images: GalleryImage[];
+  facts?: { label: string; value: string }[];
+  className?: string;
+  label?: string;
+}) {
   const [i, setI] = useState(0);
   const reduce = useReducedMotion();
   const touchX = useRef<number | null>(null);
@@ -18,7 +28,7 @@ export default function RenderViewer({ images, facts, className }: { images: Gal
   return (
     <div className={className}>
       <div
-        className="relative aspect-[4/3] overflow-hidden bg-ink sm:aspect-[16/9] lg:aspect-[21/9]"
+        className="relative mx-auto aspect-video w-full max-w-[calc(62svh*16/9)] overflow-hidden bg-ink"
         onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
         onTouchEnd={(e) => {
           if (touchX.current === null) return;
@@ -43,7 +53,7 @@ export default function RenderViewer({ images, facts, className }: { images: Gal
 
         <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-4 text-bone md:p-6">
           <div>
-            <p className="label text-bone/60">3D view {i + 1} / {images.length}</p>
+            <p className="label text-bone/60">{label} {i + 1} / {images.length}</p>
             <p className="mt-1 font-display text-lg font-medium uppercase tracking-tight md:text-2xl">{img.caption}</p>
           </div>
           {images.length > 1 && (
@@ -59,9 +69,9 @@ export default function RenderViewer({ images, facts, className }: { images: Gal
         </div>
       </div>
 
-      <div className="mt-3 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <div className="mx-auto mt-3 flex max-w-[calc(62svh*16/9)] flex-col gap-4 md:flex-row md:items-center md:justify-between">
         {images.length > 1 && (
-          <div className="-mx-1 flex min-w-0 gap-2 overflow-x-auto p-1 [scrollbar-width:none]" role="tablist" aria-label="3D views">
+          <div className="-mx-1 flex min-w-0 gap-2 overflow-x-auto p-1 [scrollbar-width:none]" role="tablist" aria-label={`${label}s`}>
             {images.map((im, n) => (
               <button
                 key={im.src}

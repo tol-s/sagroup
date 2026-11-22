@@ -30,7 +30,7 @@ This repository is standalone. It shares no code, database, environment variable
 | `/about` | Company, philosophy, disciplines, coverage, client experience |
 | `/services` | The 7 primary services grouped by priority, each with image, description, inclusions, complete construction scope and CTA (anchors: `/services#slug`) |
 | `/projects` | Portfolio with instant filters (Residential Houses by default, Villas, Apartments / Flats, Commercial, All) |
-| `/projects/[slug]` | Project detail: hero, overview, details, design approach, features, gallery with lightbox, previous/next |
+| `/projects/[slug]` | Project detail: views slider (front view first, full image visible), overview, details, interactive floor plans (when available), design approach, features, previous/next |
 | `/calculator` | Construction cost calculator, packages, timeline and FAQ |
 | `/process` | Interactive 8-step design and construction timeline |
 | `/contact` | Lead form, phone numbers, WhatsApp |
