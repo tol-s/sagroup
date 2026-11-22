@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import RenderViewer from "@/components/RenderViewer";
+import ForSaleBox from "@/components/ForSaleBox";
 import AnimatedText from "@/components/AnimatedText";
 import Reveal from "@/components/Reveal";
 import ImageReveal from "@/components/ImageReveal";
@@ -75,6 +76,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
               { label: "Style", value: project.style },
             ]}
           />
+          <ForSaleBox project={project} className="mx-auto mt-6 max-w-[calc(62svh*16/9)]" />
         </div>
       </section>
 

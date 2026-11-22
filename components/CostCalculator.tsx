@@ -63,8 +63,21 @@ export default function CostCalculator() {
   const [custom, setCustom] = useState(false);
   const [customArea, setCustomArea] = useState("");
   const [pct, setPct] = useState(defaultCoverage);
+  const [otherYd, setOtherYd] = useState("");
 
-  const plot = plotSizes.find((p) => p.id === plotId) ?? plotSizes[0];
+  // Any plot size in sq yd: typed values override the preset buttons.
+  const typedYd = Math.max(0, Math.min(20000, Number(otherYd) || 0));
+  const plot =
+    plotId === "other" && typedYd > 0
+      ? {
+          id: "other",
+          label: `${typedYd.toLocaleString("en-PK")} sq. yd.`,
+          sqyd: typedYd,
+          timeline: ([...plotSizes].reverse().find((p) => p.sqyd <= typedYd) ?? plotSizes[0]).timeline,
+        }
+      : (plotSizes.find((p) => p.id === plotId) ?? plotSizes[2]);
+  const plotYd = plot.sqyd;
+  const plotSqft = plotYd * SQFT_PER_SQYD;
   const work = workTypes.find((w) => w.id === workId) ?? workTypes[0];
   const effectiveFloors = floors;
   const floorCount = floorOptions.find((f) => f.id === floors)?.count ?? 1;
@@ -72,8 +85,8 @@ export default function CostCalculator() {
 
   const area = useMemo(() => {
     if (custom) return Math.max(0, Math.min(200000, Number(customArea) || 0));
-    return coveredArea(plot.sqyd, pct, floorCount);
-  }, [custom, customArea, plot, pct, floorCount]);
+    return coveredArea(plotYd, pct, floorCount);
+  }, [custom, customArea, plotYd, pct, floorCount]);
 
   const total = area * work.rate;
   /** Packages without a published rate are quoted on request. */
@@ -85,7 +98,7 @@ export default function CostCalculator() {
     `Hi ${site.companyName}, I used the cost calculator on your website.`,
     custom
       ? `Covered area: ${area.toLocaleString("en-PK")} sq ft`
-      : `Plot: ${plot.label}, ${pct}% covered, ${floorLabel}, approx. ${area.toLocaleString("en-PK")} sq ft covered`,
+      : `Plot: ${plot.label} (${plotSqft.toLocaleString("en-PK")} sq ft), ${pct}% covered, ${floorLabel}, approx. ${area.toLocaleString("en-PK")} sq ft covered`,
     `Work: ${work.label}`,
     onRequest ? "Please share the price for this package." : `Estimate shown: ${formatPKR(total)}`,
     "Please share an exact quotation.",
@@ -100,12 +113,44 @@ export default function CostCalculator() {
           <p className="mb-4 text-sm text-graphite">Aapka plot kitne gaz ka hai?</p>
           <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
             {plotSizes.map((p) => (
-              <Choice key={p.id} active={!custom && plotId === p.id} onClick={() => { setPlotId(p.id); setCustom(false); }}>
+              <Choice key={p.id} active={!custom && plotId === p.id} onClick={() => { setPlotId(p.id); setOtherYd(""); setCustom(false); }}>
                 {p.label.replace(" sq. yd.", "")}
                 <span className="block text-xs font-normal opacity-70">sq. yd.</span>
               </Choice>
             ))}
           </div>
+          {!custom && (
+            <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
+              <label htmlFor="plot-yd" className="text-sm text-graphite">
+                Other size
+              </label>
+              <span className="flex items-center gap-2">
+                <input
+                  id="plot-yd"
+                  type="number"
+                  inputMode="numeric"
+                  min={20}
+                  max={20000}
+                  placeholder="e.g. 300"
+                  value={otherYd}
+                  onChange={(e) => {
+                    setOtherYd(e.target.value);
+                    setPlotId(e.target.value ? "other" : "240");
+                  }}
+                  className={clsx(
+                    "w-28 border px-3 py-2 text-base focus:border-ink focus:outline-none",
+                    plotId === "other" && typedYd > 0 ? "border-ink bg-bone" : "border-ink/20 bg-paper",
+                  )}
+                />
+                <span className="text-sm text-graphite">sq. yd.</span>
+              </span>
+            </div>
+          )}
+          {!custom && (
+            <p className="mt-3 bg-sand/60 px-3 py-2 text-sm">
+              {plot.sqyd.toLocaleString("en-PK")} sq yd × 9 = <span className="font-medium">{plotSqft.toLocaleString("en-PK")} sq ft</span> plot area
+            </p>
+          )}
           <button
             type="button"
             onClick={() => setCustom((v) => !v)}
@@ -149,7 +194,7 @@ export default function CostCalculator() {
               Depends on your society or area, e.g. about 50% in Bahria Town, 65% in Aligarh Muslim Society. Not sure? Keep 60% and we will confirm.
             </p>
             <p className="mt-1 text-xs font-medium text-graphite">
-              {plot.label} × {pct}% = approx. {perFloor.toLocaleString("en-PK")} sq ft per floor
+              {plotSqft.toLocaleString("en-PK")} sq ft × {pct}% = approx. {perFloor.toLocaleString("en-PK")} sq ft per floor
             </p>
           </fieldset>
         )}
@@ -243,7 +288,7 @@ export default function CostCalculator() {
               <div className="flex justify-between gap-4 py-3">
                 <dt className="text-bone/55">Plot</dt>
                 <dd className="text-right">
-                  {plot.label}, {floorLabel}
+                  {plot.label} ({plotSqft.toLocaleString("en-PK")} sq ft), {floorLabel}
                 </dd>
               </div>
             )}

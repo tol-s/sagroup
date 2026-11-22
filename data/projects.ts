@@ -28,8 +28,10 @@ export type Project = {
   filters: ProjectFilter[];
   /** true = sample / demonstration project (labelled "Sample" on the site). */
   sample?: boolean;
-  /** Short status badge, e.g. "3D design". */
+  /** Short status badge, e.g. "For sale". */
   status?: string;
+  /** Set when SA Group is selling this property: shows a buy enquiry box. */
+  forSale?: { headline: string; text: string; whatsappMessage: string };
   /** Interactive floor plans (see components/FloorPlanExplorer). */
   floorPlans?: FloorPlan[];
   /** Quick facts shown on the project page and featured section. */
@@ -105,12 +107,17 @@ const allProjects: Project[] = [
     category: "Residential House",
     type: "Double-storey family residence (G+1)",
     style: "Contemporary Modern",
-    scope: "Architectural planning, furnished floor plans and 3D exterior visualisation",
-    status: "SA Group design",
+    scope: "Own project: designed and built by SA Group, from architecture and grey structure to finishing",
+    status: "For sale",
+    forSale: {
+      headline: "This house is for sale.",
+      text: "Residence B-01 is SA Group's own project, designed and built by our team. Ask us for the price, location and a site visit.",
+      whatsappMessage: "Hi SA Group, I am interested in buying Residence B-01. Please share the price, location and a time for a site visit.",
+    },
     description:
-      "A contemporary double-storey family home designed by SA Group: five bedrooms, two lounges, open terraces and a bold modern elevation.",
+      "SA Group's own project: a contemporary double-storey family home, designed and built by our team and now for sale. Four bedrooms plus a guest room, two lounges and open terraces.",
     overview:
-      "Residence B-01 is planned around how a Pakistani family actually lives. The ground floor keeps guests and family separate: a formal drawing room and guest room near the entrance, with the lounge, dining and a modular kitchen with a separate dirty kitchen behind. Upstairs, three bedrooms with attached baths, a family lounge, a kitchenette, a gym and two open terraces make the first floor a home of its own.",
+      "Residence B-01 is our own project, built by SA Group and now available to buy. It is planned around how a Pakistani family actually lives. The ground floor keeps guests and family separate: a formal drawing room and guest room near the entrance, with the lounge, dining and a modular kitchen with a separate dirty kitchen behind. Upstairs, three bedrooms with attached baths, a family lounge, a kitchenette, a gym and two open terraces make the first floor a home of its own.",
     designApproach:
       "The elevation layers white volumes, charcoal frames and stone cladding, with deep projections that shade the windows from the Karachi sun. A pergola on the roof, glass balcony railings and concealed lighting give the house its night-time presence, while planters at the boundary wall soften the street front.",
     heroImage: "/projects/b01/day-front.jpg",
@@ -125,13 +132,13 @@ const allProjects: Project[] = [
       { src: "/projects/b01/first-floor.webp", alt: "Furnished 3D first floor plan of Residence B-01", caption: "First floor plan" },
     ],
     features: ["Separate drawing room", "Modular + dirty kitchen", "Attached baths", "Walk-in closets", "Two open terraces", "Rooftop pergola"],
-    constructionScope: ["Architectural planning", "Furnished floor plans", "3D elevation", "Exterior lighting design", "Landscape planning"],
+    constructionScope: completeResidentialScope,
     filters: ["residential"],
     facts: [
       { label: "Floors", value: "Ground + 1" },
       { label: "Bedrooms", value: "4 + guest" },
       { label: "Bathrooms", value: "5 + 2 powder" },
-      { label: "Lounges", value: "2" },
+      { label: "Status", value: "Built · For sale" },
     ],
     floorPlans: [
       {

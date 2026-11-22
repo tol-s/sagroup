@@ -13,6 +13,7 @@ import Testimonials from "@/components/Testimonials";
 import JsonLd from "@/components/JsonLd";
 import { featuredProject, projects } from "@/data/projects";
 import ProjectCard from "@/components/ProjectCard";
+import ForSaleBox from "@/components/ForSaleBox";
 import { faqs } from "@/data/calculator";
 
 /**
@@ -63,9 +64,13 @@ export default function HomePage() {
             <SectionHeading
               id="featured-title"
               index="02"
-              eyebrow="Our design"
+              eyebrow={featuredProject.forSale ? "Own project · For sale" : "Our design"}
               title={`${featuredProject.title}.`}
-              intro="A family home designed by SA Group. See the 3D views, then tap any room on the naksha to see its size."
+              intro={
+                featuredProject.forSale
+                  ? "Our own project, designed and built by SA Group and now for sale. See the 3D views, then tap any room on the naksha to see its size."
+                  : "A family home designed by SA Group. See the 3D views, then tap any room on the naksha to see its size."
+              }
               className="flex-1"
             />
             <Reveal className="shrink-0">
@@ -73,6 +78,7 @@ export default function HomePage() {
             </Reveal>
           </div>
           <RenderViewer className="mt-12 md:mt-16" images={featuredProject.gallery.filter((g) => !g.src.includes("floor"))} facts={featuredProject.facts} />
+          <ForSaleBox project={featuredProject} className="mx-auto mt-6 max-w-[calc(62svh*16/9)]" />
           {featuredProject.floorPlans && (
             <div className="mt-16 md:mt-24">
               <p className="label mb-6 flex items-center gap-3 text-concrete">
