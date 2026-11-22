@@ -11,7 +11,8 @@ import Button from "@/components/Button";
 import CTASection from "@/components/CTASection";
 import Testimonials from "@/components/Testimonials";
 import JsonLd from "@/components/JsonLd";
-import { featuredProject } from "@/data/projects";
+import { featuredProject, projects } from "@/data/projects";
+import ProjectCard from "@/components/ProjectCard";
 import { faqs } from "@/data/calculator";
 
 /**
@@ -20,6 +21,7 @@ import { faqs } from "@/data/calculator";
  * what is included, how long it takes, and how to reach us.
  */
 export default function HomePage() {
+  const moreDesigns = projects.filter((p) => !p.sample && p.slug !== featuredProject.slug).slice(0, 2);
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -78,6 +80,19 @@ export default function HomePage() {
                 Explore the floor plans
               </p>
               <FloorPlanExplorer plans={featuredProject.floorPlans} title={featuredProject.title} />
+            </div>
+          )}
+          {moreDesigns.length > 0 && (
+            <div className="mt-16 md:mt-24">
+              <p className="label mb-6 flex items-center gap-3 text-concrete">
+                <span className="h-px w-8 bg-current" aria-hidden />
+                More SA Group designs
+              </p>
+              <div className="grid gap-x-6 gap-y-12 md:grid-cols-2">
+                {moreDesigns.map((p, i) => (
+                  <ProjectCard key={p.slug} project={p} index={i + 1} aspect="aspect-[16/10]" sizes="(min-width: 768px) 50vw, 100vw" />
+                ))}
+              </div>
             </div>
           )}
         </div>

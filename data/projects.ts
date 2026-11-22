@@ -111,12 +111,14 @@ export const projects: Project[] = [
       "Residence B-01 is planned around how a Pakistani family actually lives. The ground floor keeps guests and family separate: a formal drawing room and guest room near the entrance, with the lounge, dining and a modular kitchen with a separate dirty kitchen behind. Upstairs, three bedrooms with attached baths, a family lounge, a kitchenette, a gym and two open terraces make the first floor a home of its own.",
     designApproach:
       "The elevation layers white volumes, charcoal frames and stone cladding, with deep projections that shade the windows from the Karachi sun. A pergola on the roof, glass balcony railings and concealed lighting give the house its night-time presence, while planters at the boundary wall soften the street front.",
-    heroImage: "/projects/b01/night-front.jpg",
-    cardImage: "/projects/b01/gate.jpg",
+    heroImage: "/projects/b01/day-front.jpg",
+    cardImage: "/projects/b01/day-front.jpg",
     gallery: [
-      { src: "/projects/b01/night-front.jpg", alt: "Residence B-01 front elevation at night with stone cladding and calligraphy panel", caption: "Front elevation, night" },
-      { src: "/projects/b01/corner.jpg", alt: "Residence B-01 seen from the street corner at night", caption: "Street view" },
-      { src: "/projects/b01/gate.jpg", alt: "Residence B-01 main gate, porch and boundary wall", caption: "Main gate and porch" },
+      { src: "/projects/b01/day-front.jpg", alt: "Residence B-01 front elevation in daylight with rooftop pergola, balconies and main gate", caption: "Front elevation, day" },
+      { src: "/projects/b01/gate.jpg", alt: "Residence B-01 front elevation at night with the main gate and porch lit", caption: "Front elevation, night" },
+      { src: "/projects/b01/corner.jpg", alt: "Residence B-01 seen from the street corner at night", caption: "Corner view, night" },
+      { src: "/projects/b01/dusk-side.jpg", alt: "Residence B-01 side facade at dusk with stone cladding and calligraphy panel", caption: "Side elevation, dusk" },
+      { src: "/projects/b01/night-front.jpg", alt: "Residence B-01 side facade at night with concealed lighting", caption: "Side elevation, night" },
       { src: "/projects/b01/ground-floor.webp", alt: "Furnished 3D ground floor plan of Residence B-01", caption: "Ground floor plan" },
       { src: "/projects/b01/first-floor.webp", alt: "Furnished 3D first floor plan of Residence B-01", caption: "First floor plan" },
     ],
@@ -184,6 +186,38 @@ export const projects: Project[] = [
           { id: "f-terrace2", name: "Front Terrace", size: "18'6\" x 8'0\"", kind: "outdoor", box: [546, 1084, 936, 1272] },
         ],
       },
+    ],
+  },
+  {
+    slug: "the-linear-a-097",
+    title: "The Linear, A-097",
+    location: "Karachi",
+    category: "Residential House",
+    type: "Double-storey residence (G+1)",
+    style: "Modern Linear",
+    scope: "Architectural design and 3D exterior visualisation",
+    status: "SA Group design",
+    description:
+      "A compact modern home with a bold angled fin wall, warm timber gates and clean horizontal lines, designed by SA Group.",
+    overview:
+      "The Linear shows how a narrow Karachi plot can still make a strong first impression. A tall charcoal fin wall rises past the roof line and frames the house, while the long horizontal slabs of the balcony and roof give it a calm, linear rhythm. Timber-clad gates and a timber screen bring warmth to the street front.",
+    designApproach:
+      "Two gestures define the elevation: a sloping dark fin wall with integrated cove lighting, and deep horizontal overhangs that shade the first-floor rooms. Warm timber on the gates, door and vertical screen balances the white and charcoal palette, and a glass balcony railing keeps the front light and open. Built-in planters soften the boundary.",
+    heroImage: "/projects/a097/sunset-front.jpg",
+    cardImage: "/projects/a097/day-perspective.jpg",
+    gallery: [
+      { src: "/projects/a097/sunset-front.jpg", alt: "The Linear A-097 front elevation at sunset with lit fin wall and timber gates", caption: "Front elevation, sunset" },
+      { src: "/projects/a097/day-perspective.jpg", alt: "The Linear A-097 seen from the street in daylight, showing the angled fin wall", caption: "Street perspective, day" },
+      { src: "/projects/a097/day-front.jpg", alt: "The Linear A-097 front elevation in daylight with timber gates and planters", caption: "Front elevation, day" },
+    ],
+    features: ["Angled fin wall", "Timber-clad gates", "Glass balcony railing", "Cove lighting", "Deep overhangs", "Built-in planters"],
+    constructionScope: ["Architectural planning", "3D elevation", "Exterior lighting design", "Facade detailing"],
+    filters: ["residential"],
+    facts: [
+      { label: "Floors", value: "Ground + 1" },
+      { label: "Style", value: "Modern linear" },
+      { label: "Facade", value: "Fin wall + timber" },
+      { label: "Status", value: "3D design" },
     ],
   },
   {

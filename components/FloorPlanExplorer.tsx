@@ -104,7 +104,7 @@ export default function FloorPlanExplorer({ plans, title }: { plans: FloorPlan[]
   const spring = reduce ? { duration: 0 } : { type: "spring" as const, stiffness: 120, damping: 22, mass: 0.9 };
 
   return (
-    <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-10">
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:grid-rows-[auto_1fr] lg:gap-x-10 lg:gap-y-6">
       {/* FLOOR TABS (mobile: above the plan) */}
       <div className="min-w-0 lg:col-span-7 lg:col-start-6 lg:row-start-1">
         <div role="tablist" aria-label={`${title} floors`} className="grid grid-cols-2 gap-2">

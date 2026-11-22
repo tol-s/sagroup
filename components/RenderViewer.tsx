@@ -61,7 +61,7 @@ export default function RenderViewer({ images, facts, className }: { images: Gal
 
       <div className="mt-3 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         {images.length > 1 && (
-          <div className="flex gap-2" role="tablist" aria-label="3D views">
+          <div className="-mx-1 flex min-w-0 gap-2 overflow-x-auto p-1 [scrollbar-width:none]" role="tablist" aria-label="3D views">
             {images.map((im, n) => (
               <button
                 key={im.src}
@@ -70,7 +70,7 @@ export default function RenderViewer({ images, facts, className }: { images: Gal
                 aria-selected={n === i}
                 aria-label={im.caption}
                 onClick={() => setI(n)}
-                className={clsx("relative h-14 w-20 overflow-hidden transition-opacity md:h-16 md:w-28", n === i ? "opacity-100 ring-2 ring-ink ring-offset-2 ring-offset-bone" : "opacity-55 hover:opacity-100")}
+                className={clsx("relative h-12 w-16 shrink-0 overflow-hidden transition-opacity sm:h-14 sm:w-20 md:h-16 md:w-28", n === i ? "opacity-100 ring-2 ring-ink ring-offset-2 ring-offset-bone" : "opacity-55 hover:opacity-100")}
               >
                 <Image src={im.src} alt="" fill sizes="112px" className="object-cover" />
               </button>
